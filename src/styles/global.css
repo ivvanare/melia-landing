@@ -290,3 +290,16 @@ b {
   position: relative;
   z-index: 1;
 }
+
+/* The closing band sits over a photograph: its own ground keeps the text at
+   AA regardless of what the picture does behind it. */
+.cta-ground {
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, var(--color-paper) 94%, transparent),
+      color-mix(in oklab, var(--color-paper) 98%, transparent)
+    ),
+    var(--cta-photo, none);
+  background-size: cover;
+  background-position: center;
+}

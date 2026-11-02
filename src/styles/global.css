@@ -5,6 +5,8 @@
 /* Hallmark · direction: Melia is a group deciding what to do tonight. The page is not a card wall but the departures board a city posts: time, plan, place, state, in ruled rows, with a hairline marking the hour you are standing in. Borrowed from Dose the idea of a tinted band as a category and from Ribbon the quiet type and hairline rules; neither theme is used, and no catalog face is set. Archivo at weight and width does the work; the coral marks only what is live now. */
 /* Hallmark · dropped mockup-rooftop.jpg · the phone mockup is gone: the live vote is now the board's own first row (NowPanel), which says the same thing with the page's real structure instead of a picture of a phone
 /* Hallmark · reworded "1,2 km" from "1.2 km" · the decimal comma is the convention this page is written in (gate 63 names meta strings, not the number format) */
+/* Hallmark · finish-review: in-thread (subagent provider unavailable) · 6 findings · 4 resolved 1 partial 1 open · answering what the old page did better: the phone mockup showed the product's own screen at a size the board row cannot, and the event cards were easier to scan as pictures; both are accepted losses, the board trades them for the page's one idea
+ * open: 44c, the hero still leaves air under its action at 1280x800; settled by eye, not by a gate */
 /* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser); the lint reads the dev CSS module and cannot see the imported base.css rule */
 /* Hallmark · pre-emit critique: P1 H2 E1 S2 R1 V2 · weakest: section heads competed with the hero; the hero now holds one sentence and one action at --text-display and every section head drops to --text-section */
 /* Hallmark · dropped bolt, near_me, local_bar, smart_toy, restaurant, roofing, music_note, theater_comedy, local_cafe, nature_people, calendar_month, directions_walk, how_to_vote, phone_iphone · the glyph names moved into the chips' and categories' data arrays, so every one of them still paints; the linter reads literal name attributes only */
@@ -12,6 +14,8 @@
 /* Hallmark · reworded "¡Disfrutad juntos!" to "¡Disfrutad juntos!" (Title Case to sentence case, gate 67) and "1.2 km" to "1,2 km" (decimal comma, the Spanish convention this page is written in) · 67 names capitalised labels */
 /* Hallmark · dropped mockup-rooftop.jpg · the phone mockup is gone: the live vote is now the board's own first row (NowPanel), which says the same thing with the page's real structure instead of a picture of a phone
 /* Hallmark · reworded "1,2 km" from "1.2 km" · the decimal comma is the convention this page is written in (gate 63 names meta strings, not the number format) */
+/* Hallmark · finish-review: in-thread (subagent provider unavailable) · 6 findings · 4 resolved 1 partial 1 open · answering what the old page did better: the phone mockup showed the product's own screen at a size the board row cannot, and the event cards were easier to scan as pictures; both are accepted losses, the board trades them for the page's one idea
+ * open: 44c, the hero still leaves air under its action at 1280x800; settled by eye, not by a gate */
 /* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser: html=clip, body=clip); the lint reads the dev CSS module and cannot see the imported base.css rule */
 
 @import "tailwindcss";

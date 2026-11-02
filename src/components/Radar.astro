@@ -70,7 +70,7 @@ const events = [
             <button
               type="button"
               data-time={label}
-              aria-pressed={i === 0 ? 'true' : 'false'}
+              aria-pressed={i === 1 ? 'true' : 'false'}
               class="time-pill cursor-pointer whitespace-nowrap px-4 py-3.5 text-xs font-medium transition-colors"
             >
               {label}
@@ -91,6 +91,17 @@ const events = [
         <span class="col-span-5">salida</span>
         <span class="col-span-2">local</span>
         <span class="col-span-3 text-right">estado</span>
+      </div>
+      <div class="relative">
+        <span
+          class="pointer-events-none absolute inset-x-0 -top-px z-10 flex items-center gap-2"
+          aria-hidden="true"
+        >
+          <span class="h-px flex-1 bg-accent"></span>
+          <span class="num rounded-pill bg-accent px-2 py-0.5 text-[10px] font-medium text-accent-ink"
+            >21:14</span
+          >
+        </span>
       </div>
       {events.map((event) => <EventCard {...event} />)}
     </div>

@@ -22,23 +22,15 @@ const metrics = [
   <main class="w-full">
     <Hero />
 
-    <!-- The page's own figures, as ruled rows rather than a stat band. -->
-    <section class="w-full border-y border-rule bg-paper-2 py-[var(--space-2xl)]">
+    <!-- The page's own figures, as one more row of the board. -->
+    <section class="w-full border-t border-rule bg-paper">
       <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
-        <dl class="grid grid-cols-1 sm:grid-cols-3">
+        <dl class="grid grid-cols-3 divide-x divide-rule">
           {
-            metrics.map(({ figure, label }, i) => (
-              <div
-                class:list={[
-                  'flex items-baseline gap-3 py-[var(--space-lg)] border-rule',
-                  i > 0 && 'sm:border-l sm:pl-[var(--space-lg)]',
-                  i < metrics.length - 1 && 'border-b sm:border-b-0',
-                ]}
-              >
-                <dt class="num font-display text-[1.75rem] leading-none text-ink">
-                  {figure}
-                </dt>
-                <dd class="text-sm text-ink-2">{label}</dd>
+            metrics.map(({ figure, label }) => (
+              <div class="flex flex-col gap-0.5 px-[var(--space-md)] py-[var(--space-md)] first:pl-0 last:pr-0">
+                <dt class="num text-sm font-medium text-ink">{figure}</dt>
+                <dd class="text-[11px] text-muted">{label}</dd>
               </div>
             ))
           }

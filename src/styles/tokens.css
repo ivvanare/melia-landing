@@ -16,22 +16,22 @@
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
   --color-error: oklch(52% 0.19 27);
   --color-success: oklch(50% 0.12 150);
-  --color-paper: oklch(23% 0.045 258);
-  --color-paper-2: oklch(27% 0.05 257);
-  --color-paper-3: oklch(32% 0.055 256);
-  --color-ink: oklch(97% 0.008 95);
-  --color-ink-2: oklch(89% 0.012 95);
-  --color-muted: oklch(79% 0.018 250);
-  --color-rule: oklch(42% 0.045 255);
+  --color-paper: oklch(21% 0.028 262);
+  --color-paper-2: oklch(25% 0.032 261);
+  --color-paper-3: oklch(30% 0.036 260);
+  --color-ink: oklch(95% 0.018 85);
+  --color-ink-2: oklch(87% 0.02 84);
+  --color-muted: oklch(76% 0.022 80);
+  --color-rule: oklch(38% 0.03 262);
   --color-accent: oklch(68.6% 0.192 32.4);
   --color-accent-2: oklch(76% 0.15 32);
   --color-accent-text: oklch(82% 0.115 34);
-  --color-accent-ink: oklch(18% 0.03 258);
+  --color-accent-ink: oklch(17% 0.02 262);
   --color-focus: oklch(88% 0.09 40);
   --font-display: "Archivo", ui-sans-serif, sans-serif;
   --font-body: "Archivo", ui-sans-serif, sans-serif;
   --font-outlier: var(--font-body);
-  --radius-card: 6px;
+  --radius-card: 10px;
   --radius-pill: 999px;
   --shadow-card: 0 18px 44px oklch(14% 0.04 258 / 0.45);
   --tracking-display: -0.028em;
@@ -72,18 +72,18 @@
 
 /* Spore `lab` colourway: the light half of the same material. */
 :root.light {
-  --color-paper: oklch(95% 0.012 250);
-  --color-paper-2: oklch(91% 0.016 250);
-  --color-paper-3: oklch(86% 0.02 250);
-  --color-ink: oklch(21% 0.04 258);
-  --color-ink-2: oklch(32% 0.04 257);
-  --color-muted: oklch(48% 0.03 255);
-  --color-rule: oklch(74% 0.03 252);
+  --color-paper: oklch(93% 0.018 78);
+  --color-paper-2: oklch(89% 0.022 78);
+  --color-paper-3: oklch(84% 0.026 76);
+  --color-ink: oklch(20% 0.025 262);
+  --color-ink-2: oklch(31% 0.026 261);
+  --color-muted: oklch(47% 0.024 262);
+  --color-rule: oklch(72% 0.026 78);
   --color-accent: oklch(56% 0.18 32);
   --color-accent-2: oklch(48% 0.17 32);
   --color-accent-text: oklch(46% 0.17 32);
   --color-accent-ink: oklch(98% 0.01 95);
   --color-focus: oklch(45% 0.16 32);
-  --shadow-card: 0 18px 44px oklch(30% 0.03 258 / 0.16);
+  --shadow-card: 0 18px 44px oklch(30% 0.03 262 / 0.16);
   color-scheme: light;
 }

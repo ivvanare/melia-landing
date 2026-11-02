@@ -11,69 +11,60 @@ interface Props {
   title: string;
   description: string;
   location: string;
-  featured?: boolean;
 }
 
-const {
-  image,
-  alt,
-  category,
-  badge,
-  time,
-  price,
-  title,
-  description,
-  location,
-  featured = false,
-} = Astro.props;
+const { image, alt, category, badge, time, price, title, description, location } =
+  Astro.props;
 ---
 
 <article
-  class:list={[
-    'group flex flex-col overflow-hidden rounded-card border border-rule bg-paper-2',
-    featured && 'h-full',
-  ]}
+  class="group grid grid-cols-1 items-start gap-x-5 gap-y-3 border-t border-rule py-5 md:grid-cols-12"
 >
-  <div class:list={['relative w-full overflow-hidden', featured ? 'h-full min-h-[220px] flex-1' : 'h-52']}>
-    <img alt={alt} class="h-full w-full object-cover" src={image} />
-    <div class="absolute inset-x-0 top-0 flex items-start justify-between gap-2 p-3">
-      <span class="rounded-pill bg-paper/85 px-2.5 py-1 text-xs font-medium text-ink"
-        >{category}</span
-      >
+  <!-- The hour is the first column: it is what the board is for. -->
+  <div class="flex items-baseline gap-2 md:col-span-2 md:flex-col md:gap-0">
+    <span class="num text-lg font-medium text-ink">{time.split(',')[0]}</span>
+    <span class="text-[11px] text-muted">{time.split(',')[1]?.trim() || category}</span>
+  </div>
+
+  <div class="flex flex-col gap-1.5 md:col-span-5">
+    <h3 class="text-lg leading-tight text-ink transition-colors group-hover:text-accent-text">
+      {title}
+    </h3>
+    <p class="max-w-[48ch] text-sm text-ink-2">{description}</p>
+    <span class="flex items-center gap-1 pt-1 text-xs text-muted">
+      <Icon name="location_on" class="text-[14px] text-accent-text" />
+      {location}
+    </span>
+  </div>
+
+  <div class="md:col-span-2">
+    <a
+      class="block aspect-[4/3] w-full overflow-hidden rounded-[3px] border border-rule"
+      href="#mapa-en-vivo"
+      tabindex="-1"
+      aria-hidden="true"
+    >
+      <img alt={alt} class="h-full w-full object-cover" src={image} loading="lazy" />
+    </a>
+  </div>
+
+  <div class="flex items-center justify-between gap-3 md:col-span-3 md:flex-col md:items-end md:justify-start md:gap-2">
+    <span class="whitespace-nowrap rounded-pill bg-accent px-2.5 py-1 text-[11px] font-medium text-accent-ink"
+      >{badge}</span
+    >
+    <span class="num text-sm text-ink-2">{price}</span>
+    <span class="flex items-center gap-2">
       <button
         type="button"
         aria-label={`Guardar en favoritos: ${title}`}
-        class="flex h-8 w-8 items-center justify-center rounded-pill border border-rule bg-paper/85 text-ink-2 transition-colors hover:text-accent-text"
+        class="flex h-10 w-10 items-center justify-center rounded-pill border border-rule text-ink-2 transition-colors hover:text-accent"
       >
         <Icon name="favorite_border" class="text-[17px]" />
       </button>
-    </div>
-    <span
-      class="absolute bottom-3 left-3 rounded-pill bg-accent px-2.5 py-0.5 text-xs font-medium text-accent-ink"
-      >{badge}</span
-    >
-  </div>
-
-  <div class="flex flex-1 flex-col justify-between gap-3 p-[var(--space-lg)]">
-    <div class="flex flex-col gap-1.5">
-      <div class="flex items-baseline justify-between gap-3 text-xs text-muted">
-        <span>{time}</span>
-        <span class="num text-base text-ink">{price}</span>
-      </div>
-      <h3 class="text-lg text-ink transition-colors group-hover:text-accent-text">
-        {title}
-      </h3>
-      <p class="text-sm text-ink-2">{description}</p>
-    </div>
-    <div class="flex items-center justify-between gap-3 border-t border-rule pt-3">
-      <span class="flex items-center gap-1 text-xs text-ink-2">
-        <Icon name="location_on" class="text-[15px] text-accent-text" />
-        {location}
-      </span>
       <a
-        class="whitespace-nowrap rounded-pill border border-ink-2 px-4 py-2.5 text-xs font-medium text-ink-2 transition-colors hover:border-accent hover:text-accent-text"
+        class="whitespace-nowrap rounded-pill border border-ink-2 px-4 py-2.5 text-xs font-medium text-ink-2 transition-colors hover:border-accent hover:text-accent"
         href="#mapa-en-vivo">Ver plan</a
       >
-    </div>
+    </span>
   </div>
 </article>

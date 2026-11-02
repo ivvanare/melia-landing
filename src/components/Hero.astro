@@ -1,38 +1,36 @@
 ---
 import Icon from './Icon.astro';
-import PhoneMockup from './PhoneMockup.astro';
+import NowPanel from './NowPanel.astro';
 import Carousel from './Carousel.astro';
 import StoreBadges from './StoreBadges.astro';
 ---
 
 <section
-  class="relative w-full overflow-hidden bg-paper pt-[calc(72px+var(--space-2xl))] pb-[var(--space-2xl)]"
+  class="relative w-full overflow-hidden bg-paper pt-[calc(72px+var(--space-lg))] pb-[var(--space-3xl)]"
   id="descubrir"
 >
   <div
-    class="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-x-[var(--space-xl)] gap-y-[var(--space-2xl)] px-[var(--gutter)] lg:grid-cols-12"
+    class="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-start gap-x-[var(--space-xl)] gap-y-[var(--space-xl)] px-[var(--gutter)] lg:grid-cols-12"
   >
-    <!-- Copy & actions -->
-    <div class="flex flex-col items-start gap-6 lg:col-span-7">
-      <h1 class="text-display text-ink max-w-[15ch] lg:max-w-[17ch]">
+    <div class="flex flex-col items-start gap-5 lg:col-span-6">
+      <h1 class="text-[clamp(2.2rem,3.9vw,3.7rem)] font-medium leading-[1.06] tracking-[-0.028em] text-ink">
         Menos <span
           class="text-muted line-through decoration-accent decoration-[3px]"
           >“a ver qué hacemos”</span
-        >, más <span class="text-accent">¡ya estamos aquí!</span>
+        >, más <span class="text-accent-text">¡ya estamos aquí!</span>
       </h1>
 
-      <p class="lead max-w-[46ch] text-ink-2">
+      <p class="max-w-[44ch] text-[0.95rem] leading-relaxed text-ink-2">
         Terrazas con ambientazo, restaurantes auténticos y planes en tu ciudad.
         Vota con tus amigos en 30 segundos.
       </p>
 
-      <!-- Search + the one primary action -->
-      <div class="flex w-full max-w-2xl flex-col gap-3">
+      <div class="flex w-full max-w-xl flex-col gap-2.5">
         <div
-          class="flex min-h-13 items-center gap-2 border-2 border-ink-2 bg-paper-2 p-1.5 transition-colors focus-within:border-accent"
+          class="flex min-h-13 items-center gap-2 border-b-2 border-ink-2 bg-paper-2 px-1 transition-colors focus-within:border-accent"
         >
           <div class="flex flex-1 items-center gap-2.5 px-2">
-            <Icon name="search" class="text-[20px] text-muted" />
+            <Icon name="search" class="text-[19px] text-muted" />
             <input
               class="h-11 w-full border-0 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
               aria-label="Buscar planes en tu ciudad"
@@ -51,8 +49,7 @@ import StoreBadges from './StoreBadges.astro';
           </button>
         </div>
 
-        <!-- Quick filters -->
-        <div class="flex w-full max-w-2xl items-center gap-2 text-xs">
+        <div class="flex w-full items-center gap-2 text-xs">
           <span class="flex-shrink-0 whitespace-nowrap text-muted">
             Filtros:
             <span
@@ -60,7 +57,7 @@ import StoreBadges from './StoreBadges.astro';
               class="ml-1 hidden rounded-pill bg-accent px-1.5 py-0.5 text-[10px] font-medium text-accent-ink align-middle"
             ></span>
           </span>
-          <Carousel label="Filtros rápidos" class="min-w-0 flex-1" trackClass="gap-2">
+          <Carousel label="Filtros rápidos" class="hero-chips min-w-0 flex-1" trackClass="gap-2 md:flex-wrap md:overflow-visible">
             {
               [
                 ['bolt', 'Hoy'],
@@ -72,7 +69,7 @@ import StoreBadges from './StoreBadges.astro';
                   type="button"
                   data-chip={label}
                   aria-pressed="false"
-                  class="chip flex min-h-11 flex-shrink-0 snap-start cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-pill border border-rule px-4 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2"
+                  class="chip flex min-h-11 flex-shrink-0 snap-start cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-pill border border-rule px-3.5 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2"
                 >
                   <Icon name={icon} class="chip-icon text-[14px]" />
                   {label}
@@ -83,7 +80,7 @@ import StoreBadges from './StoreBadges.astro';
         </div>
       </div>
 
-      <div class="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-3">
         <StoreBadges variant="hero" />
         <a
           class="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-ink-2 underline decoration-rule underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
@@ -95,9 +92,10 @@ import StoreBadges from './StoreBadges.astro';
       </div>
     </div>
 
-    <!-- The screen itself -->
-    <div class="lg:col-span-5">
-      <PhoneMockup />
+    <!-- The board's first row -->
+    <div class="lg:col-span-6">
+      <p class="mb-1 text-xs text-muted">Salidas de esta noche</p>
+      <NowPanel />
     </div>
   </div>
 </section>

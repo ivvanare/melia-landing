@@ -1,0 +1,85 @@
+---
+import Icon from './Icon.astro';
+
+const voters = [
+  { initials: 'MR', live: true },
+  { initials: 'SL', live: false },
+  { initials: 'AG', live: false },
+  { initials: '+2', live: false },
+];
+---
+
+<!-- The row the group is standing in right now, opened out. -->
+<div class="w-full border-t border-rule">
+  <div class="flex items-baseline justify-between gap-4 border-b border-rule py-3">
+    <span class="flex items-baseline gap-3">
+      <span class="num text-2xl font-medium text-accent">21:14</span>
+      <span class="text-xs text-ink-2">ahora</span>
+    </span>
+    <span class="rounded-pill bg-accent px-2.5 py-1 text-[11px] font-medium text-accent-ink"
+      >Votación en vivo</span
+    >
+  </div>
+
+  <div class="flex flex-col gap-4 py-4">
+    <div class="flex items-start justify-between gap-4">
+      <div class="flex flex-col gap-1">
+        <h2 class="text-xl text-ink">Rooftop Cibeles vs Ramen Hanabi</h2>
+        <span class="flex items-center gap-1.5 text-xs text-ink-2">
+          <Icon name="location_on" class="text-[14px] text-accent-text" />
+          Gran Vía, a 1,2 km
+        </span>
+      </div>
+      <span class="flex-shrink-0 text-right text-xs text-muted">cierra en<br />12 min</span>
+    </div>
+
+    <div class="flex flex-col gap-2">
+      <div class="flex items-baseline justify-between text-xs">
+        <span class="text-ink-2">Grupo Los de Siempre</span>
+        <span class="num text-ink"><span class="text-accent-text">4</span> de 5</span>
+      </div>
+      <div class="h-1 w-full overflow-hidden bg-paper-3">
+        <div class="h-full w-4/5 bg-accent"></div>
+      </div>
+      <div class="flex items-center gap-1.5 pt-1">
+        {
+          voters.map(({ initials, live }) => (
+            <span
+              class:list={[
+                'flex h-7 w-7 items-center justify-center rounded-pill text-[10px] font-medium',
+                live
+                  ? 'bg-accent text-accent-ink'
+                  : 'border border-rule text-ink-2',
+              ]}
+            >
+              {initials}
+            </span>
+          ))
+        }
+        <span class="ml-1 text-[11px] text-muted">han votado</span>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button
+        type="button"
+        class="flex items-center gap-1.5 rounded-pill bg-accent px-4 py-2.5 text-xs font-medium text-accent-ink transition-colors hover:bg-accent-2"
+      >
+        <Icon name="thumb_up" class="text-[15px]" />
+        ¡Me apunto!
+      </button>
+      <button
+        type="button"
+        class="flex items-center gap-1.5 rounded-pill border border-ink-2 px-4 py-2.5 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2 hover:text-ink"
+      >
+        <Icon name="schedule" class="text-[15px]" />
+        Paso hoy
+      </button>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-2 border-t border-rule py-3 text-xs text-ink-2">
+    <Icon name="sync" class="text-[15px] text-accent-text" />
+    Sincronizado con Apple Calendar, alerta a las 20:45
+  </div>
+</div>

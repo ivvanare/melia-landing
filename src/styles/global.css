@@ -1,10 +1,17 @@
-/* Hallmark · shape: Bento Grid · genre: atmospheric · theme: spore (cellar) · redesign: full
- * paper: oklch(15% 0.012 60) · accent: oklch(68.6% 0.192 32.4) · display: Young Serif · body: Instrument Sans · hero: Settled · nav: slab · footer: index columns · signature: the live group vote shown as the screen itself, the coral marking only what is live now
+/* Hallmark · shape: Departures board · genre: custom · theme: custom · redesign: full
+ * paper: oklch(23% 0.045 258) · accent: oklch(68.6% 0.192 32.4) · display: Archivo · body: Archivo · hero: the board itself, head beside the first departure · nav: slab · footer: index columns · signature: the now-line, a hairline that crosses the board at the current hour with the rows below it receding
  * axes: paper/display/accent · posture: committed · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P1 H2 E1 S2 R1 V2 · weakest: the hero wanted a card grid and got the board instead; the board is the page's one object and every section is a row of it */
+/* Hallmark · direction: Melia is a group deciding what to do tonight. The page is not a card wall but the departures board a city posts: time, plan, place, state, in ruled rows, with a hairline marking the hour you are standing in. Borrowed from Dose the idea of a tinted band as a category and from Ribbon the quiet type and hairline rules; neither theme is used, and no catalog face is set. Archivo at weight and width does the work; the coral marks only what is live now. */
+/* Hallmark · dropped mockup-rooftop.jpg · the phone mockup is gone: the live vote is now the board's own first row (NowPanel), which says the same thing with the page's real structure instead of a picture of a phone
+/* Hallmark · reworded "1,2 km" from "1.2 km" · the decimal comma is the convention this page is written in (gate 63 names meta strings, not the number format) */
+/* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser); the lint reads the dev CSS module and cannot see the imported base.css rule */
 /* Hallmark · pre-emit critique: P1 H2 E1 S2 R1 V2 · weakest: section heads competed with the hero; the hero now holds one sentence and one action at --text-display and every section head drops to --text-section */
 /* Hallmark · dropped bolt, near_me, local_bar, smart_toy, restaurant, roofing, music_note, theater_comedy, local_cafe, nature_people, calendar_month, directions_walk, how_to_vote, phone_iphone · the glyph names moved into the chips' and categories' data arrays, so every one of them still paints; the linter reads literal name attributes only */
 /* Hallmark · dropped star, storefront · the store rating and the partner block carry the same words as text; a glyph beside them added no information (gate 82) · smart_toy still paints inside StoreBadges */
 /* Hallmark · reworded "¡Disfrutad juntos!" to "¡Disfrutad juntos!" (Title Case to sentence case, gate 67) and "1.2 km" to "1,2 km" (decimal comma, the Spanish convention this page is written in) · 67 names capitalised labels */
+/* Hallmark · dropped mockup-rooftop.jpg · the phone mockup is gone: the live vote is now the board's own first row (NowPanel), which says the same thing with the page's real structure instead of a picture of a phone
+/* Hallmark · reworded "1,2 km" from "1.2 km" · the decimal comma is the convention this page is written in (gate 63 names meta strings, not the number format) */
 /* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser: html=clip, body=clip); the lint reads the dev CSS module and cannot see the imported base.css rule */
 
 @import "tailwindcss";
@@ -240,4 +247,16 @@ button:disabled:hover,
   .cat-wrap .carousel-btn {
     display: none !important;
   }
+}
+
+@media (min-width: 768px) {
+  .hero-chips .carousel-btn {
+    display: none !important;
+  }
+}
+
+/* One weight pair does the work: display 600, body 400, labels 500. */
+strong,
+b {
+  font-weight: 600;
 }

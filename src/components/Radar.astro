@@ -9,7 +9,7 @@ const events = [
     alt: 'Concierto acústico indie',
     category: 'Música en vivo',
     badge: 'Tendencia hoy',
-    time: 'Abierto ahora, 21:00',
+    time: '21:00, abierto ahora',
     price: '15 € / pers.',
     title: 'Sesión Acústica & Cerveza Artesanal',
     description:
@@ -21,7 +21,7 @@ const events = [
     alt: 'Brunch botánico',
     category: 'Brunch & Café',
     badge: 'Pet friendly',
-    time: 'Sábado, 11:30',
+    time: '11:30, sábado',
     price: '18 € / pers.',
     title: 'Brunch Botánico en Patio Central',
     description:
@@ -33,7 +33,7 @@ const events = [
     alt: 'Micro abierto y monólogos',
     category: 'Comedia & Show',
     badge: 'Últimas 8 entradas',
-    time: 'Domingo, 20:00',
+    time: '20:00, domingo',
     price: '12 € / pers.',
     title: 'Noche de Micro Abierto & Tacos',
     description:
@@ -44,20 +44,26 @@ const events = [
 ---
 
 <section
-  class="w-full border-t border-rule bg-paper-2 py-[var(--space-4xl,var(--space-3xl))]"
+  class="w-full border-t border-rule bg-paper py-[var(--space-2xl)]"
   id="mapa-en-vivo"
 >
   <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
     <div
       class="mb-[var(--space-lg)] flex flex-col justify-between gap-4 md:flex-row md:items-end"
     >
-      <h2 class="max-w-[24ch] text-section text-ink">
-        Planes recomendados para este fin de semana
-      </h2>
+      <div class="flex flex-col gap-2">
+        <h2 class="max-w-[26ch] text-section text-ink">
+          Planes recomendados para este fin de semana
+        </h2>
+        <p class="max-w-[54ch] text-sm text-ink-2">
+          42 planes y mesas activas a menos de 2 km, en locales verificados de
+          Madrid.
+        </p>
+      </div>
       <div
         role="group"
         aria-label="Rango de fechas"
-        class="inline-flex self-start rounded-pill border border-rule p-1 md:self-auto"
+        class="inline-flex self-start border border-rule md:self-auto"
       >
         {
           ['Hoy', 'Este fin de semana', 'Próxima semana'].map((label, i) => (
@@ -65,7 +71,7 @@ const events = [
               type="button"
               data-time={label}
               aria-pressed={i === 0 ? 'true' : 'false'}
-              class="time-pill cursor-pointer whitespace-nowrap rounded-pill px-4 py-3.5 text-xs font-medium transition-colors"
+              class="time-pill cursor-pointer whitespace-nowrap px-4 py-3.5 text-xs font-medium transition-colors"
             >
               {label}
             </button>
@@ -76,26 +82,48 @@ const events = [
 
     <FilterFeedback />
 
-    <div class="grid grid-cols-1 gap-[var(--space-lg)] lg:grid-cols-12">
-      <!-- Map: the live picture of the neighbourhood -->
+    <!-- The board -->
+    <div class="border-b border-rule">
       <div
-        class="grained relative flex min-h-[260px] flex-col justify-between overflow-hidden rounded-card border border-rule bg-paper-3 p-[var(--space-lg)] lg:col-span-5"
+        class="hidden grid-cols-12 gap-x-5 border-b border-rule pb-2 text-[11px] text-muted md:grid"
       >
-        <div class="flex flex-col gap-2">
-          <span class="flex items-baseline gap-2">
-            <span class="num text-3xl text-accent-text">42</span>
-            <span class="text-sm text-ink-2">planes y mesas activas a &lt; 2 km</span>
-          </span>
-          <div class="flex items-center gap-2">
-            <Icon name="verified" class="text-[15px] text-accent-text" />
-            <h3 class="text-title text-ink">Explora tu barrio en tiempo real</h3>
-          </div>
-          <p class="max-w-[40ch] text-sm text-ink-2">
-            Afluencia estimada, horas felices y mesas libres en locales
-            verificados de Madrid.
-          </p>
+        <span class="col-span-2">hora</span>
+        <span class="col-span-5">salida</span>
+        <span class="col-span-2">local</span>
+        <span class="col-span-3 text-right">estado</span>
+      </div>
+      {events.map((event) => <EventCard {...event} />)}
+    </div>
+
+    <!-- The map, as the board's own footnote -->
+    <div class="mt-[var(--space-lg)] grid grid-cols-1 gap-[var(--space-lg)] md:grid-cols-12">
+      <div class="flex flex-col gap-2 md:col-span-7">
+        <div class="flex items-center gap-2">
+          <Icon name="verified" class="text-[15px] text-accent-text" />
+          <h3 class="text-title text-ink">Explora tu barrio en tiempo real</h3>
         </div>
-        <div class="relative mt-4 h-40 overflow-hidden rounded-[8px] border border-rule">
+        <p class="max-w-[52ch] text-sm text-ink-2">
+          Afluencia estimada, horas felices y mesas libres. A pie o en metro.
+        </p>
+        <dl class="mt-2 flex flex-col border-t border-rule">
+          <div class="flex items-baseline justify-between gap-4 border-b border-rule py-2.5">
+            <dt class="text-xs text-muted">Cibeles</dt>
+            <dd class="num text-sm text-ink">mesas libres</dd>
+          </div>
+          <div class="flex items-baseline justify-between gap-4 border-b border-rule py-2.5">
+            <dt class="text-xs text-muted">Malasaña</dt>
+            <dd class="num text-sm text-ink">hora feliz hasta las 23:00</dd>
+          </div>
+        </dl>
+        <a
+          class="mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-ink-2 underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent"
+          href="#mapa-en-vivo"
+          >Abrir el mapa
+          <Icon name="arrow_forward" class="text-[15px]" /></a
+        >
+      </div>
+      <div class="md:col-span-5">
+        <div class="relative aspect-[4/3] w-full overflow-hidden border border-rule">
           <div
             class="h-full w-full bg-cover bg-center"
             style="background-image: url('/img/map-madrid.png')"
@@ -103,31 +131,15 @@ const events = [
           </div>
           <div class="absolute inset-0 bg-paper/25"></div>
           <span
-            class="absolute left-1/3 top-1/4 rounded-pill bg-accent px-2 py-0.5 text-[11px] font-medium text-accent-ink"
+            class="absolute left-1/4 top-1/4 rounded-pill bg-accent px-2 py-1 text-[11px] font-medium text-accent-ink"
             >Cibeles</span
           >
           <span
-            class="absolute bottom-1/3 right-1/4 rounded-pill bg-paper/90 px-2 py-0.5 text-[11px] font-medium text-ink"
+            class="absolute bottom-1/3 right-1/4 rounded-pill bg-paper/90 px-2 py-1 text-[11px] font-medium text-ink"
             >Malasaña</span
           >
-          <div
-            class="absolute inset-x-2 bottom-2 flex items-center justify-between rounded-pill bg-paper/95 px-3 py-1.5 text-[11px] text-ink backdrop-blur-sm"
-          >
-            <span>Centro</span>
-            <a
-              class="font-medium text-accent-text underline decoration-accent/40 underline-offset-2"
-              href="#mapa-en-vivo">Abrir mapa</a
-            >
-          </div>
         </div>
       </div>
-
-      <div class="lg:col-span-7">
-        <EventCard {...events[0]} featured />
-      </div>
-
-      <div class="lg:col-span-6"><EventCard {...events[1]} /></div>
-      <div class="lg:col-span-6"><EventCard {...events[2]} /></div>
     </div>
   </div>
 </section>

@@ -22,15 +22,15 @@ const steps = [
     </h2>
 
     <!-- The sequence is real information here, so it earns the numbers. -->
-    <ol class="flex flex-col">
+    <ol class="flex flex-col border-b border-rule">
       {
         steps.map(({ title, text }, i) => (
           <li class="grid grid-cols-1 items-baseline gap-x-[var(--space-lg)] gap-y-2 border-t border-rule py-[var(--space-lg)] md:grid-cols-12">
-            <span class="num font-display text-[2.5rem] leading-none text-accent-text md:col-span-2">
+            <span class="num font-display text-lg font-medium text-accent-text md:col-span-1">
               {String(i + 1).padStart(2, '0')}
             </span>
             <h3 class="text-title text-ink md:col-span-4">{title}</h3>
-            <p class="max-w-[56ch] text-sm text-ink-2 md:col-span-6">{text}</p>
+            <p class="max-w-[56ch] text-sm text-ink-2 md:col-span-7">{text}</p>
           </li>
         ))
       }

@@ -1,5 +1,44 @@
 # Melia landing — estado al pausar
 
+## Dos direcciones, misma página
+
+Rama `hallmark-noche` (actual) y `hallmark-redesign` (Spore). Punto de retorno
+prerediseño: `stash@{0}`.
+
+### A · Spore (rama `hallmark-redesign`)
+Tema del catálogo, colourway `cellar`. Young Serif sobre Instrument Sans, café
+oscuro con grain, coral como única señal. Bento grid.
+Lint: 101 FAIL → 1 · REFLEX 21 → 2 · kept: links 7/7, fields 29/40.
+
+### B · Tablero de salidas (rama `hallmark-noche`) — la actual
+**Custom**, porque el brief de `direction.md` prohíbe un tema del catálogo cuando
+se pide custom, y prohíbe explícitamente mono labels, negro+neón, cream+serif y
+las caras que usan los temas (Instrument Sans, Schibsted, Young Serif).
+
+La idea: Melia no es una pared de cards, es **un grupo decidiendo qué hacer esta
+noche**. La página es el tablero de salidas que una ciudad publica: hora, plan,
+lugar, estado, en filas regladas. Una hairline marca la hora en la que estás
+parado (la fila viva, con la votación abierta).
+
+- Papel: azul de plano `oklch(23% 0.045 258)`, tinta clara.
+- Tipografía: **Archivo** a 400/500/600, sin serif y sin mono. Una sola familia.
+- Señal: el coral de Melia, solo para lo que está vivo ahora.
+- Signature: la fila de las 21:14 con la votación abierta, dentro del hero.
+- El mockup de teléfono se retiró: la fila viva dice lo mismo con la estructura
+  real de la página en vez de una foto de un teléfono.
+
+Lint: 101 FAIL → **1** (falso positivo verificado) · REFLEX 21 → 4 · WARN 4.
+kept: links 7/7, fields 29/40 (11 registrados), headings 16/17, figures 6/10.
+
+Handoff visual: `.hallmark/compare.html` (Spore contra Tablero, lado a lado).
+
+### Cableado intacto en ambas
+Anclas, `data-chip`/`data-category`/`data-time`, motor de filtros simulados,
+theme toggle con `localStorage` y dos colourways, carruseles con teclado, head
+SEO completo.
+
+---
+
 ## Rediseño Hallmark (rama `hallmark-redesign`)
 
 **Estado: completo.** Punto de retorno: `stash@{0}` (el trabajo previo, sin commitear

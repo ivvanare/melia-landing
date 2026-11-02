@@ -1,0 +1,170 @@
+---
+import Icon from './Icon.astro';
+
+const avatars = [
+  { initials: 'MR', cls: 'bg-accent text-accent-ink' },
+  { initials: 'SL', cls: 'bg-paper-3 text-ink' },
+  { initials: 'AG', cls: 'bg-paper-2 text-ink-2' },
+  { initials: '+2', cls: 'bg-paper text-muted' },
+];
+---
+
+<!-- The screen itself: the live group vote, the signature of this page. -->
+<div class="relative mx-auto w-full max-w-[400px]">
+  <div
+    class="flex flex-col gap-3 rounded-card border border-rule bg-paper-2 p-3 shadow-card"
+  >
+    <!-- Status bar -->
+    <div class="flex items-center justify-between px-2 pt-1 text-xs text-muted">
+      <span class="font-medium text-ink-2">21:14</span>
+      <span class="h-4 w-16 rounded-pill bg-paper-3"></span>
+      <span class="flex items-center gap-1">
+        <Icon name="signal_cellular_alt" class="text-[13px]" />
+        <Icon name="wifi" class="text-[13px]" />
+        <Icon name="battery_5_bar" class="text-[13px]" />
+      </span>
+    </div>
+
+    <!-- Plan header -->
+    <div class="flex items-center justify-between px-1">
+      <div class="flex items-center gap-2">
+        <span
+          class="flex h-8 w-8 items-center justify-center rounded-pill bg-accent text-[11px] font-medium text-accent-ink"
+          >C</span
+        >
+        <div class="flex flex-col leading-tight">
+          <span class="text-[11px] text-muted">Plan activo</span>
+          <span class="text-xs font-medium text-ink">Los de Siempre</span>
+        </div>
+      </div>
+      <span
+        class="flex h-7 w-7 items-center justify-center rounded-pill border border-rule text-ink-2"
+      >
+        <Icon name="notifications" class="text-[15px]" />
+      </span>
+    </div>
+
+    <!-- The vote -->
+    <div class="flex flex-col gap-3 border-t border-rule pt-3">
+      <div class="flex items-baseline justify-between">
+        <span
+          class="rounded-pill bg-accent px-2 py-0.5 text-[11px] font-medium text-accent-ink"
+          >Votación en vivo</span
+        >
+        <span class="text-[11px] text-muted">cierra en 12 min</span>
+      </div>
+
+      <div class="relative h-36 w-full overflow-hidden rounded-[8px]">
+        <img
+          alt="Rooftop Cibeles vs Ramen Hanabi"
+          class="h-full w-full object-cover"
+          src="/img/mockup-rooftop.jpg"
+        />
+        <div
+          class="absolute inset-0 flex items-end bg-gradient-to-t from-paper/90 via-paper/20 to-transparent p-2.5"
+        >
+          <div class="flex flex-col leading-tight">
+            <span class="text-xs font-medium text-ink"
+              >Rooftop Cibeles vs Ramen Hanabi</span
+            >
+            <span class="text-[11px] text-ink-2">Gran Vía, a 1,2 km</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center -space-x-1.5">
+          {
+            avatars.map(({ initials, cls }) => (
+              <span
+                class:list={[
+                  'flex h-7 w-7 items-center justify-center rounded-pill border-2 border-paper text-[11px] font-medium',
+                  cls,
+                ]}
+              >
+                {initials}
+              </span>
+            ))
+          }
+        </div>
+        <span class="text-xs text-ink-2">
+          <span class="text-accent-text">4 de 5</span> han votado
+        </span>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          class="flex items-center justify-center gap-1.5 rounded-pill bg-accent px-3 py-2 text-xs font-medium text-accent-ink transition-colors hover:bg-accent-2"
+        >
+          <Icon name="thumb_up" class="text-[15px]" />
+          ¡Me apunto!
+        </button>
+        <button
+          type="button"
+          class="flex items-center justify-center gap-1.5 rounded-pill border border-ink-2 px-3 py-2 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2 hover:text-ink"
+        >
+          <Icon name="schedule" class="text-[15px]" />
+          Paso hoy
+        </button>
+      </div>
+    </div>
+
+    <!-- Calendar notification -->
+    <div
+      class="flex items-center gap-2.5 border-t border-rule pt-2.5"
+    >
+      <span
+        class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-pill bg-accent text-accent-ink"
+      >
+        <Icon name="sync" class="text-[16px]" />
+      </span>
+      <div class="flex min-w-0 flex-col leading-tight">
+        <span class="text-[11px] font-medium text-ink"
+          >Sincronizado con Apple Calendar</span
+        >
+        <span class="text-[11px] text-ink-2">Alerta de salida a las 20:45</span>
+      </div>
+    </div>
+
+    <!-- Next plan -->
+    <div
+      class="flex items-center justify-between gap-2 border-t border-rule pt-2.5"
+    >
+      <div class="flex items-center gap-2.5">
+        <span
+          class="flex h-8 w-8 items-center justify-center rounded-pill border border-rule text-ink-2"
+        >
+          <Icon name="calendar_today" class="text-[16px]" />
+        </span>
+        <div class="flex flex-col leading-tight">
+          <span class="text-xs font-medium text-ink">Sábado: Brunch & Market</span
+          >
+          <span class="text-[11px] text-muted">Malasaña, 11:30</span>
+        </div>
+      </div>
+      <span
+        class="rounded-pill border border-rule px-2 py-0.5 text-[11px] font-medium text-ink-2"
+        >Confirmado</span
+      >
+    </div>
+
+    <!-- Tab bar -->
+    <div
+      class="flex items-center justify-around border-t border-rule pt-2 text-[11px] text-muted"
+    >
+      <span class="flex flex-col items-center text-accent-text">
+        <Icon name="explore" class="text-[19px]" />
+        Explorar
+      </span>
+      <span class="flex flex-col items-center">
+        <Icon name="groups" class="text-[19px]" />
+        Grupos
+      </span>
+      <span class="flex flex-col items-center">
+        <Icon name="bookmarks" class="text-[19px]" />
+        Listas
+      </span>
+    </div>
+  </div>
+</div>

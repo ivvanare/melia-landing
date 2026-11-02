@@ -1,0 +1,103 @@
+---
+import Icon from './Icon.astro';
+import PhoneMockup from './PhoneMockup.astro';
+import Carousel from './Carousel.astro';
+import StoreBadges from './StoreBadges.astro';
+---
+
+<section
+  class="relative w-full overflow-hidden bg-paper pt-[calc(72px+var(--space-2xl))] pb-[var(--space-2xl)]"
+  id="descubrir"
+>
+  <div
+    class="mx-auto grid w-full max-w-[1200px] grid-cols-1 items-center gap-x-[var(--space-xl)] gap-y-[var(--space-2xl)] px-[var(--gutter)] lg:grid-cols-12"
+  >
+    <!-- Copy & actions -->
+    <div class="flex flex-col items-start gap-6 lg:col-span-7">
+      <h1 class="text-display text-ink max-w-[15ch] lg:max-w-[17ch]">
+        Menos <span
+          class="text-muted line-through decoration-accent decoration-[3px]"
+          >“a ver qué hacemos”</span
+        >, más <span class="text-accent">¡ya estamos aquí!</span>
+      </h1>
+
+      <p class="lead max-w-[46ch] text-ink-2">
+        Terrazas con ambientazo, restaurantes auténticos y planes en tu ciudad.
+        Vota con tus amigos en 30 segundos.
+      </p>
+
+      <!-- Search + the one primary action -->
+      <div class="flex w-full max-w-2xl flex-col gap-3">
+        <div
+          class="flex min-h-13 items-center gap-2 border-2 border-ink-2 bg-paper-2 p-1.5 transition-colors focus-within:border-accent"
+        >
+          <div class="flex flex-1 items-center gap-2.5 px-2">
+            <Icon name="search" class="text-[20px] text-muted" />
+            <input
+              class="h-11 w-full border-0 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
+              aria-label="Buscar planes en tu ciudad"
+              placeholder="Rooftop, jazz, brunch…"
+              type="text"
+              data-search
+            />
+          </div>
+          <button
+            type="button"
+            data-explore
+            class="flex cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-pill bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink transition-colors hover:bg-accent-2"
+          >
+            Explorar
+            <Icon name="arrow_forward" class="text-[16px]" />
+          </button>
+        </div>
+
+        <!-- Quick filters -->
+        <div class="flex w-full max-w-2xl items-center gap-2 text-xs">
+          <span class="flex-shrink-0 whitespace-nowrap text-muted">
+            Filtros:
+            <span
+              data-chip-count
+              class="ml-1 hidden rounded-pill bg-accent px-1.5 py-0.5 text-[10px] font-medium text-accent-ink align-middle"
+            ></span>
+          </span>
+          <Carousel label="Filtros rápidos" class="min-w-0 flex-1" trackClass="gap-2">
+            {
+              [
+                ['bolt', 'Hoy'],
+                ['near_me', 'Cerca de mí'],
+                ['groups', 'Con amigos'],
+                ['local_bar', 'Rooftops & Copas'],
+              ].map(([icon, label]) => (
+                <button
+                  type="button"
+                  data-chip={label}
+                  aria-pressed="false"
+                  class="chip flex min-h-11 flex-shrink-0 snap-start cursor-pointer items-center gap-1.5 whitespace-nowrap rounded-pill border border-rule px-4 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2"
+                >
+                  <Icon name={icon} class="chip-icon text-[14px]" />
+                  {label}
+                </button>
+              ))
+            }
+          </Carousel>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-x-5 gap-y-3 pt-1">
+        <StoreBadges variant="hero" />
+        <a
+          class="inline-flex items-center gap-1.5 py-2 text-sm font-medium text-ink-2 underline decoration-rule underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+          href="#mapa-en-vivo"
+        >
+          <Icon name="map" class="text-[16px]" />
+          Ver el mapa
+        </a>
+      </div>
+    </div>
+
+    <!-- The screen itself -->
+    <div class="lg:col-span-5">
+      <PhoneMockup />
+    </div>
+  </div>
+</section>

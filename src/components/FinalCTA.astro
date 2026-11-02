@@ -1,0 +1,32 @@
+---
+import StoreBadges from './StoreBadges.astro';
+import Icon from './Icon.astro';
+---
+
+<section
+  id="descargar"
+  class="w-full border-t border-rule bg-paper py-[var(--space-4xl,var(--space-3xl))]"
+>
+  <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
+    <div
+      class="grained flex flex-col items-start gap-6 rounded-card border border-rule bg-paper-3 p-[var(--space-2xl)] lg:p-[var(--space-3xl)]"
+    >
+      <span
+        class="flex h-12 w-12 items-center justify-center rounded-pill bg-accent text-accent-ink"
+      >
+        <Icon name="celebration" class="text-[24px]" />
+      </span>
+      <h2 class="max-w-[26ch] text-section text-ink">
+        Tu próxima anécdota empieza este fin de semana.
+      </h2>
+      <p class="max-w-[52ch] text-ink-2">
+        Descarga Melia gratis en iOS o Android y deja de preguntarte qué hacer.
+        Sal, descubre y vive la ciudad con tu grupo.
+      </p>
+      <StoreBadges variant="cta" />
+      <p class="text-xs text-muted">
+        Sin suscripciones forzadas, 100 % colaborativo para grupos.
+      </p>
+    </div>
+  </div>
+</section>

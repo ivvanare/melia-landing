@@ -1,0 +1,81 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  /** Nombre legible del carrusel, usado en los aria-labels de las flechas */
+  label: string;
+  class?: string;
+  trackClass?: string;
+}
+
+const { label, class: className = '', trackClass = '' } = Astro.props;
+---
+
+<div class:list={['carousel relative', className]} data-carousel>
+  <div
+    data-carousel-track
+    tabindex="0"
+    role="group"
+    aria-label={label}
+    class:list={[
+      'carousel-track flex items-center overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-px-4',
+      trackClass,
+    ]}
+  >
+    <slot />
+  </div>
+  <button
+    type="button"
+    data-carousel-prev
+    aria-label={`${label}: ver anteriores`}
+    class="carousel-btn carousel-prev"
+  >
+    <Icon name="chevron_left" class="text-[18px]" />
+  </button>
+  <button
+    type="button"
+    data-carousel-next
+    aria-label={`${label}: ver siguientes`}
+    class="carousel-btn carousel-next"
+  >
+    <Icon name="chevron_right" class="text-[18px]" />
+  </button>
+</div>
+
+<script>
+  function initCarousels() {
+    document.querySelectorAll('[data-carousel]').forEach((root) => {
+      if (!(root instanceof HTMLElement) || root.dataset.carouselInit) return;
+      root.dataset.carouselInit = '1';
+
+      const track = root.querySelector('[data-carousel-track]');
+      const prev = root.querySelector('[data-carousel-prev]');
+      const next = root.querySelector('[data-carousel-next]');
+      if (!(track instanceof HTMLElement) || !prev || !next) return;
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const update = () => {
+        const max = track.scrollWidth - track.clientWidth;
+        root.classList.toggle('is-scrollable', max > 8);
+        root.classList.toggle('at-start', track.scrollLeft <= 8);
+        root.classList.toggle('at-end', track.scrollLeft >= max - 8);
+      };
+
+      const go = (dir: number) =>
+        track.scrollBy({
+          left: dir * track.clientWidth * 0.85,
+          behavior: reduced.matches ? 'auto' : 'smooth',
+        });
+
+      prev.addEventListener('click', () => go(-1));
+      next.addEventListener('click', () => go(1));
+      track.addEventListener('scroll', update, { passive: true });
+      new ResizeObserver(update).observe(track);
+      update();
+    });
+  }
+
+  initCarousels();
+  document.addEventListener('astro:page-load', initCarousels);
+</script>

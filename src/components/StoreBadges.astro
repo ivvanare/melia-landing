@@ -1,0 +1,42 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  variant?: 'hero' | 'cta';
+}
+
+const { variant = 'hero' } = Astro.props;
+const isHero = variant === 'hero';
+const href = isHero ? '#descargar' : '#';
+const pad = isHero ? 'px-5 py-3' : 'px-6 py-3.5';
+
+const stores = [
+  { icon: 'phone_iphone', label: 'Descarga en', name: 'App Store', filled: true },
+  { icon: 'smart_toy', label: 'Disponible en', name: 'Google Play', filled: false },
+];
+---
+
+<div class="flex flex-wrap items-center gap-3">
+  {
+    stores.map(({ icon, label, name, filled }) => (
+      <a
+        class:list={[
+          'flex items-center gap-3 rounded-pill transition-colors',
+          pad,
+          filled && !isHero
+            ? 'bg-accent text-accent-ink hover:bg-accent-2'
+            : 'border border-ink-2 text-ink hover:border-accent-2 hover:text-accent',
+        ]}
+        href={href}
+      >
+        <Icon name={icon} class="text-[22px]" />
+        <span class="flex flex-col text-left leading-tight">
+          <span class="text-[11px]    opacity-80">
+            {label}
+          </span>
+          <span class="text-sm font-medium">{name}</span>
+        </span>
+      </a>
+    ))
+  }
+</div>

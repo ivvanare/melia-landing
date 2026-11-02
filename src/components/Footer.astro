@@ -1,0 +1,86 @@
+---
+import Icon from './Icon.astro';
+
+const columns = [
+  {
+    title: 'Explorar',
+    links: [
+      { label: 'Planes destacados', href: '#' },
+      { label: 'Rutas de fin de semana', href: '#' },
+      { label: 'Gastronomía y bares', href: '#' },
+      { label: 'Festivales y conciertos', href: '#' },
+    ],
+  },
+  {
+    title: 'Producto',
+    links: [
+      { label: 'Votación grupal', href: '#' },
+      { label: 'Sincronización con calendario', href: '#' },
+      { label: 'Widget móvil', href: '#' },
+      { label: 'Radar urbano', href: '#' },
+    ],
+  },
+  {
+    title: 'Compañía',
+    links: [
+      { label: 'Red de aliados', href: '#creadores' },
+      { label: 'Términos de servicio', href: '#' },
+      { label: 'Privacidad', href: '#' },
+      { label: 'Soporte', href: '#' },
+    ],
+  },
+];
+---
+
+<footer class="w-full border-t border-rule bg-paper py-[var(--space-2xl)]">
+  <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
+    <div class="grid grid-cols-1 gap-[var(--space-xl)] md:grid-cols-2 lg:grid-cols-5">
+      <div class="flex flex-col items-start gap-3 lg:col-span-2">
+        <a class="flex items-center gap-2.5" href="#">
+          <span
+            class="flex h-7 w-7 items-center justify-center rounded-pill bg-accent text-accent-ink"
+          >
+            <Icon name="explore" class="text-[16px]" />
+          </span>
+          <span class="font-display text-lg text-ink">Melia</span>
+        </a>
+        <p class="max-w-[42ch] text-sm text-ink-2">
+          Descubre eventos auténticos, vota salidas con tu grupo de amigos y
+          coordina planes inolvidables en minutos.
+        </p>
+        <p class="text-xs text-muted">
+          Disponible en España: Madrid, Barcelona, Valencia, Sevilla.
+        </p>
+      </div>
+
+      {
+        columns.map(({ title, links }) => (
+          <nav class="flex flex-col gap-2" aria-label={title}>
+            <h2 class="font-body text-xs font-medium text-muted">{title}</h2>
+            {links.map(({ label, href }) => (
+              <a
+                class="whitespace-nowrap text-sm text-ink-2 underline decoration-transparent underline-offset-4 transition-colors hover:text-accent hover:decoration-accent"
+                href={href}
+              >
+                {label}
+              </a>
+            ))}
+          </nav>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-[var(--space-xl)] flex flex-col gap-2 border-t border-rule pt-[var(--space-lg)] text-xs text-muted md:flex-row md:items-center md:justify-between"
+    >
+      <span
+        >© 2025 Melia. Todos los derechos reservados. Diseñado para momentos
+        espontáneos.</span
+      >
+      <span class="flex items-center gap-4">
+        <span>Español (ES)</span>
+        <span>Hecho con ❤️ para amigos que salen</span>
+      </span>
+    </div>
+  </div>
+</footer>

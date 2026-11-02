@@ -1,0 +1,808 @@
+<!DOCTYPE html><html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Plany — Sal sin rodeos</title>
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              coral: "#FF5A36",       /* Sunset Coral */
+              coralHover: "#E64825",
+              coralLight: "#FFF1EE",
+              night: "#0F172A",       /* Deep Night Indigo */
+              nightIndigo: "#1E1B4B",
+              slate: "#334155",
+              muted: "#64748B",
+              border: "#E2E8F0",
+              canvas: "#F8FAFC",
+              surface: "#FFFFFF",
+              amber: "#F59E0B",
+              cyan: "#0284C7"
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          borderRadius: {
+            card: "16px",
+            pill: "9999px"
+          },
+          boxShadow: {
+            subtle: "0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05)",
+            elevation: "0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 6px -2px rgba(15, 23, 42, 0.03)",
+            float: "0 20px 40px -15px rgba(255, 90, 54, 0.22)"
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    @layer base {
+      html, body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #F8FAFC;
+        color: #0F172A;
+        -webkit-font-smoothing: antialiased;
+      }
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+</head>
+<body class="bg-brand-canvas text-brand-night antialiased selection:bg-brand-coral selection:text-white">
+<!-- TOP NAVIGATION HEADER -->
+<header class="fixed top-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-brand-border">
+<div class="max-w-7xl mx-auto h-20 px-6 sm:px-8 flex items-center justify-between">
+<!-- Logo + City Selector -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-2 group" href="#">
+<div class="w-9 h-9 rounded-xl bg-brand-coral flex items-center justify-center text-white shadow-md shadow-brand-coral/30 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[22px]">explore</span>
+</div>
+<span class="text-2xl font-extrabold tracking-tight text-brand-night">Plany</span>
+</a>
+<div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-pill bg-slate-100/90 text-brand-slate text-xs font-semibold hover:bg-slate-200/80 transition-colors cursor-pointer border border-slate-200/60">
+<span class="material-symbols-outlined text-brand-coral text-[16px]">location_on</span>
+<span class="">Madrid, ES</span>
+<span class="material-symbols-outlined text-brand-muted text-[14px]">expand_more</span>
+</div>
+</div>
+<!-- Center Links -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="px-4 py-2 rounded-pill text-sm font-bold text-brand-night hover:text-brand-coral transition-colors" href="#descubrir">Descubrir</a>
+<a class="px-4 py-2 rounded-pill text-sm font-semibold text-brand-muted hover:text-brand-night transition-colors" href="#como-funciona">Cómo funciona</a>
+<a class="px-4 py-2 rounded-pill text-sm font-semibold text-brand-muted hover:text-brand-night transition-colors" href="#mapa-en-vivo">Radar Urbano</a>
+<a class="px-4 py-2 rounded-pill text-sm font-semibold text-brand-muted hover:text-brand-night transition-colors" href="#widgets">Widgets</a>
+<a class="px-4 py-2 rounded-pill text-sm font-semibold text-brand-muted hover:text-brand-night transition-colors" href="#creadores">Creadores</a>
+</nav>
+<!-- Right CTAs -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-pill bg-brand-coral text-white text-sm font-bold shadow-md shadow-brand-coral/25 hover:bg-brand-coralHover hover:shadow-lg transition-all" href="#descargar">
+<span class="">Descargar Gratis</span>
+<span class="material-symbols-outlined text-[18px]">arrow_downward</span>
+</a>
+<div class="w-9 h-9 rounded-full bg-slate-100 flex items-center justify-center text-brand-night hover:bg-slate-200 cursor-pointer border border-brand-border">
+<span class="material-symbols-outlined text-[20px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<main class="w-full pt-20">
+<!-- HERO SECTION -->
+<section class="relative w-full pt-12 pb-20 lg:pt-16 lg:pb-28 overflow-hidden bg-brand-canvas" id="descubrir">
+<!-- Ambient Lighting -->
+<div class="absolute -top-32 right-1/4 w-96 h-96 bg-brand-coral/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-1/3 -left-20 w-80 h-80 bg-brand-nightIndigo/5 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Left Column: Copy & Actions -->
+<div class="lg:col-span-7 flex flex-col items-start gap-6">
+<!-- Pill Announcement -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-pill bg-white border border-brand-border shadow-subtle">
+<span class="w-2 h-2 rounded-full bg-brand-coral animate-ping"></span>
+<span class="text-xs font-bold tracking-wide uppercase text-brand-slate">La app definitiva para salir sin rodeos</span>
+</div>
+<!-- Headline -->
+<h1 class="text-4xl sm:text-5xl lg:text-[54px] font-extrabold text-brand-night leading-[1.12] tracking-tight">
+              Menos <span class="text-brand-muted line-through decoration-brand-coral decoration-4">“a ver qué hacemos”</span>,<br>
+              más <span class="bg-gradient-to-r from-brand-coral via-brand-coral to-amber-500 bg-clip-text text-transparent">¡ya estamos aquí!</span>
+</h1>
+<p class="text-base sm:text-lg text-brand-muted leading-relaxed max-w-xl">
+              Descubre terrazas con ambientazo, restaurantes auténticos y experiencias en tu ciudad. Crea listas con amigos, votad en 30 segundos y olvidad los debates eternos por chat.</p>
+<!-- Streamlined Search + Instant Mood Filter Chips -->
+<div class="w-full max-w-xl flex flex-col gap-3">
+<div class="p-1.5 rounded-pill bg-white border border-brand-border shadow-elevation flex items-center justify-between gap-2 focus-within:border-brand-coral/80 transition-colors">
+<div class="flex-1 flex items-center px-4 gap-2.5">
+<span class="material-symbols-outlined text-brand-muted text-[22px]">search</span>
+<input class="w-full bg-transparent border-0 outline-none text-sm text-brand-night placeholder:text-brand-muted/70 focus:ring-0" placeholder="¿Qué te apetece hoy? p.ej: Rooftop, Jazz, Brunch..." type="text">
+</div>
+<button class="px-5 py-2.5 rounded-pill bg-brand-coral hover:bg-brand-coralHover text-white text-sm font-bold flex items-center gap-1.5 shadow-sm transition-all cursor-pointer whitespace-nowrap" onclick="document.getElementById('mapa-en-vivo').scrollIntoView({behavior: 'smooth'})">
+<span class="">Explorar</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+<!-- Quick Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs">
+<span class="text-brand-muted font-medium whitespace-nowrap">Filtros rápidos:</span>
+<button class="px-3 py-1 rounded-pill bg-white border border-brand-border text-brand-slate font-semibold hover:border-brand-coral hover:text-brand-coral transition-colors flex items-center gap-1 cursor-pointer whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px] text-brand-coral">bolt</span> Hoy
+                </button>
+<button class="px-3 py-1 rounded-pill bg-white border border-brand-border text-brand-slate font-semibold hover:border-brand-coral hover:text-brand-coral transition-colors flex items-center gap-1 cursor-pointer whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px] text-brand-cyan">near_me</span> Cerca de mí
+                </button>
+<button class="px-3 py-1 rounded-pill bg-white border border-brand-border text-brand-slate font-semibold hover:border-brand-coral hover:text-brand-coral transition-colors flex items-center gap-1 cursor-pointer whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px] text-amber-500">groups</span> Con amigos
+                </button>
+<button class="px-3 py-1 rounded-pill bg-white border border-brand-border text-brand-slate font-semibold hover:border-brand-coral hover:text-brand-coral transition-colors flex items-center gap-1 cursor-pointer whitespace-nowrap">
+<span class="material-symbols-outlined text-[14px] text-brand-coral">local_bar</span> Rooftops &amp; Copas
+                </button>
+</div>
+</div>
+<!-- Download Buttons & Map Link -->
+<div class="flex flex-wrap items-center gap-3.5 pt-2">
+<a class="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-brand-night text-white hover:bg-slate-900 transition-all shadow-subtle group" href="#descargar">
+<span class="material-symbols-outlined text-[26px]">phone_iphone</span>
+<div class="flex flex-col text-left">
+<span class="text-[10px] uppercase font-bold tracking-wider text-slate-400">Descarga en</span>
+<span class="text-xs font-bold leading-tight">App Store</span>
+</div>
+</a>
+<a class="flex items-center gap-2.5 px-5 py-2.5 rounded-xl bg-white border border-brand-border text-brand-night hover:bg-slate-50 transition-all shadow-subtle group" href="#descargar">
+<span class="material-symbols-outlined text-[26px] text-brand-coral">smart_toy</span>
+<div class="flex flex-col text-left">
+<span class="text-[10px] uppercase font-bold tracking-wider text-brand-muted">Disponible en</span>
+<span class="text-xs font-bold leading-tight">Google Play</span>
+</div>
+</a>
+<a class="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-brand-slate hover:text-brand-coral transition-colors ml-1" href="#mapa-en-vivo">
+<span class="material-symbols-outlined text-[18px]">map</span>
+<span class="">Ver mapa interactivo</span>
+</a>
+</div>
+<!-- Social Proof Metrics -->
+<div class="grid grid-cols-3 gap-6 pt-4 border-t border-brand-border/80 w-full max-w-lg">
+<div class="flex flex-col">
+<span class="text-2xl sm:text-3xl font-extrabold text-brand-night">+2.4k</span>
+<span class="text-xs font-medium text-brand-muted uppercase tracking-wider">Planes activos</span>
+</div>
+<div class="flex flex-col">
+<span class="text-2xl sm:text-3xl font-extrabold text-brand-night">+180</span>
+<span class="text-xs font-medium text-brand-muted uppercase tracking-wider">Ciudades</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1">
+<span class="text-2xl sm:text-3xl font-extrabold text-brand-night">4.9</span>
+<span class="material-symbols-outlined text-amber-500 text-[22px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<span class="text-xs font-medium text-brand-muted uppercase tracking-wider">Valoración store</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Mobile App Preview Mockup -->
+<div class="lg:col-span-5 relative flex justify-center">
+<!-- Glow background -->
+<div class="absolute inset-0 bg-gradient-to-tr from-brand-coral/15 to-brand-cyan/15 rounded-[48px] filter blur-2xl -z-10 scale-95"></div>
+<!-- Phone Frame -->
+<div class="w-full max-w-[360px] bg-white rounded-[40px] p-3.5 shadow-2xl border-4 border-slate-900/10 flex flex-col gap-3">
+<!-- Dynamic Island & Status Bar -->
+<div class="flex items-center justify-between px-3 pt-1 text-xs text-brand-muted">
+<span class="font-bold text-brand-night">21:14</span>
+<div class="w-20 h-4 bg-brand-night rounded-full mx-auto"></div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">signal_cellular_alt</span>
+<span class="material-symbols-outlined text-[13px]">wifi</span>
+<span class="material-symbols-outlined text-[13px]">battery_5_bar</span>
+</div>
+</div>
+<!-- Top In-App Bar -->
+<div class="flex items-center justify-between px-2 pt-1">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-brand-nightIndigo text-white flex items-center justify-center font-bold text-xs">
+                    C
+                  </div>
+<div>
+<span class="text-[10px] text-brand-muted uppercase block leading-none font-bold">Plan activo</span>
+<span class="text-xs font-extrabold text-brand-night">Grupo "Los de Siempre" ⚡</span>
+</div>
+</div>
+<div class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-brand-slate text-xs">
+<span class="material-symbols-outlined text-[16px]">notifications</span>
+</div>
+</div>
+<!-- Real-time Group Voting Card -->
+<div class="bg-slate-50 border border-brand-border rounded-card p-3.5 flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-pill bg-brand-coral text-white text-[11px] font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                    Votación en vivo
+                  </span>
+<span class="text-[11px] font-bold text-brand-muted">Cierra en 12 min</span>
+</div>
+<!-- Card visual: Rooftop -->
+<div class="relative w-full h-36 rounded-xl overflow-hidden shadow-sm">
+<img alt="Rooftop &amp; Tapas Cibeles" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw6eCKOT1-lQt7mnC75KEFivgDy0zYJSGm92U4hSyj8nO6HRgaI66WEwiKYz4j6QdjZZAuJ9WGIgN0919m0FnQj-bwns70iMG1RttHyHfuIu3_0kENcaO5OgHDMTohgaAKDk7sA4FiFSGKmUCBipgNLI2mTQTh3_lCArIafXTahLhctAIExC-vOuDtYKwYhhvnhlXCKXaFgFMHJv8DS8xJoV0E9SsLmC1yd9dJgyg">
+<div class="absolute inset-0 bg-gradient-to-t from-brand-night/85 via-black/20 to-transparent flex items-end p-2.5">
+<div>
+<span class="text-xs font-bold text-white block">Rooftop Cibeles vs Ramen Hanabi</span>
+<span class="text-[11px] text-slate-200 flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[13px] text-brand-coral">location_on</span>
+                        Gran Vía • A 1.2 km
+                      </span>
+</div>
+</div>
+</div>
+<!-- Friend Voting Avatars & Ratio -->
+<div class="flex items-center justify-between pt-0.5">
+<div class="flex items-center -space-x-2">
+<div class="w-7 h-7 rounded-full bg-brand-coral text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm">MR</div>
+<div class="w-7 h-7 rounded-full bg-brand-night text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm">SL</div>
+<div class="w-7 h-7 rounded-full bg-sky-600 text-white text-[10px] font-bold flex items-center justify-center border-2 border-white shadow-sm">AG</div>
+<div class="w-7 h-7 rounded-full bg-slate-200 text-brand-slate text-[10px] font-bold flex items-center justify-center border-2 border-white">+2</div>
+</div>
+<div class="text-right">
+<span class="text-xs font-extrabold text-brand-night flex items-center gap-1">
+<span class="text-brand-coral">4 de 5</span> han votado 🔥
+                    </span>
+</div>
+</div>
+<!-- Interactive Vote Buttons in Mockup -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<button class="py-2 px-3 rounded-pill bg-brand-coral text-white text-xs font-bold flex items-center justify-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[15px]">thumb_up</span>
+<span class="">¡Me apunto!</span>
+</button>
+<button class="py-2 px-3 rounded-pill bg-white border border-brand-border text-brand-slate text-xs font-medium flex items-center justify-center gap-1 hover:bg-slate-100">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="">Paso hoy</span>
+</button>
+</div>
+</div>
+<!-- Second quick upcoming plan inside mock -->
+<div class="p-2.5 rounded-xl bg-white border border-brand-border flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<div>
+<span class="text-xs font-bold text-brand-night block">Sábado: Brunch &amp; Market</span>
+<span class="text-[11px] text-brand-muted">Malasaña • 11:30h</span>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded-pill bg-emerald-50 text-emerald-700 text-[10px] font-bold border border-emerald-200">Confirmado</span>
+</div>
+<!-- In-App Bottom Tab Bar -->
+<div class="flex items-center justify-around py-1.5 border-t border-brand-border text-brand-muted text-[11px]">
+<div class="flex flex-col items-center text-brand-coral font-bold">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span class="">Explorar</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+<span class="">Grupos</span>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-[20px]">bookmarks</span>
+<span class="">Listas</span>
+</div>
+</div>
+</div>
+<!-- Floating Pill Widget: Calendar Sync -->
+<div class="hidden sm:flex absolute -bottom-4 -left-6 bg-white border border-brand-border p-3.5 rounded-2xl shadow-elevation items-center gap-3 max-w-xs animate-bounce" style="animation-duration: 4s;">
+<div class="w-10 h-10 rounded-xl bg-brand-night text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-extrabold text-brand-night">Sincronizado con Apple Calendar</span>
+<span class="text-[11px] text-brand-muted">Alerta de salida a las 20:45h</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CATEGORY STRIP -->
+<section class="w-full py-6 bg-white border-y border-brand-border">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="flex items-center justify-between mb-3">
+<h2 class="text-sm font-bold uppercase tracking-wider text-brand-slate flex items-center gap-1.5">
+<span class="">Planes según tu mood</span>
+<span class="material-symbols-outlined text-brand-coral text-[16px]">local_fire_department</span>
+</h2>
+<span class="text-xs text-brand-muted font-medium hidden sm:inline">Desliza para descubrir más</span>
+</div>
+<div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar pb-1">
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-pill bg-brand-night text-white text-xs font-bold shadow-sm">
+<span class="material-symbols-outlined text-[16px] text-brand-coral">restaurant</span>
+<span class="">Gastronomía &amp; Tapas</span>
+<span class="px-1.5 py-0.2 rounded-pill bg-slate-800 text-[10px] text-slate-300">640</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-pill bg-slate-50 hover:bg-slate-100 text-brand-slate border border-brand-border text-xs font-semibold transition-colors">
+<span class="material-symbols-outlined text-[16px] text-brand-coral">roofing</span>
+<span class="">Rooftops &amp; Terrazas</span>
+<span class="px-1.5 py-0.2 rounded-pill bg-slate-200 text-[10px]">94</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-pill bg-slate-50 hover:bg-slate-100 text-brand-slate border border-brand-border text-xs font-semibold transition-colors">
+<span class="material-symbols-outlined text-[16px] text-brand-night">music_note</span>
+<span class="">Música &amp; Conciertos</span>
+<span class="px-1.5 py-0.2 rounded-pill bg-slate-200 text-[10px]">128</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-pill bg-slate-50 hover:bg-slate-100 text-brand-slate border border-brand-border text-xs font-semibold transition-colors">
+<span class="material-symbols-outlined text-[16px] text-brand-slate">theater_comedy</span>
+<span class="">Stand-up &amp; Microteatro</span>
+<span class="px-1.5 py-0.2 rounded-pill bg-slate-200 text-[10px]">82</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-pill bg-slate-50 hover:bg-slate-100 text-brand-slate border border-brand-border text-xs font-semibold transition-colors">
+<span class="material-symbols-outlined text-[16px] text-amber-500">local_cafe</span>
+<span class="">Brunch &amp; Cafés de Autor</span>
+<span class="px-1.5 py-0.2 rounded-pill bg-slate-200 text-[10px]">112</span>
+</button>
+<button class="flex-shrink-0 flex items-center gap-2 px-4 py-2 rounded-pill bg-slate-50 hover:bg-slate-100 text-brand-slate border border-brand-border text-xs font-semibold transition-colors">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">nature_people</span>
+<span class="">Escapadas &amp; Aire Libre</span>
+<span class="px-1.5 py-0.2 rounded-pill bg-slate-200 text-[10px]">53</span>
+</button>
+</div>
+</div>
+</section>
+<!-- CLEAN CARD ARCHITECTURE: 3 CORE FEATURE PILLARS -->
+<section class="w-full py-20 bg-brand-canvas" id="como-funciona">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="text-center max-w-2xl mx-auto mb-16 flex flex-col items-center gap-3">
+<span class="px-3.5 py-1 rounded-pill bg-slate-100 border border-brand-border text-brand-night text-xs font-bold uppercase tracking-wider">
+            El superpoder de coordinar
+          </span>
+<h2 class="text-3xl sm:text-4xl font-extrabold text-brand-night tracking-tight">
+            Tres razones para no volver a planear por chat
+          </h2>
+<p class="text-base text-brand-muted">
+            Diseñado para que salir de casa con tus personas favoritas tome 2 minutos, sin los eternos audios de WhatsApp.
+          </p>
+</div>
+<!-- 3 Cards with Consistent Monochromatic Containers (No Rainbow Pastels) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white rounded-card p-8 border border-brand-border shadow-subtle hover:shadow-elevation transition-all flex flex-col justify-between gap-6">
+<div class="flex flex-col gap-4">
+<div class="w-12 h-12 rounded-xl bg-brand-night text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">near_me</span>
+</div>
+<h3 class="text-xl font-bold text-brand-night">
+                Descubrimiento hiperlocal en tiempo real
+              </h3>
+<p class="text-sm text-brand-muted leading-relaxed">
+                Filtra por distancia precisa, rango de precio real por persona y lugares con disponibilidad inmediata. Planes curados y verificados a diario.
+              </p>
+</div>
+<!-- Micro-preview -->
+<div class="p-3.5 rounded-xl bg-slate-50 border border-brand-border flex flex-col gap-2">
+<div class="flex items-center justify-between text-xs font-semibold text-brand-slate">
+<span class="">Distancia estimada</span>
+<span class="font-bold text-brand-night">&lt; 800m a pie</span>
+</div>
+<div class="w-full bg-slate-200 rounded-pill h-2 overflow-hidden">
+<div class="bg-brand-coral h-full rounded-pill w-2/5"></div>
+</div>
+<div class="flex items-center gap-1.5 pt-1 text-xs text-brand-night font-bold">
+<span class="material-symbols-outlined text-[16px] text-emerald-600">schedule</span>
+<span class="">Abierto ahora • Terraza con mesas libres</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-card p-8 border border-brand-border shadow-subtle hover:shadow-elevation transition-all flex flex-col justify-between gap-6">
+<div class="flex flex-col gap-4">
+<div class="w-12 h-12 rounded-xl bg-brand-night text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">how_to_vote</span>
+</div>
+<h3 class="text-xl font-bold text-brand-night">
+                Listas grupales con votación express
+              </h3>
+<p class="text-sm text-brand-muted leading-relaxed">
+                Elige 2 o 3 opciones, comparte un enlace rápido y votad con un simple toque. Tus amigos no necesitan registrarse para votar.
+              </p>
+</div>
+<!-- Micro-preview -->
+<div class="p-3.5 rounded-xl bg-slate-50 border border-brand-border flex flex-col gap-2.5">
+<div class="flex items-center justify-between text-xs font-bold text-brand-night">
+<span class="">¿Tapas en Latina o Ramen?</span>
+<span class="text-brand-coral">4 votos</span>
+</div>
+<div class="space-y-1.5">
+<div class="flex justify-between text-[11px] font-semibold text-brand-slate">
+<span class="">Taberna La Carmencita</span>
+<span class="font-bold text-brand-night">75%</span>
+</div>
+<div class="w-full bg-slate-200 rounded-pill h-2 overflow-hidden">
+<div class="bg-brand-night h-full rounded-pill w-3/4"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-card p-8 border border-brand-border shadow-subtle hover:shadow-elevation transition-all flex flex-col justify-between gap-6">
+<div class="flex flex-col gap-4">
+<div class="w-12 h-12 rounded-xl bg-brand-night text-white flex items-center justify-center">
+<span class="material-symbols-outlined text-[24px]">calendar_month</span>
+</div>
+<h3 class="text-xl font-bold text-brand-night">
+                Tu agenda de ocio centralizada
+              </h3>
+<p class="text-sm text-brand-muted leading-relaxed">
+                Sincronización instantánea con Google Calendar, Apple Calendar y recordatorios del clima para que nadie llegue tarde o sin plan b.
+              </p>
+</div>
+<!-- Micro-preview -->
+<div class="p-3.5 rounded-xl bg-slate-50 border border-brand-border flex items-center gap-3">
+<span class="material-symbols-outlined text-[24px] text-emerald-600">check_circle</span>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-brand-night">Sincronización automática</span>
+<span class="text-[11px] text-brand-muted">iCal, Google Calendar &amp; Outlook</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- INTEGRATED URBAN RADAR MAP + RECOMMENDED WEEKEND PLANS -->
+<section class="w-full py-20 bg-white border-t border-brand-border" id="mapa-en-vivo">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<!-- Section Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<span class="text-xs font-bold text-brand-coral uppercase tracking-wider">Radar urbano en vivo</span>
+<h2 class="text-3xl sm:text-4xl font-extrabold text-brand-night tracking-tight mt-1">
+              Planes recomendados para este fin de semana
+            </h2>
+</div>
+<!-- Time Filter Pill Controls -->
+<div class="inline-flex p-1 rounded-pill bg-slate-100 border border-brand-border self-start md:self-auto">
+<button class="px-4 py-1.5 rounded-pill bg-white text-brand-night text-xs font-bold shadow-subtle">Hoy</button>
+<button class="px-4 py-1.5 rounded-pill text-brand-muted hover:text-brand-night text-xs font-semibold transition-colors">Este fin de semana</button>
+<button class="px-4 py-1.5 rounded-pill text-brand-muted hover:text-brand-night text-xs font-semibold transition-colors">Próxima semana</button>
+</div>
+</div>
+<!-- Integrated Map Callout Bar -->
+<div class="mb-10 bg-slate-900 rounded-card p-6 sm:p-8 text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+<div class="flex flex-col gap-3 max-w-xl z-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-pill bg-slate-800 text-brand-coral text-xs font-bold w-fit border border-slate-700">
+<span class="w-2 h-2 rounded-full bg-brand-coral animate-ping"></span>
+<span class="">42 planes y mesas activas a &lt; 2 km</span>
+</div>
+<h3 class="text-2xl font-bold tracking-tight">Explora tu barrio en tiempo real</h3>
+<p class="text-sm text-slate-300 leading-relaxed">
+              Consulta en el mapa interactivo afluencia estimada, horas felices y mesas libres en locales verificados de Madrid.
+            </p>
+<div class="flex items-center gap-4 text-xs font-semibold text-slate-300 pt-1">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-emerald-400">verified</span> Locales verificados</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px] text-brand-cyan">directions_walk</span> A pie o en metro</span>
+</div>
+</div>
+<!-- Mini Interactive Map Widget Window -->
+<div class="w-full lg:w-96 h-48 rounded-xl overflow-hidden relative border border-slate-700 shadow-elevation">
+<div class="w-full h-full bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDmtQAcw4KNcnWR4b_7ptlcpr5eVgKSzmKX0-RhkzIeHz1W_xVLg7FsFlT_AjPCPpmhAnYwSL2_MUAfTkT-H6MplBXrnopz3tF9vLgqFMDYFWp_QW8XZ68QbxIrg72t5WANzLxH3ammGBZDHv-ZkqT0Kr35Y7G9CBrEXH3KKdP8lUvWchwHhwELcRSofNrAiggCTtuQeI_vkL8vv-vjioxF5whRwxgnQoMwyMbOyX8')"></div>
+<div class="absolute inset-0 bg-brand-night/30 pointer-events-none"></div>
+<!-- Pin 1 -->
+<div class="absolute top-1/4 left-1/3 px-2 py-1 rounded-pill bg-brand-coral text-white text-[10px] font-bold shadow-md flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">local_bar</span> Cibeles
+            </div>
+<!-- Pin 2 -->
+<div class="absolute bottom-1/3 right-1/4 px-2 py-1 rounded-pill bg-brand-night text-white text-[10px] font-bold shadow-md flex items-center gap-1 border border-slate-700">
+<span class="material-symbols-outlined text-[12px] text-brand-coral">restaurant</span> Malasaña
+            </div>
+<div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-sm rounded-lg p-2 flex items-center justify-between text-[11px] text-brand-night font-bold">
+<span class="">Geolocalización activa: Centro</span>
+<span class="text-brand-coral flex items-center gap-0.5">Explorar mapa <span class="material-symbols-outlined text-[12px]">arrow_forward</span></span>
+</div>
+</div>
+</div>
+<!-- 3 Cards Feed with Real-time Status Badges & Secondary Outline Buttons -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-white rounded-card border border-brand-border overflow-hidden shadow-subtle hover:shadow-elevation transition-all flex flex-col group">
+<div class="relative h-56 w-full overflow-hidden bg-slate-100">
+<img alt="Concierto acústico indie" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-1mmXDZIPpJQZMZl12Z54-T92WwPidILxFO6acwacnjCsXZMpUDdi2hMkBJbylOHT_AJVlg7OpS8etfu-I4YMye5s_OaX2eDff_Htmz6jxzYEyywUuj-a3cUMwfYKwYuGWaW2C7ljvvN5GXfXNyNy9z5KkZ95Q2ngPaSKAkdfjs3lvrUr7xxPZmHuK0g0VYZO1I_bf--1SUZNPeN6g6OZjC83lE_6rG-e00l9tE8">
+<div class="absolute top-3 left-3 bg-brand-night text-white text-[11px] font-bold px-3 py-1 rounded-pill shadow-sm">
+                Música en vivo
+              </div>
+<button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-slate hover:text-brand-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-brand-coral text-white text-[11px] font-bold px-2.5 py-0.5 rounded-pill shadow-sm flex items-center gap-1">
+<span class="">Tendencia hoy</span> 🔥
+              </div>
+</div>
+<div class="p-6 flex flex-col justify-between flex-1 gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-xs font-semibold text-brand-muted">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Abierto ahora • 21:00h
+                  </span>
+<span class="font-extrabold text-brand-night text-sm">15€ / pers.</span>
+</div>
+<h3 class="text-lg font-bold text-brand-night group-hover:text-brand-coral transition-colors">
+                  Sesión Acústica &amp; Cerveza Artesanal
+                </h3>
+<p class="text-xs text-brand-muted line-clamp-2">
+                  Noche de cantautores independientes en el sótano acústico de Malasaña. Ambiente íntimo y degustación de 4 IPAs locales.
+                </p>
+</div>
+<div class="pt-3 border-t border-brand-border flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-brand-slate font-medium">
+<span class="material-symbols-outlined text-brand-coral text-[16px]">location_on</span>
+<span class="">Malasaña • A 1.5 km</span>
+</div>
+<!-- Secondary Outline/Ghost Action -->
+<button class="px-4 py-1.5 rounded-pill border border-brand-border text-brand-night hover:border-brand-coral hover:text-brand-coral text-xs font-bold transition-colors">
+                  Ver plan
+                </button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-card border border-brand-border overflow-hidden shadow-subtle hover:shadow-elevation transition-all flex flex-col group">
+<div class="relative h-56 w-full overflow-hidden bg-slate-100">
+<img alt="Brunch botánico" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDLVkgIHSRXb6nLpga7wOkNM9QsAy6LuLM2FHtfsKyH5Qy8I5jH88bt5K2YWrmAYyVLF7E9_egSM05ADTovGRE7e_aBExeFEXLJgECt3eXiVD74KD88KmOxFmdmeYdxrS1a3FYASMKn7pi7FQv-4TprFBSmtjSy1OjpHPj_fIQOg_eTxKDtdA-npyVFjd3f6We9h2LwYFhffUg93_tUa3JqnlOHdP4CzlvZ5cc8pPg">
+<div class="absolute top-3 left-3 bg-brand-night text-white text-[11px] font-bold px-3 py-1 rounded-pill shadow-sm">
+                Brunch &amp; Café
+              </div>
+<button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-slate hover:text-brand-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-slate-900 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-pill shadow-sm flex items-center gap-1">
+<span class="">Pet Friendly 🐾</span>
+</div>
+</div>
+<div class="p-6 flex flex-col justify-between flex-1 gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-xs font-semibold text-brand-muted">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Sábado, 11:30h
+                  </span>
+<span class="font-extrabold text-brand-night text-sm">18€ / pers.</span>
+</div>
+<h3 class="text-lg font-bold text-brand-night group-hover:text-brand-coral transition-colors">
+                  Brunch Botánico en Patio Central
+                </h3>
+<p class="text-xs text-brand-muted line-clamp-2">
+                  Tostas de masa madre, café de especialidad infusionado en frío y repostería en un invernadero urbano histórico.
+                </p>
+</div>
+<div class="pt-3 border-t border-brand-border flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-brand-slate font-medium">
+<span class="material-symbols-outlined text-brand-coral text-[16px]">location_on</span>
+<span class="">Salamanca • A 2.8 km</span>
+</div>
+<!-- Secondary Outline/Ghost Action -->
+<button class="px-4 py-1.5 rounded-pill border border-brand-border text-brand-night hover:border-brand-coral hover:text-brand-coral text-xs font-bold transition-colors">
+                  Ver plan
+                </button>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-card border border-brand-border overflow-hidden shadow-subtle hover:shadow-elevation transition-all flex flex-col group">
+<div class="relative h-56 w-full overflow-hidden bg-slate-100">
+<img alt="Micro abierto y monólogos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANnvS3NwvzEi6d5MdlWU3bvoYgFRtrDUVfDLkWuIERVijbUycNKmQSlNEO5FKXGekgB5sHXp89VRE4UAzfABdjMDSn6UiJfU2lU26GWdBasaSEnQTuxbkrrWEnCKtalH9Dht51Di37z-szOktFB2apzlpuEPvhhhTkvzVclSBNlkKymkyKhFh1UbJQAeXqlI6BM4dFuOgfo9XZ20Ycg50GEYJfWoWZhGN3LwXVAaY">
+<div class="absolute top-3 left-3 bg-brand-night text-white text-[11px] font-bold px-3 py-1 rounded-pill shadow-sm">
+                Comedia &amp; Show
+              </div>
+<button class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-brand-slate hover:text-brand-coral transition-colors">
+<span class="material-symbols-outlined text-[18px]">favorite_border</span>
+</button>
+<div class="absolute bottom-3 left-3 bg-amber-500 text-white text-[11px] font-bold px-2.5 py-0.5 rounded-pill shadow-sm">
+                Últimas 8 entradas 🔥
+              </div>
+</div>
+<div class="p-6 flex flex-col justify-between flex-1 gap-4">
+<div class="space-y-1.5">
+<div class="flex items-center justify-between text-xs font-semibold text-brand-muted">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-brand-coral"></span> Domingo, 20:00h
+                  </span>
+<span class="font-extrabold text-brand-night text-sm">12€ / pers.</span>
+</div>
+<h3 class="text-lg font-bold text-brand-night group-hover:text-brand-coral transition-colors">
+                  Noche de Micro Abierto &amp; Tacos
+                </h3>
+<p class="text-xs text-brand-muted line-clamp-2">
+                  Cómicos consolidados probando material nuevo acompañados de cócteles de autor y barra mexicana.
+                </p>
+</div>
+<div class="pt-3 border-t border-brand-border flex items-center justify-between">
+<div class="flex items-center gap-1 text-xs text-brand-slate font-medium">
+<span class="material-symbols-outlined text-brand-coral text-[16px]">location_on</span>
+<span class="">La Latina • A 0.9 km</span>
+</div>
+<!-- Secondary Outline/Ghost Action -->
+<button class="px-4 py-1.5 rounded-pill border border-brand-border text-brand-night hover:border-brand-coral hover:text-brand-coral text-xs font-bold transition-colors">
+                  Ver plan
+                </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3-STEP INTUITIVE SOCIAL GUIDE -->
+<section class="w-full py-20 bg-brand-canvas border-t border-brand-border">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="text-center max-w-xl mx-auto mb-16 flex flex-col items-center gap-2">
+<span class="text-xs font-bold text-brand-coral uppercase tracking-wider">Así de simple</span>
+<h2 class="text-3xl sm:text-4xl font-extrabold text-brand-night tracking-tight">
+            Tres pasos y ya están en la calle
+          </h2>
+<p class="text-sm text-brand-muted">
+            Cero registros tediosos ni formularios interminables. Pensado para la espontaneidad urbana.
+          </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center gap-4 bg-white p-8 rounded-card border border-brand-border shadow-subtle">
+<div class="w-14 h-14 rounded-full bg-brand-coral text-white text-xl font-extrabold flex items-center justify-center shadow-md shadow-brand-coral/30">
+              1
+            </div>
+<h3 class="text-lg font-bold text-brand-night">
+              Descubre o Propón
+            </h3>
+<p class="text-sm text-brand-muted max-w-xs leading-relaxed">
+              Selecciona entre cientos de recomendaciones o añade tu propio plan preferido a la lista en segundos.
+            </p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center gap-4 bg-white p-8 rounded-card border border-brand-border shadow-subtle">
+<div class="w-14 h-14 rounded-full bg-brand-night text-white text-xl font-extrabold flex items-center justify-center shadow-md">
+              2
+            </div>
+<h3 class="text-lg font-bold text-brand-night">
+              Comparte y Vota
+            </h3>
+<p class="text-sm text-brand-muted max-w-xs leading-relaxed">
+              Envía el link al chat de amigos. Todos votan con un toque desde su navegador móvil sin instalar nada obligatorio.
+            </p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center gap-4 bg-white p-8 rounded-card border border-brand-border shadow-subtle">
+<div class="w-14 h-14 rounded-full bg-slate-800 text-white text-xl font-extrabold flex items-center justify-center shadow-md">
+              3
+            </div>
+<h3 class="text-lg font-bold text-brand-night">
+              ¡Disfrutad juntos!
+            </h3>
+<p class="text-sm text-brand-muted max-w-xs leading-relaxed">
+              Plan confirmado, enlace directo en Google Maps, recordatorio en calendario y control de presupuesto estimado.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- WIDGETS DE PANTALLA & SOCIAL RADAR -->
+<section class="w-full py-20 bg-white border-t border-brand-border" id="widgets">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+
+</div>
+</section>
+<!-- SLEEK DISCRETE B2B CREATOR & PARTNER STRIP (Replaces heavy intrusive form) -->
+<section class="w-full py-12 bg-slate-100 border-t border-brand-border" id="creadores">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="bg-white rounded-card p-6 sm:p-8 border border-brand-border shadow-subtle flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-brand-night text-white flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[24px]">storefront</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-bold uppercase tracking-wider text-brand-coral">Para locales &amp; Creadores</span>
+<h3 class="text-lg sm:text-xl font-bold text-brand-night">¿Gestionas un local o creas experiencias urbanas?</h3>
+<p class="text-xs sm:text-sm text-brand-muted">Únete a la red de creadores de Plany y conecta con personas listas para salir hoy.</p>
+</div>
+</div>
+<div class="flex items-center gap-3 w-full md:w-auto justify-end">
+<a class="px-5 py-2.5 rounded-pill bg-brand-night text-white hover:bg-slate-800 text-xs font-bold shadow-subtle transition-all whitespace-nowrap flex items-center gap-1.5" href="mailto:aliados@plany.app">
+<span class="">Conectar con aliados</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL DOWNLOAD BANNER -->
+<section class="w-full py-16 bg-white border-t border-brand-border" id="descargar">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-brand-night via-brand-nightIndigo to-slate-900 p-10 sm:p-16 text-center text-white flex flex-col items-center gap-6 shadow-elevation">
+<!-- Subtle Glow Background -->
+<div class="absolute -top-24 -left-24 w-72 h-72 bg-brand-coral/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="w-14 h-14 rounded-2xl bg-brand-coral text-white flex items-center justify-center shadow-lg shadow-brand-coral/40">
+<span class="material-symbols-outlined text-[32px]">celebration</span>
+</div>
+<h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight max-w-2xl leading-tight">
+            Tu próxima anécdota empieza este fin de semana.
+          </h2>
+<p class="text-sm sm:text-base text-slate-300 max-w-xl">
+            Descarga Plany gratis en iOS o Android y deja de preguntarte qué hacer. Sal, descubre y vive la ciudad con tu grupo.
+          </p>
+<!-- Download Action Badges -->
+<div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+<a class="flex items-center gap-3 px-6 py-3 rounded-xl bg-white text-brand-night hover:bg-slate-100 transition-all shadow-md" href="#">
+<span class="material-symbols-outlined text-[26px]">phone_iphone</span>
+<div class="flex flex-col text-left">
+<span class="text-[10px] text-brand-muted uppercase font-bold tracking-wider">Consíguelo en</span>
+<span class="text-xs font-extrabold leading-tight">App Store</span>
+</div>
+</a>
+<a class="flex items-center gap-3 px-6 py-3 rounded-xl bg-slate-800 text-white hover:bg-slate-700 border border-slate-700 transition-all shadow-md" href="#">
+<span class="material-symbols-outlined text-[26px] text-brand-coral">smart_toy</span>
+<div class="flex flex-col text-left">
+<span class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Disponible en</span>
+<span class="text-xs font-extrabold leading-tight">Google Play</span>
+</div>
+</a>
+</div>
+<span class="text-xs text-slate-400 pt-1 font-medium">
+            Sin suscripciones forzadas • 100% colaborativo para grupos
+          </span>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="w-full bg-slate-50 border-t border-brand-border py-14">
+<div class="max-w-7xl mx-auto px-6 sm:px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-brand-border">
+<div class="lg:col-span-2 flex flex-col items-start gap-4">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-brand-coral flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">explore</span>
+</div>
+<span class="text-xl font-bold tracking-tight text-brand-night">Plany</span>
+</div>
+<p class="text-xs sm:text-sm text-brand-muted max-w-sm leading-relaxed">
+            Descubre eventos auténticos, vota salidas con tu grupo de amigos y coordina planes inolvidables en minutos.
+          </p>
+<div class="flex items-center gap-2 pt-2">
+<span class="text-xs font-semibold text-brand-slate">Disponible en España</span>
+<span class="text-brand-muted">•</span>
+<span class="text-xs text-brand-muted">Madrid, Barcelona, Valencia, Sevilla</span>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold text-brand-night uppercase tracking-wider">Explorar</span>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Planes Destacados</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Rutas de Fin de Semana</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Gastronomía &amp; Bares</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Festivales &amp; Conciertos</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold text-brand-night uppercase tracking-wider">Producto</span>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Votación Grupal</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Sincronización Calendario</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Widget Móvil</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Radar Urbano</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-xs font-bold text-brand-night uppercase tracking-wider">Compañía</span>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#creadores">Red de Aliados</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Términos de Servicio</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Privacidad</a>
+<a class="text-xs text-brand-muted hover:text-brand-night transition-colors" href="#">Soporte</a>
+</div>
+</div>
+<div class="pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-brand-muted">
+<span class="">© 2025 Plany Inc. Todos los derechos reservados. Diseñado para momentos espontáneos.</span>
+<div class="flex items-center gap-4">
+<span class="">Español (ES)</span>
+<span class="">•</span>
+<span class="">Hecho con ❤️ para amigos que salen</span>
+</div>
+</div>
+</div>
+</footer>
+
+
+</body></html>

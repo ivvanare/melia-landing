@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import Carousel from './Carousel.astro';
+
+const categories = [
+  { icon: 'restaurant', label: 'Gastronomía & Tapas', count: '640', active: true },
+  { icon: 'roofing', label: 'Rooftops & Terrazas', count: '94', active: false },
+  { icon: 'music_note', label: 'Música & Conciertos', count: '128', active: false },
+  { icon: 'theater_comedy', label: 'Stand-up & Microteatro', count: '82', active: false },
+  { icon: 'local_cafe', label: 'Brunch & Cafés de Autor', count: '112', active: false },
+  { icon: 'nature_people', label: 'Escapadas & Aire Libre', count: '53', active: false },
+];
+---
+
+<section class="w-full border-y border-rule bg-paper-2 py-[var(--space-lg)]">
+  <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
+    <div class="mb-3 flex items-baseline justify-between gap-4">
+      <h2 class="flex items-center gap-1.5 font-body text-sm font-medium text-ink-2">
+        Planes según tu mood
+        <Icon name="local_fire_department" class="text-[16px] text-accent-text" />
+      </h2>
+      <span class="hidden text-xs text-muted sm:inline">Desliza para ver más</span>
+    </div>
+    <Carousel label="Categorías de planes" class="cat-wrap" trackClass="gap-2.5 pb-1 lg:flex-wrap lg:overflow-visible">
+      {
+        categories.map(({ icon, label, count, active }) => (
+          <button
+            type="button"
+            data-category={label}
+            aria-pressed={active ? 'true' : 'false'}
+            class="cat-chip flex min-h-11 flex-shrink-0 snap-start cursor-pointer items-center gap-2 rounded-pill border border-rule px-4 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2"
+          >
+            <Icon name={icon} class="cat-icon text-[16px]" />
+            <span>{label}</span>
+            <span class="cat-count text-[11px] text-ink-2">{count}</span>
+          </button>
+        ))
+      }
+    </Carousel>
+  </div>
+</section>

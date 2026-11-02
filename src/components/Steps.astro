@@ -1,0 +1,39 @@
+---
+const steps = [
+  {
+    title: 'Descubre o propón',
+    text: 'Selecciona entre cientos de recomendaciones o añade tu propio plan preferido a la lista en segundos.',
+  },
+  {
+    title: 'Comparte y vota',
+    text: 'Envía el link al chat de amigos. Todos votan con un toque desde su navegador móvil sin instalar nada obligatorio.',
+  },
+  {
+    title: 'Disfrutad juntos',
+    text: 'Plan confirmado, enlace directo en Google Maps, recordatorio en calendario y control de presupuesto estimado.',
+  },
+];
+---
+
+<section class="w-full border-t border-rule bg-paper py-[var(--space-4xl,var(--space-3xl))]">
+  <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
+    <h2 class="mb-[var(--space-xl)] max-w-[22ch] text-section text-ink">
+      Tres pasos y ya están en la calle
+    </h2>
+
+    <!-- The sequence is real information here, so it earns the numbers. -->
+    <ol class="flex flex-col">
+      {
+        steps.map(({ title, text }, i) => (
+          <li class="grid grid-cols-1 items-baseline gap-x-[var(--space-lg)] gap-y-2 border-t border-rule py-[var(--space-lg)] md:grid-cols-12">
+            <span class="num font-display text-[2.5rem] leading-none text-accent-text md:col-span-2">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3 class="text-title text-ink md:col-span-4">{title}</h3>
+            <p class="max-w-[56ch] text-sm text-ink-2 md:col-span-6">{text}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

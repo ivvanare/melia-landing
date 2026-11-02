@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+---
+
+<section id="creadores" class="w-full border-t border-rule bg-paper py-[var(--space-2xl)]">
+  <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
+    <div
+      class="grained flex flex-col gap-6 rounded-card border border-rule bg-paper-2 p-[var(--space-xl)] md:flex-row md:items-center md:justify-between"
+    >
+      <div class="flex flex-col gap-2">
+        <p class="text-xs text-muted">Para locales y creadores</p>
+        <h2 class="max-w-[30ch] text-title text-ink">
+          ¿Gestionas un local o creas experiencias urbanas?
+        </h2>
+        <p class="max-w-[52ch] text-sm text-ink-2">
+          Únete a la red de creadores de Melia y conecta con personas listas para
+          salir hoy.
+        </p>
+        <dl class="mt-2 grid grid-cols-1 gap-y-2 border-t border-rule pt-3 sm:grid-cols-3">
+          <div class="flex items-baseline gap-2">
+            <dt class="num font-display text-xl text-ink">640</dt>
+            <dd class="text-xs text-ink-2">locales</dd>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <dt class="num font-display text-xl text-ink">42</dt>
+            <dd class="text-xs text-ink-2">planes esta semana</dd>
+          </div>
+          <div class="flex items-baseline gap-2">
+            <dt class="num font-display text-xl text-ink">48 h</dt>
+            <dd class="text-xs text-ink-2">de respuesta</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="flex flex-shrink-0 flex-col gap-3">
+        <a
+          class="inline-flex items-center gap-2 self-start rounded-pill bg-accent px-5 py-3 text-sm font-medium text-accent-ink transition-colors hover:bg-accent-2"
+          href="mailto:aliados@melia.app"
+        >
+          Conectar con aliados
+          <Icon name="arrow_forward" class="text-[16px]" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

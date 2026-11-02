@@ -1,16 +1,57 @@
 ---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import CategoryStrip from '../components/CategoryStrip.astro';
+import Features from '../components/Features.astro';
+import Radar from '../components/Radar.astro';
+import Steps from '../components/Steps.astro';
+import Creators from '../components/Creators.astro';
+import FinalCTA from '../components/FinalCTA.astro';
+import Footer from '../components/Footer.astro';
+
+const metrics = [
+  { figure: '+2,4k', label: 'planes activos' },
+  { figure: '+180', label: 'ciudades' },
+  { figure: '4,9', label: 'valoración en las tiendas' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <Header />
+  <main class="w-full">
+    <Hero />
+
+    <!-- The page's own figures, as ruled rows rather than a stat band. -->
+    <section class="w-full border-y border-rule bg-paper-2 py-[var(--space-2xl)]">
+      <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
+        <dl class="grid grid-cols-1 sm:grid-cols-3">
+          {
+            metrics.map(({ figure, label }, i) => (
+              <div
+                class:list={[
+                  'flex items-baseline gap-3 py-[var(--space-lg)] border-rule',
+                  i > 0 && 'sm:border-l sm:pl-[var(--space-lg)]',
+                  i < metrics.length - 1 && 'border-b sm:border-b-0',
+                ]}
+              >
+                <dt class="num font-display text-[1.75rem] leading-none text-ink">
+                  {figure}
+                </dt>
+                <dd class="text-sm text-ink-2">{label}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </section>
+
+    <CategoryStrip />
+    <Features />
+    <Radar />
+    <Steps />
+    <Creators />
+    <FinalCTA />
+  </main>
+  <Footer />
+</Base>

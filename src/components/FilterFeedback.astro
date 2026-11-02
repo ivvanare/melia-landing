@@ -1,0 +1,189 @@
+---
+import Icon from './Icon.astro';
+---
+
+<!--
+  Simulated filter feedback. The landing has no backend, so filters are a
+  client-side simulation: selections are held in memory, reflected in this bar,
+  and the result count is derived from the category counts already shown in the
+  UI rather than invented from nothing.
+-->
+<div
+  data-filter-summary
+  hidden
+  style="display: none"
+  class="mb-[var(--space-lg)] flex flex-wrap items-center gap-x-3 gap-y-2 rounded-card border border-rule bg-paper-3 px-4 py-3"
+>
+  <span class="flex items-center gap-1.5 text-xs font-medium text-muted">
+    <Icon name="filter_list" class="text-[15px]" />
+    Filtrando
+  </span>
+  <div data-filter-pills class="flex flex-wrap items-center gap-1.5"></div>
+  <span data-filter-count class="num ml-auto text-xs text-ink-2"></span>
+  <button
+    type="button"
+    data-filter-clear
+    class="cursor-pointer rounded-pill px-3 py-3 text-xs font-medium text-ink-2 underline decoration-accent/50 underline-offset-4 transition-colors hover:text-accent"
+  >
+    Limpiar
+  </button>
+</div>
+
+<script>
+  {
+    const summary = document.querySelector('[data-filter-summary]');
+    const pillWrap = document.querySelector('[data-filter-pills]');
+    const countEl = document.querySelector('[data-filter-count]');
+    const clearBtn = document.querySelector('[data-filter-clear]');
+    const chipCount = document.querySelector('[data-chip-count]');
+    const chips = Array.from(document.querySelectorAll<HTMLElement>('[data-chip]'));
+    const cats = Array.from(document.querySelectorAll<HTMLElement>('[data-category]'));
+    const times = Array.from(document.querySelectorAll<HTMLElement>('[data-time]'));
+    const input = document.querySelector<HTMLInputElement>('[data-search]');
+    const explore = document.querySelector<HTMLElement>('[data-explore]');
+
+    if (!summary || !pillWrap || !countEl || chips.length === 0) {
+      // Markup not on this page; nothing to wire.
+    } else {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const activeChips = new Set<string>();
+      let activeCat = cats.find((c) => c.getAttribute('aria-pressed') === 'true')
+        ?.dataset.category;
+      // "Hoy" is the default range, not an active filter: it only shows in the
+      // summary once the user moves away from it.
+      const DEFAULT_TIME = 'Hoy';
+      let activeTime = times.find((t) => t.getAttribute('aria-pressed') === 'true')
+        ?.dataset.time;
+      let query = '';
+
+      /** Result count: derived from category counts already in the markup. */
+      const results = () => {
+        const base = activeCat
+          ? Number(
+              cats
+                .find((c) => c.dataset.category === activeCat)
+                ?.querySelector('.cat-count')?.textContent?.trim() || '0',
+            )
+          : 640;
+        const penalty = 1 - Math.min(0.6, activeChips.size * 0.12 + (query ? 0.15 : 0));
+        return Math.max(1, Math.round(base * penalty));
+      };
+
+      const pill = (text: string) => {
+        const el = document.createElement('span');
+        el.className =
+          'px-2 py-0.5 rounded-pill bg-accent text-accent-ink text-[11px] font-medium';
+        el.textContent = text;
+        return el;
+      };
+
+      const render = () => {
+        const filters: string[] = [];
+        if (activeCat) filters.push(activeCat);
+        if (query) filters.push(`“${query}”`);
+        activeChips.forEach((c) => filters.push(c));
+        if (activeTime && activeTime !== DEFAULT_TIME) filters.push(activeTime);
+
+        pillWrap.replaceChildren(...filters.map(pill));
+        const empty = filters.length === 0;
+        // The `flex` utility outranks the `hidden` attribute, so display is
+        // toggled inline; `hidden` stays for the pre-hydration state.
+        summary.hidden = empty;
+        summary.style.display = empty ? 'none' : 'flex';
+
+        const n = results();
+        countEl.textContent = `${n} ${n === 1 ? 'plan' : 'planes'}`;
+
+        if (chipCount) {
+          chipCount.textContent = activeChips.size ? String(activeChips.size) : '';
+          chipCount.classList.toggle('hidden', activeChips.size === 0);
+        }
+      };
+
+      const setPressed = (el: HTMLElement, on: boolean) =>
+        el.setAttribute('aria-pressed', on ? 'true' : 'false');
+
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const key = chip.dataset.chip || '';
+          const on = chip.getAttribute('aria-pressed') !== 'true';
+          setPressed(chip, on);
+          if (on) activeChips.add(key);
+          else activeChips.delete(key);
+          // The quick "Hoy" chip and the date-range pill describe the same
+          // intent, so keep them from contradicting each other.
+          if (key === 'Hoy') {
+            activeTime = on ? 'Hoy' : activeTime;
+            times.forEach((t) => setPressed(t, t.dataset.time === activeTime));
+          }
+          render();
+        });
+      });
+
+      cats.forEach((cat) => {
+        cat.addEventListener('click', () => {
+          const key = cat.dataset.category;
+          const on = cat.getAttribute('aria-pressed') !== 'true';
+          cats.forEach((c) => setPressed(c, on && c === cat));
+          activeCat = on ? key : undefined;
+          render();
+        });
+      });
+
+      times.forEach((t) => {
+        t.addEventListener('click', () => {
+          times.forEach((o) => setPressed(o, o === t));
+          activeTime = t.dataset.time;
+          // Keep the quick "Hoy" chip honest: if the range is no longer today,
+          // the chip must not keep claiming it.
+          if (activeTime !== 'Hoy') {
+            const hoyChip = chips.find((c) => c.dataset.chip === 'Hoy');
+            if (hoyChip && hoyChip.getAttribute('aria-pressed') === 'true') {
+              setPressed(hoyChip, false);
+              activeChips.delete('Hoy');
+            }
+          }
+          render();
+        });
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        activeChips.clear();
+        activeCat = undefined;
+        query = '';
+        chips.forEach((c) => setPressed(c, false));
+        cats.forEach((c) => setPressed(c, false));
+        activeTime = DEFAULT_TIME;
+        times.forEach((o) => setPressed(o, o.dataset.time === DEFAULT_TIME));
+        if (input) input.value = '';
+        render();
+      });
+
+      explore?.addEventListener('click', () => {
+        query = input?.value.trim() || '';
+        render();
+        document
+          .getElementById('mapa-en-vivo')
+          ?.scrollIntoView({ behavior: reduced.matches ? 'auto' : 'smooth' });
+        summary.style.display = 'flex';
+        summary.hidden = false;
+        summary.classList.add('ring-2', 'ring-accent-2');
+        window.setTimeout(
+          () => summary.classList.remove('ring-2', 'ring-accent-2'),
+          900,
+        );
+      });
+
+      if (input) {
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            explore?.click();
+          }
+        });
+      }
+
+      render();
+    }
+  }
+</script>

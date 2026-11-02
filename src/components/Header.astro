@@ -1,0 +1,93 @@
+---
+import Icon from './Icon.astro';
+
+const links = [
+  { href: '#descubrir', label: 'Descubrir' },
+  { href: '#como-funciona', label: 'Cómo funciona' },
+  { href: '#mapa-en-vivo', label: 'Radar urbano' },
+  { href: '#creadores', label: 'Creadores' },
+];
+---
+
+<header class="slab fixed top-0 z-50 w-full border-b border-rule bg-paper/95 backdrop-blur-md">
+  <div
+    class="mx-auto flex h-[72px] w-full max-w-[1200px] items-center justify-between gap-6 px-[var(--gutter)]"
+  >
+    <div class="flex items-center gap-5">
+      <a class="flex items-center gap-2.5" href="#">
+        <span
+          class="flex h-8 w-8 items-center justify-center rounded-pill bg-accent text-accent-ink"
+        >
+          <Icon name="explore" class="text-[18px]" />
+        </span>
+        <span class="font-display text-[1.35rem] tracking-tight text-ink"
+          >Melia</span
+        >
+      </a>
+      <a
+        class="hidden items-center gap-1.5 rounded-pill border border-rule px-3 py-1.5 text-xs font-medium text-ink-2 transition-colors hover:border-accent-2 hover:text-ink md:flex"
+        href="#mapa-en-vivo"
+      >
+        <Icon name="location_on" class="text-[14px] text-accent" />
+        Madrid, ES
+        <Icon name="expand_more" class="text-[14px] text-muted" />
+      </a>
+    </div>
+
+    <nav class="hidden items-center gap-1 lg:flex">
+      {
+        links.map(({ href, label }) => (
+          <a
+            class="whitespace-nowrap rounded-pill px-3 py-3 text-sm font-medium text-ink-2 transition-colors hover:bg-paper-2 hover:text-ink"
+            href={href}
+          >
+            {label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <a
+        class="hidden min-h-11 items-center gap-2 rounded-pill px-4 text-sm font-medium text-ink transition-colors hover:text-accent sm:inline-flex"
+        href="#descargar"
+      >
+        Descargar gratis
+        <Icon name="arrow_downward" class="text-[16px]" />
+      </a>
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Cambiar entre tema claro y oscuro"
+        class="flex h-11 w-11 items-center justify-center rounded-pill border border-rule text-ink-2 transition-colors hover:border-accent-2 hover:text-ink"
+      >
+        <span class="relative block h-5 w-5">
+          <Icon name="dark_mode" class="theme-icon theme-icon-moon" />
+          <Icon name="light_mode" class="theme-icon theme-icon-sun" />
+        </span>
+      </button>
+      <button
+        type="button"
+        aria-label="Tu cuenta"
+        class="flex h-11 w-11 items-center justify-center rounded-pill border border-rule text-ink-2 transition-colors hover:border-accent-2 hover:text-ink"
+      >
+        <Icon name="person" class="text-[20px]" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const root = document.documentElement;
+      if (!reduced.matches) {
+        root.classList.add('theme-anim');
+        window.setTimeout(() => root.classList.remove('theme-anim'), 400);
+      }
+      const isLight = root.classList.toggle('light');
+      localStorage.setItem('melia-theme', isLight ? 'light' : 'dark');
+    });
+  }
+</script>

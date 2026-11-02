@@ -12,7 +12,23 @@ const categories = [
 ];
 ---
 
-<section class="w-full border-y border-rule bg-paper-2 py-[var(--space-lg)]">
+<section class="w-full border-y border-rule bg-paper-2">
+  <!-- /img/night-street.jpg · 1920x640 · the street the board describes -->
+  <div
+    class="grain-band h-[clamp(160px,22vw,280px)] w-full"
+    style="background-image: url('/img/night-street.jpg')"
+    role="img"
+    aria-label="Terrazas y calles de Madrid al caer la noche"
+  >
+    <div
+      class="mx-auto flex h-full max-w-[1200px] items-end px-[var(--gutter)] pb-[var(--space-md)]"
+    >
+      <p class="max-w-[42ch] bg-paper px-3 py-1.5 text-sm text-ink">
+        Madrid, 21:40. Cuatro planes abiertos en tu radio de dos kilómetros.
+      </p>
+    </div>
+  </div>
+  <div class="py-[var(--space-lg)]">
   <div class="mx-auto w-full max-w-[1200px] px-[var(--gutter)]">
     <div class="mb-3 flex items-baseline justify-between gap-4">
       <h2 class="flex items-center gap-1.5 font-body text-sm font-medium text-ink-2">
@@ -37,5 +53,6 @@ const categories = [
         ))
       }
     </Carousel>
+  </div>
   </div>
 </section>

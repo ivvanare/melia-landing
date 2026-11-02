@@ -296,8 +296,8 @@ b {
 .cta-ground {
   background-image:
     linear-gradient(
-      color-mix(in oklab, var(--color-paper) 94%, transparent),
-      color-mix(in oklab, var(--color-paper) 98%, transparent)
+      color-mix(in oklab, var(--color-paper) 88%, transparent),
+      color-mix(in oklab, var(--color-paper) 96%, transparent)
     ),
     var(--cta-photo, none);
   background-size: cover;

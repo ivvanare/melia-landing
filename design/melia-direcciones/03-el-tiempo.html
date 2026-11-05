@@ -44,7 +44,13 @@
 
   /* HERO: the clock is the page */
   .hero { padding: 80px 0 72px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 72px; align-items: center; }
-  .hero h1 { max-width: 14ch; }
+  .hero h1 { max-width: 15ch; }
+  /* The sentence is a contrast, not a paragraph: "Menos X" recedes, "Y" lands. */
+  .l1 { display: block; font-size: .42em; color: var(--p-muted); letter-spacing: -.01em; }
+  .l2 { display: block; font-size: .78em; color: var(--p-muted); line-height: 1.12; }
+  .l2 s { text-decoration-color: var(--p-accent); text-decoration-thickness: 3px; }
+  .l1--second { margin-top: .14em; }
+  .l3 { display: block; font-size: 1em; color: var(--p-accent-text); letter-spacing: -.045em; }
   .hero .sub { margin-top: 24px; font-size: 18px; color: var(--p-muted); max-width: 40ch; }
   .hero .acts { margin-top: 32px; display: flex; gap: 12px; }
 
@@ -126,7 +132,12 @@
 <main id="top">
 <div class="wrap hero">
   <div>
-    <h1>Menos “a ver qué hacemos”, más ¡ya estamos aquí!</h1>
+    <h1>
+      <span class="l1">Menos</span>
+      <span class="l2"><s>“a ver qué hacemos”</s>,</span>
+      <span class="l1 l1--second">más</span>
+      <span class="l3">¡ya estamos aquí!</span>
+    </h1>
     <p class="sub">Terrazas, restaurantes y planes en tu ciudad. Vota con tus amigos en 30 segundos.</p>
     <div class="acts">
       <a class="btn btn--p" href="#descargar">Descargar gratis</a>

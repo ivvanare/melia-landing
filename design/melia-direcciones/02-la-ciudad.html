@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melia · La ciudad</title>
+<style>
+  :root {
+    --p-bg: #faf7f4; --p-surface: #edeae7; --p-ink: #1b1614; --p-muted: #676260;
+    --p-accent: #ff5a36; --p-accent-text: #b52603; --p-action-ink: #ffffff;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-text: Figtree, system-ui, sans-serif;
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 20px;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  body { margin: 0; background: var(--p-bg); color: var(--p-ink); font-family: var(--font-text);
+         font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 400; line-height: 1.02; letter-spacing: -.03em; }
+  h1 { font-size: clamp(44px, 5.4vw, 92px); letter-spacing: -.045em; }
+  h2 { font-size: clamp(28px, 2.2vw, 46px); }
+  h3 { font-size: 20px; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 0 40px; }
+  :focus-visible { outline: 2px solid var(--p-accent-text); outline-offset: 3px; border-radius: 4px; }
+
+  nav { position: sticky; top: 0; z-index: 10; background: color-mix(in oklab, var(--p-bg) 92%, transparent);
+        backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid rgba(27,22,20,.10); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 21px; text-decoration: none; }
+  .dot { width: 24px; height: 24px; border-radius: 999px; background: var(--p-accent); }
+  .links { display: flex; gap: 26px; font-size: 14px; }
+  .links a { text-decoration: none; color: var(--p-muted); }
+  .links a:hover, .links a[aria-current] { color: var(--p-ink); }
+  .btn { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: var(--r-sm);
+         font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent;
+         transition: background-color .18s ease, border-color .18s ease; }
+  .btn--p { background: var(--p-accent); color: var(--p-action-ink); }
+  .btn--p:hover { background: color-mix(in oklab, var(--p-accent) 86%, var(--p-ink)); }
+  .btn--s { border-color: rgba(27,22,20,.28); }
+  .btn--s:hover { background: var(--p-surface); }
+
+  /* HERO: the photograph is the page, type sits on its dark side */
+  .hero { position: relative; height: min(88vh, 820px); min-height: 560px; overflow: hidden; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .hero::after { content: ""; position: absolute; inset: 0;
+                 background: linear-gradient(100deg, rgba(20,16,14,.86) 0%, rgba(20,16,14,.62) 46%, rgba(20,16,14,.18) 100%); }
+  .hero .inner { position: relative; z-index: 2; height: 100%; display: flex; flex-direction: column;
+                 justify-content: flex-end; padding-bottom: var(--s8); color: #faf7f4; }
+  .hero h1 { max-width: 13ch; }
+  .hero .sub { margin-top: var(--s5); font-size: 19px; max-width: 42ch; color: #e6dfda; }
+  .hero .acts { margin-top: var(--s6); display: flex; gap: 12px; }
+  .hero .btn--s { border-color: rgba(250,247,244,.4); color: #faf7f4; }
+  .hero .btn--s:hover { background: rgba(250,247,244,.12); }
+  .hero .pin { position: absolute; right: 40px; bottom: var(--s8); z-index: 2;
+               background: #faf7f4; color: #1b1614; border-radius: var(--r-md); padding: 14px 18px;
+               display: flex; align-items: center; gap: 12px; font-size: 14px; }
+  .hero .pin b { font-weight: 500; }
+
+  /* Neighbourhoods as the navigation */
+  .hoods { border-bottom: 1px solid rgba(27,22,20,.12); }
+  .hoods .row { display: flex; gap: 8px; overflow-x: auto; padding: 18px 0; }
+  .hood { flex: none; border: 1px solid rgba(27,22,20,.18); border-radius: 999px; padding: 9px 16px;
+          font-size: 13px; text-decoration: none; white-space: nowrap; transition: background .18s ease, color .18s ease; }
+  .hood:hover { background: var(--p-ink); color: var(--p-bg); border-color: var(--p-ink); }
+  .hood b { font-weight: 500; }
+
+  section { padding: 88px 0; }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: var(--s7); }
+  .head p { color: var(--p-muted); max-width: 38ch; font-size: 15px; }
+
+  /* Asymmetric grid: one tall plan, two stacked */
+  .grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: var(--s5); }
+  .col { display: grid; gap: var(--s5); }
+  .plan { position: relative; border-radius: var(--r-lg); overflow: hidden; text-decoration: none;
+          display: block; background: var(--p-surface); min-height: 240px; }
+  .plan img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+              transition: transform .5s cubic-bezier(.22,1,.36,1); }
+  .plan:hover img { transform: scale(1.03); }
+  .plan .cap { position: absolute; inset: auto 0 0 0; padding: var(--s5); color: #faf7f4;
+               background: linear-gradient(to top, rgba(20,16,14,.88), rgba(20,16,14,0)); }
+  .plan .k { font-size: 12px; opacity: .9; }
+  .plan .t { font-family: var(--font-display); font-size: 21px; letter-spacing: -.02em; margin-top: 2px; }
+  .plan .m { font-size: 13px; opacity: .9; margin-top: 2px; }
+  .plan--tall { min-height: 500px; }
+
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s6);
+           border-top: 1px solid rgba(27,22,20,.12); padding-top: var(--s6); }
+  .fact .n { font-family: var(--font-display); font-size: clamp(32px, 3vw, 52px); letter-spacing: -.03em; }
+  .fact .l { font-size: 14px; color: var(--p-muted); margin-top: 2px; }
+
+  .map { display: grid; grid-template-columns: 1fr 1.1fr; gap: var(--s7); align-items: center; }
+  .map .frame { border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4/3; }
+  .map .frame img { width: 100%; height: 100%; object-fit: cover; }
+  .rows { margin-top: var(--s5); }
+  .rows div { display: flex; justify-content: space-between; gap: 24px; padding: 12px 0;
+              border-top: 1px solid rgba(27,22,20,.12); font-size: 14px; }
+  .rows div span:last-child { color: var(--p-muted); }
+
+  .close { background: #1b1614; color: #faf7f4; padding: 96px 0; }
+  .close h2 { max-width: 22ch; }
+  .close p { margin-top: var(--s4); color: #a49e9a; max-width: 46ch; }
+  .close .acts { margin-top: var(--s6); display: flex; gap: 12px; }
+  .close .btn--s { border-color: rgba(250,247,244,.34); color: #faf7f4; }
+  .close .btn--s:hover { background: rgba(250,247,244,.1); }
+
+  footer { padding: 48px 0; font-size: 13px; color: var(--p-muted); }
+  .fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  .fgrid h4 { margin: 0 0 10px; font-family: var(--font-text); font-size: 12px; font-weight: 500; color: var(--p-ink); }
+  .fgrid a { display: block; text-decoration: none; padding: 3px 0; }
+  .fgrid a:hover { color: var(--p-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .plan:hover img { transform: none; }
+  }
+  @media (max-width: 980px) {
+    .grid, .map, .facts, .fgrid { grid-template-columns: 1fr; }
+    .hero .pin { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap bar">
+  <a class="logo" href="#top"><span class="dot" aria-hidden="true"></span>Melia</a>
+  <div class="links">
+    <a href="#planes" aria-current="page">Madrid</a><a href="#mapa">Barrios</a><a href="#locales">Creadores</a>
+  </div>
+  <a class="btn btn--p" href="#descargar">Descargar gratis</a>
+</div></nav>
+
+<main id="top">
+<div class="hero">
+  <img src="../../public/img/night-street.jpg" alt="Terraza de Madrid al caer la noche, con luces encendidas en la calle">
+  <div class="wrap inner">
+    <h1>Esta noche Madrid tiene 640 planes.</h1>
+    <p class="sub">Terrazas, brunch, micro abierto. Vota con tus amigos en 30 segundos y salgan.</p>
+    <div class="acts">
+      <a class="btn btn--p" href="#descargar">Descargar gratis</a>
+      <a class="btn btn--s" href="#planes">Ver los planes</a>
+    </div>
+  </div>
+  <div class="pin">
+    <span class="dot" style="width:10px;height:10px" aria-hidden="true"></span>
+    <span><b>21:14</b> · 42 mesas libres a menos de 2 km</span>
+  </div>
+</div>
+
+<div class="hoods"><div class="wrap">
+  <div class="row">
+    <a class="hood" href="#planes"><b>Malasaña</b> · 128</a>
+    <a class="hood" href="#planes"><b>La Latina</b> · 96</a>
+    <a class="hood" href="#planes"><b>Chueca</b> · 84</a>
+    <a class="hood" href="#planes"><b>Salamanca</b> · 71</a>
+    <a class="hood" href="#planes"><b>Lavapiés</b> · 64</a>
+    <a class="hood" href="#planes"><b>Chamberí</b> · 52</a>
+  </div>
+</div></div>
+
+<section id="planes"><div class="wrap">
+  <div class="head">
+    <h2>Lo que hay abierto ahora</h2>
+    <p>Tres de los 640 planes de esta noche, elegidos por lo cerca que están.</p>
+  </div>
+  <div class="grid">
+    <a class="plan plan--tall" href="#planes">
+      <img src="../../public/img/event-acoustic.jpg" alt="Público en un concierto acústico en un sótano">
+      <div class="cap">
+        <div class="k">Malasaña · Música en vivo · abierto ahora</div>
+        <div class="t">Sesión Acústica &amp; Cerveza Artesanal</div>
+        <div class="m">21:00 · 15 €/pers. · a 1,5 km</div>
+      </div>
+    </a>
+    <div class="col">
+      <a class="plan" href="#planes">
+        <img src="../../public/img/event-brunch.jpg" alt="Mesa de brunch en un patio con plantas">
+        <div class="cap">
+          <div class="k">Salamanca · Brunch · sábado</div>
+          <div class="t">Brunch Botánico en Patio Central</div>
+          <div class="m">11:30 · 18 €/pers.</div>
+        </div>
+      </a>
+      <a class="plan" href="#planes">
+        <img src="../../public/img/event-comedy.jpg" alt="Cómico actuando ante el público en un local pequeño">
+        <div class="cap">
+          <div class="k">La Latina · Comedia · domingo</div>
+          <div class="t">Noche de Micro Abierto &amp; Tacos</div>
+          <div class="m">20:00 · 12 €/pers.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="facts" style="margin-top:64px">
+    <div class="fact"><div class="n">+2,4k</div><div class="l">planes activos</div></div>
+    <div class="fact"><div class="n">+180</div><div class="l">ciudades</div></div>
+    <div class="fact"><div class="n">4,9</div><div class="l">valoración en las tiendas</div></div>
+  </div>
+</div></section>
+
+<section id="mapa"><div class="wrap">
+  <div class="map">
+    <div>
+      <h2>Explora tu barrio en tiempo real</h2>
+      <p style="margin-top:16px;color:var(--p-muted);max-width:38ch">
+        42 planes y mesas activas a menos de 2 km, en locales verificados de Madrid.
+      </p>
+      <div class="rows">
+        <div><span>Cibeles</span><span>mesas libres</span></div>
+        <div><span>Malasaña</span><span>hora feliz hasta las 23:00</span></div>
+        <div><span>A pie o en metro</span><span>todo a menos de 15 minutos</span></div>
+      </div>
+      <a class="btn btn--s" href="#mapa" style="margin-top:24px">Abrir el mapa</a>
+    </div>
+    <div class="frame"><img src="../../public/img/map-madrid.png" alt="Mapa del centro de Madrid con los locales marcados"></div>
+  </div>
+</div></section>
+
+<div class="close" id="descargar"><div class="wrap">
+  <h2>Tu próxima anécdota empieza este fin de semana.</h2>
+  <p>Descarga Melia gratis en iOS o Android y deja de preguntarte qué hacer. Sin suscripciones forzadas, 100 % colaborativo para grupos.</p>
+  <div class="acts">
+    <a class="btn btn--p" href="#descargar">App Store</a>
+    <a class="btn btn--s" href="#descargar">Google Play</a>
+  </div>
+</div></div>
+</main>
+
+<footer id="locales"><div class="wrap fgrid">
+  <div>
+    <div class="logo" style="font-size:18px;margin-bottom:10px"><span class="dot" style="width:20px;height:20px" aria-hidden="true"></span>Melia</div>
+    <p>Descubre eventos auténticos, vota salidas con tu grupo y coordina planes en minutos.</p>
+    <p style="margin-top:10px">Disponible en España: Madrid, Barcelona, Valencia, Sevilla.</p>
+  </div>
+  <div><h4>Explorar</h4><a href="#planes">Planes destacados</a><a href="#planes">Rutas de fin de semana</a><a href="#planes">Gastronomía</a></div>
+  <div><h4>Producto</h4><a href="#planes">Votación grupal</a><a href="#mapa">Radar urbano</a><a href="#mapa">Calendario</a></div>
+  <div><h4>Compañía</h4><a href="#locales">Red de aliados</a><a href="#locales">Soporte</a></div>
+</div>
+<p class="wrap" style="margin-top:32px">© 2025 Melia · Español (ES)</p>
+</footer>
+
+</body>
+</html>

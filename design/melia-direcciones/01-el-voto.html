@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melia · El voto</title>
+<style>
+  :root {
+    --p-bg: #faf7f4; --p-surface: #edeae7; --p-ink: #1b1614; --p-muted: #676260;
+    --p-accent: #ff5a36; --p-accent-text: #b52603; --p-action-ink: #ffffff;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-text: Figtree, system-ui, sans-serif;
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 20px;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  body { margin: 0; background: var(--p-bg); color: var(--p-ink); font-family: var(--font-text);
+         font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 400; line-height: 1.04; letter-spacing: -.03em; }
+  h1 { font-size: clamp(40px, 4.6vw, 76px); letter-spacing: -.04em; }
+  h2 { font-size: clamp(28px, 2.1vw, 44px); }
+  h3 { font-size: 21px; letter-spacing: -.02em; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+  :focus-visible { outline: 2px solid var(--p-accent-text); outline-offset: 3px; border-radius: 4px; }
+
+  nav { border-bottom: 1px solid rgba(27,22,20,.12); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display);
+          font-size: 22px; text-decoration: none; }
+  .dot { width: 26px; height: 26px; border-radius: 999px; background: var(--p-accent); }
+  .links { display: flex; gap: 28px; font-size: 14px; }
+  .links a { text-decoration: none; color: var(--p-muted); }
+  .links a:hover { color: var(--p-ink); }
+  .btn { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: var(--r-sm);
+         font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent;
+         transition: background-color .18s ease, border-color .18s ease; }
+  .btn--p { background: var(--p-accent); color: var(--p-action-ink); }
+  .btn--p:hover { background: color-mix(in oklab, var(--p-accent) 86%, var(--p-ink)); }
+  .btn--s { border-color: rgba(27,22,20,.28); }
+  .btn--s:hover { background: var(--p-surface); }
+
+  /* HERO: the vote is the page */
+  .hero { padding: 72px 0 96px; }
+  .hero h1 { max-width: 15ch; }
+  .hero .sub { margin-top: var(--s5); font-size: 19px; color: var(--p-muted); max-width: 46ch; }
+  .hero .acts { margin-top: var(--s6); display: flex; gap: 12px; }
+
+  .ballot { margin-top: var(--s8); background: var(--p-surface); border-radius: var(--r-lg);
+            padding: var(--s6); display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--s7); align-items: center; }
+  .ballot__tag { display: inline-block; background: var(--p-accent); color: var(--p-ink);
+                 border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 500; }
+  .ballot h2 { margin-top: var(--s4); font-size: clamp(24px, 2vw, 34px); }
+  .ballot__meta { margin-top: var(--s3); font-size: 14px; color: var(--p-muted); }
+
+  .tally { margin-top: var(--s5); display: flex; flex-direction: column; gap: 14px; }
+  .opt { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; align-items: baseline; font-size: 15px; }
+  .opt b { font-weight: 500; }
+  .opt span { font-variant-numeric: tabular-nums; color: var(--p-muted); font-size: 14px; }
+  .track { grid-column: 1 / -1; height: 6px; background: rgba(27,22,20,.10); border-radius: 999px; overflow: hidden; }
+  .fill { height: 100%; border-radius: 999px; background: var(--p-accent); }
+  .fill--muted { background: rgba(27,22,20,.35); }
+  .ballot .btn { width: 100%; justify-content: center; }
+  .who { display: flex; align-items: center; gap: 8px; margin-top: var(--s4); font-size: 13px; color: var(--p-muted); }
+  .av { width: 28px; height: 28px; border-radius: 999px; display: grid; place-items: center;
+        font-size: 11px; font-weight: 500; border: 2px solid var(--p-surface); }
+  .av + .av { margin-left: -10px; }
+  .av--on { background: var(--p-accent); color: var(--p-ink); }
+  .av--off { background: #dfd9d4; }
+
+  /* Section: real plans instead of chips */
+  section { padding: 96px 0; border-top: 1px solid rgba(27,22,20,.12); }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: var(--s7); }
+  .head p { color: var(--p-muted); max-width: 40ch; font-size: 15px; }
+  .mood { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s5); }
+  .plan { background: var(--p-surface); border-radius: var(--r-lg); overflow: hidden; text-decoration: none;
+          display: flex; flex-direction: column; transition: transform .25s cubic-bezier(.22,1,.36,1); }
+  .plan:hover { transform: translateY(-2px); }
+  .plan img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+  .plan .body { padding: var(--s5); display: flex; flex-direction: column; gap: 6px; }
+  .plan .k { font-size: 12px; color: var(--p-muted); letter-spacing: .02em; }
+  .plan .t { font-family: var(--font-display); font-size: 19px; letter-spacing: -.02em; }
+  .plan .m { font-size: 14px; color: var(--p-muted); }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s6); }
+  .step { border-top: 2px solid var(--p-ink); padding-top: var(--s4); }
+  .step .n { font-family: var(--font-display); font-size: 13px; color: var(--p-accent-text); }
+  .step h3 { margin-top: 6px; font-size: 19px; }
+  .step p { margin-top: var(--s2); font-size: 14px; color: var(--p-muted); }
+
+  .close { background: #1b1614; color: #faf7f4; padding: 96px 0; }
+  .close h2 { max-width: 20ch; }
+  .close p { margin-top: var(--s4); color: #a49e9a; max-width: 46ch; }
+  .close .acts { margin-top: var(--s6); display: flex; gap: 12px; }
+  .close .btn--s { border-color: rgba(250,247,244,.34); color: #faf7f4; }
+  .close .btn--s:hover { background: rgba(250,247,244,.10); }
+
+  footer { padding: 48px 0; font-size: 13px; color: var(--p-muted); }
+  .fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  .fgrid h4 { margin: 0 0 10px; font-family: var(--font-text); font-size: 12px; font-weight: 500; color: var(--p-ink); }
+  .fgrid a { display: block; text-decoration: none; padding: 3px 0; }
+  .fgrid a:hover { color: var(--p-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+    .plan:hover { transform: none; }
+  }
+  @media (max-width: 900px) {
+    .ballot, .mood, .steps, .fgrid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap bar">
+  <a class="logo" href="#top"><span class="dot" aria-hidden="true"></span>Melia</a>
+  <div class="links">
+    <a href="#votar">Cómo funciona</a><a href="#planes">Planes</a><a href="#locales">Creadores</a>
+  </div>
+  <a class="btn btn--p" href="#descargar">Descargar gratis</a>
+</div></nav>
+
+<main id="top">
+<div class="wrap hero">
+  <h1>Menos “a ver qué hacemos”, más ¡ya estamos aquí!</h1>
+  <p class="sub">Terrazas, restaurantes y planes en tu ciudad. Vota con tus amigos en 30 segundos.</p>
+  <div class="acts">
+    <a class="btn btn--p" href="#descargar">Descargar gratis</a>
+    <a class="btn btn--s" href="#planes">Ver los planes</a>
+  </div>
+
+  <div class="ballot" id="votar">
+    <div>
+      <span class="ballot__tag">Votación en vivo</span>
+      <h2>Rooftop Cibeles vs Ramen Hanabi</h2>
+      <p class="ballot__meta">Gran Vía, a 1,2 km · cierra en 12 min</p>
+      <div class="who">
+        <span class="av av--on">MR</span><span class="av av--on">SL</span>
+        <span class="av av--off">AG</span><span class="av av--off">+2</span>
+        <span>4 de 5 han votado</span>
+      </div>
+    </div>
+    <div>
+      <div class="tally">
+        <div class="opt">
+          <b>Rooftop Cibeles</b><span>3 votos · 15 €/pers.</span>
+          <div class="track"><div class="fill" style="width:75%"></div></div>
+        </div>
+        <div class="opt">
+          <b>Ramen Hanabi</b><span>1 voto · 12 €/pers.</span>
+          <div class="track"><div class="fill fill--muted" style="width:25%"></div></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:24px">
+        <a class="btn btn--p" href="#descargar">¡Me apunto!</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="planes"><div class="wrap">
+  <div class="head">
+    <h2>Planes según tu mood</h2>
+    <p>640 planes abiertos ahora mismo en Madrid, agrupados por lo que te apetece esta noche.</p>
+  </div>
+  <div class="mood">
+    <a class="plan" href="#planes">
+      <img src="../../public/img/event-acoustic.jpg" alt="Concierto acústico en un sótano de Malasaña">
+      <div class="body">
+        <span class="k">Música &amp; Conciertos · 128 abiertos</span>
+        <span class="t">Sesión Acústica &amp; Cerveza Artesanal</span>
+        <span class="m">Malasaña, a 1,5 km · 15 €/pers.</span>
+      </div>
+    </a>
+    <a class="plan" href="#planes">
+      <img src="../../public/img/event-brunch.jpg" alt="Mesa de brunch en un patio con plantas">
+      <div class="body">
+        <span class="k">Brunch &amp; Cafés · 112 abiertos</span>
+        <span class="t">Brunch Botánico en Patio Central</span>
+        <span class="m">Salamanca, a 2,8 km · 18 €/pers.</span>
+      </div>
+    </a>
+    <a class="plan" href="#planes">
+      <img src="../../public/img/event-comedy.jpg" alt="Cómico actuando ante el público">
+      <div class="body">
+        <span class="k">Stand-up &amp; Microteatro · 82 abiertos</span>
+        <span class="t">Noche de Micro Abierto &amp; Tacos</span>
+        <span class="m">La Latina, a 0,9 km · 12 €/pers.</span>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>Tres pasos y ya están en la calle</h2></div>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><h3>Descubre o propón</h3>
+      <p>Elige entre cientos de recomendaciones o añade tu propio plan a la lista en segundos.</p></div>
+    <div class="step"><span class="n">02</span><h3>Comparte y vota</h3>
+      <p>Envía el link al chat. Todos votan con un toque, sin instalar nada ni registrarse.</p></div>
+    <div class="step"><span class="n">03</span><h3>Disfrutad juntos</h3>
+      <p>Plan confirmado, enlace a Google Maps, recordatorio en calendario y presupuesto estimado.</p></div>
+  </div>
+</div></section>
+
+<div class="close" id="descargar"><div class="wrap">
+  <h2>Tu próxima anécdota empieza este fin de semana.</h2>
+  <p>Descarga Melia gratis en iOS o Android y deja de preguntarte qué hacer. Sin suscripciones forzadas, 100 % colaborativo para grupos.</p>
+  <div class="acts">
+    <a class="btn btn--p" href="#descargar">App Store</a>
+    <a class="btn btn--s" href="#descargar">Google Play</a>
+  </div>
+</div></div>
+</main>
+
+<footer id="locales"><div class="wrap fgrid">
+  <div>
+    <div class="logo" style="font-size:18px;margin-bottom:10px"><span class="dot" style="width:20px;height:20px" aria-hidden="true"></span>Melia</div>
+    <p>Descubre eventos auténticos, vota salidas con tu grupo y coordina planes en minutos.</p>
+    <p style="margin-top:10px">Disponible en España: Madrid, Barcelona, Valencia, Sevilla.</p>
+  </div>
+  <div><h4>Explorar</h4><a href="#planes">Planes destacados</a><a href="#planes">Rutas de fin de semana</a><a href="#planes">Gastronomía</a></div>
+  <div><h4>Producto</h4><a href="#votar">Votación grupal</a><a href="#votar">Calendario</a><a href="#locales">Radar urbano</a></div>
+  <div><h4>Compañía</h4><a href="#locales">Red de aliados</a><a href="#locales">Soporte</a></div>
+</div>
+<p class="wrap" style="margin-top:32px">© 2025 Melia · Español (ES)</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Melia · El tiempo</title>
+<style>
+  :root {
+    --p-bg: #faf7f4; --p-surface: #edeae7; --p-ink: #1b1614; --p-muted: #676260;
+    --p-accent: #ff5a36; --p-accent-text: #b52603; --p-action-ink: #ffffff;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-text: Figtree, system-ui, sans-serif;
+    --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 20px;
+  }
+  * { box-sizing: border-box; }
+  html, body { overflow-x: clip; }
+  body { margin: 0; background: var(--p-bg); color: var(--p-ink); font-family: var(--font-text);
+         font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 400; line-height: 1.03; letter-spacing: -.03em; }
+  h1 { font-size: clamp(40px, 4.4vw, 74px); letter-spacing: -.04em; }
+  h2 { font-size: clamp(26px, 2vw, 40px); }
+  h3 { font-size: 19px; }
+  p { margin: 0; }
+  a { color: inherit; }
+  .mono { font-variant-numeric: tabular-nums; }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 40px; }
+  :focus-visible { outline: 2px solid var(--p-accent-text); outline-offset: 3px; border-radius: 4px; }
+
+  nav { border-bottom: 1px solid rgba(27,22,20,.12); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 21px; text-decoration: none; }
+  .dot { width: 24px; height: 24px; border-radius: 999px; background: var(--p-accent); }
+  .links { display: flex; gap: 26px; font-size: 14px; }
+  .links a { text-decoration: none; color: var(--p-muted); }
+  .links a:hover { color: var(--p-ink); }
+  .btn { display: inline-flex; align-items: center; height: 44px; padding: 0 22px; border-radius: var(--r-sm);
+         font-size: 15px; font-weight: 500; text-decoration: none; border: 1px solid transparent;
+         transition: background-color .18s ease, border-color .18s ease; }
+  .btn--p { background: var(--p-accent); color: var(--p-action-ink); }
+  .btn--p:hover { background: color-mix(in oklab, var(--p-accent) 86%, var(--p-ink)); }
+  .btn--s { border-color: rgba(27,22,20,.28); }
+  .btn--s:hover { background: var(--p-surface); }
+
+  /* HERO: the clock is the page */
+  .hero { padding: 80px 0 72px; display: grid; grid-template-columns: 1.05fr .95fr; gap: 72px; align-items: center; }
+  .hero h1 { max-width: 14ch; }
+  .hero .sub { margin-top: 24px; font-size: 18px; color: var(--p-muted); max-width: 40ch; }
+  .hero .acts { margin-top: 32px; display: flex; gap: 12px; }
+
+  .clock { background: var(--p-surface); border-radius: var(--r-lg); padding: 28px; }
+  .clock__top { display: flex; justify-content: space-between; align-items: baseline; }
+  .clock__now { font-family: var(--font-display); font-size: 56px; letter-spacing: -.04em; line-height: 1; }
+  .clock__live { background: var(--p-accent); color: var(--p-ink); border-radius: 999px; padding: 5px 12px;
+                 font-size: 12px; font-weight: 500; }
+  .clock__q { margin-top: 18px; font-size: 14px; color: var(--p-muted); }
+  .now-row { display: grid; grid-template-columns: 62px 1fr; gap: 16px; align-items: start;
+             margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(27,22,20,.14); }
+  .now-row .h { font-variant-numeric: tabular-nums; font-size: 15px; color: var(--p-ink); }
+  .now-row .t { font-family: var(--font-display); font-size: 20px; letter-spacing: -.02em; }
+  .now-row .m { font-size: 13px; color: var(--p-muted); margin-top: 2px; }
+  .votes { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--p-muted); }
+  .av { width: 26px; height: 26px; border-radius: 999px; display: grid; place-items: center;
+        font-size: 10px; font-weight: 500; border: 2px solid var(--p-surface); }
+  .av + .av { margin-left: -9px; }
+  .av--on { background: var(--p-accent); color: var(--p-ink); }
+  .av--off { background: #dfd9d4; }
+
+  section { padding: 88px 0; border-top: 1px solid rgba(27,22,20,.12); }
+  .head { display: flex; justify-content: space-between; align-items: end; gap: 32px; margin-bottom: 40px; }
+  .head p { color: var(--p-muted); max-width: 40ch; font-size: 15px; }
+
+  /* The night as a timetable */
+  .night { display: grid; grid-template-columns: 92px 1fr; }
+  .hour { font-variant-numeric: tabular-nums; font-size: 15px; color: var(--p-muted);
+          padding: 22px 0; border-top: 1px solid rgba(27,22,20,.12); }
+  .slot { padding: 22px 0; border-top: 1px solid rgba(27,22,20,.12);
+          display: grid; grid-template-columns: 1fr 220px; gap: 28px; align-items: center; }
+  .slot .t { font-family: var(--font-display); font-size: 22px; letter-spacing: -.02em; }
+  .slot .d { font-size: 14px; color: var(--p-muted); margin-top: 3px; max-width: 52ch; }
+  .slot .meta { font-size: 13px; color: var(--p-muted); margin-top: 8px; }
+  .slot img { width: 220px; height: 132px; object-fit: cover; border-radius: var(--r-md); display: block;
+              transition: transform .45s cubic-bezier(.22,1,.36,1); }
+  .slot:hover img { transform: scale(1.03); }
+  .night .live .hour, .night .live .slot { border-top: 2px solid var(--p-accent); }
+  .night .live .hour { color: var(--p-accent-text); font-weight: 500; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .step { padding-top: 16px; border-top: 2px solid var(--p-ink); }
+  .step .n { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--p-accent-text); }
+  .step h3 { margin-top: 6px; font-size: 19px; }
+  .step p { margin-top: 8px; font-size: 14px; color: var(--p-muted); }
+
+  .close { background: #1b1614; color: #faf7f4; padding: 96px 0; }
+  .close h2 { max-width: 22ch; }
+  .close p { margin-top: 16px; color: #a49e9a; max-width: 46ch; }
+  .close .acts { margin-top: 32px; display: flex; gap: 12px; }
+  .close .btn--s { border-color: rgba(250,247,244,.34); color: #faf7f4; }
+  .close .btn--s:hover { background: rgba(250,247,244,.1); }
+
+  footer { padding: 48px 0; font-size: 13px; color: var(--p-muted); }
+  .fgrid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; }
+  .fgrid h4 { margin: 0 0 10px; font-family: var(--font-text); font-size: 12px; font-weight: 500; color: var(--p-ink); }
+  .fgrid a { display: block; text-decoration: none; padding: 3px 0; }
+  .fgrid a:hover { color: var(--p-ink); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+    .slot:hover img { transform: none; }
+  }
+  @media (max-width: 940px) {
+    .hero, .slot, .steps, .fgrid { grid-template-columns: 1fr; }
+    .night { grid-template-columns: 64px 1fr; }
+    .slot img { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<nav><div class="wrap bar">
+  <a class="logo" href="#top"><span class="dot" aria-hidden="true"></span>Melia</a>
+  <div class="links"><a href="#noche">La noche</a><a href="#votar">Cómo funciona</a><a href="#locales">Creadores</a></div>
+  <a class="btn btn--p" href="#descargar">Descargar gratis</a>
+</div></nav>
+
+<main id="top">
+<div class="wrap hero">
+  <div>
+    <h1>Menos “a ver qué hacemos”, más ¡ya estamos aquí!</h1>
+    <p class="sub">Terrazas, restaurantes y planes en tu ciudad. Vota con tus amigos en 30 segundos.</p>
+    <div class="acts">
+      <a class="btn btn--p" href="#descargar">Descargar gratis</a>
+      <a class="btn btn--s" href="#noche">Ver la noche entera</a>
+    </div>
+  </div>
+
+  <div class="clock" id="votar">
+    <div class="clock__top">
+      <span class="clock__now mono">21:14</span>
+      <span class="clock__live">Votación en vivo</span>
+    </div>
+    <p class="clock__q">Tu grupo decide en 12 minutos a dónde van hoy.</p>
+    <div class="now-row">
+      <span class="h mono">21:30</span>
+      <div>
+        <div class="t">Rooftop Cibeles</div>
+        <div class="m">Gran Vía, a 1,2 km · 15 €/pers.</div>
+        <div class="votes">
+          <span class="av av--on">MR</span><span class="av av--on">SL</span>
+          <span class="av av--off">AG</span><span class="av av--off">+2</span>
+          <span>4 de 5 han votado</span>
+        </div>
+      </div>
+    </div>
+    <a class="btn btn--p" href="#descargar" style="width:100%;justify-content:center;margin-top:20px">¡Me apunto!</a>
+  </div>
+</div>
+
+<section id="noche"><div class="wrap">
+  <div class="head">
+    <h2>Esta noche, hora por hora</h2>
+    <p>Lo que está abierto ahora en Madrid, ordenado por lo que empieza antes.</p>
+  </div>
+  <div class="night">
+    <div class="hour">21:00</div>
+    <div class="slot">
+      <div>
+        <div class="t">Sesión Acústica &amp; Cerveza Artesanal</div>
+        <div class="d">Noche de cantautores independientes en el sótano acústico de Malasaña. Degustación de 4 IPAs locales.</div>
+        <div class="meta">Malasaña, a 1,5 km · 15 €/pers. · abierto ahora</div>
+      </div>
+      <img src="../../public/img/event-acoustic.jpg" alt="Concierto acústico en un sótano de Malasaña">
+    </div>
+
+    <div class="hour">21:30</div>
+    <div class="slot live">
+      <div>
+        <div class="t">Rooftop Cibeles</div>
+        <div class="d">Terraza en la azotea con vistas a la ciudad. El plan que tu grupo está votando ahora mismo.</div>
+        <div class="meta">Gran Vía, a 1,2 km · 15 €/pers. · 4 de 5 han votado</div>
+      </div>
+      <img src="../../public/img/mockup-rooftop.jpg" alt="Terraza de un rooftop de Madrid al atardecer">
+    </div>
+
+    <div class="hour">11:30</div>
+    <div class="slot">
+      <div>
+        <div class="t">Brunch Botánico en Patio Central</div>
+        <div class="d">Tostas de masa madre, café de especialidad y repostería en un invernadero urbano histórico.</div>
+        <div class="meta">Salamanca, a 2,8 km · 18 €/pers. · sábado</div>
+      </div>
+      <img src="../../public/img/event-brunch.jpg" alt="Mesa de brunch en un patio con plantas">
+    </div>
+
+    <div class="hour">20:00</div>
+    <div class="slot">
+      <div>
+        <div class="t">Noche de Micro Abierto &amp; Tacos</div>
+        <div class="d">Cómicos consolidados probando material nuevo, con cócteles de autor y barra mexicana.</div>
+        <div class="meta">La Latina, a 0,9 km · 12 €/pers. · domingo</div>
+      </div>
+      <img src="../../public/img/event-comedy.jpg" alt="Cómico actuando ante el público en un local pequeño">
+    </div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="head"><h2>Tres pasos y ya están en la calle</h2></div>
+  <div class="steps">
+    <div class="step"><span class="n">01</span><h3>Descubre o propón</h3>
+      <p>Elige entre cientos de recomendaciones o añade tu propio plan a la lista en segundos.</p></div>
+    <div class="step"><span class="n">02</span><h3>Comparte y vota</h3>
+      <p>Envía el link al chat. Todos votan con un toque, sin instalar nada ni registrarse.</p></div>
+    <div class="step"><span class="n">03</span><h3>Disfrutad juntos</h3>
+      <p>Plan confirmado, enlace a Google Maps, recordatorio en calendario y presupuesto estimado.</p></div>
+  </div>
+</div></section>
+
+<div class="close" id="descargar"><div class="wrap">
+  <h2>Tu próxima anécdota empieza este fin de semana.</h2>
+  <p>Descarga Melia gratis en iOS o Android y deja de preguntarte qué hacer. Sin suscripciones forzadas, 100 % colaborativo para grupos.</p>
+  <div class="acts">
+    <a class="btn btn--p" href="#descargar">App Store</a>
+    <a class="btn btn--s" href="#descargar">Google Play</a>
+  </div>
+</div></div>
+</main>
+
+<footer id="locales"><div class="wrap fgrid">
+  <div>
+    <div class="logo" style="font-size:18px;margin-bottom:10px"><span class="dot" style="width:20px;height:20px" aria-hidden="true"></span>Melia</div>
+    <p>Descubre eventos auténticos, vota salidas con tu grupo y coordina planes en minutos.</p>
+    <p style="margin-top:10px">Disponible en España: Madrid, Barcelona, Valencia, Sevilla.</p>
+  </div>
+  <div><h4>Explorar</h4><a href="#noche">Planes destacados</a><a href="#noche">Rutas de fin de semana</a><a href="#noche">Gastronomía</a></div>
+  <div><h4>Producto</h4><a href="#votar">Votación grupal</a><a href="#votar">Calendario</a><a href="#noche">Radar urbano</a></div>
+  <div><h4>Compañía</h4><a href="#locales">Red de aliados</a><a href="#locales">Soporte</a></div>
+</div>
+<p class="wrap" style="margin-top:32px">© 2025 Melia · Español (ES)</p>
+</footer>
+
+</body>
+</html>

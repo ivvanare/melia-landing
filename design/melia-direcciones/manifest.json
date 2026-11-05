@@ -1,0 +1,24 @@
+{
+  "slug": "melia-direcciones",
+  "brief": "Tres direcciones para la landing de Melia, atacando lo que la crítica dejó abierto: las dos pantallas vacías (moods, razones) y el cierre.",
+  "artboards": [
+    {
+      "file": "01-el-voto.html",
+      "title": "El voto",
+      "idea": "La página es la votación. El hero es un ballot abierto con dos opciones, barras y quién votó. Los moods dejan de ser chips y pasan a ser tres planes reales por categoría.",
+      "tradeoff": "El plan real es lo que se ve; se pierde el mapa y el radar como pieza propia."
+    },
+    {
+      "file": "02-la-ciudad.html",
+      "title": "La ciudad",
+      "idea": "Madrid es la protagonista. Foto a sangre en el hero con el tipo sobre el lado oscuro, los barrios como navegación y un grid asimétrico 1.25/1 donde un plan es alto y dos se apilan.",
+      "tradeoff": "La votación baja a una píldora; se gana lugar y fotografía, se pierde el producto como argumento."
+    },
+    {
+      "file": "03-el-tiempo.html",
+      "title": "El tiempo",
+      "idea": "La noche ordenada por horas. El hero lleva un reloj con la fila de las 21:30 y la votación abierta; la sección de planes es un timetable con cada plan en su franja y la hora actual marcada.",
+      "tradeoff": "La estructura temporal es única de esta app, pero obliga a leer filas en vez de mirar fotos grandes."
+    }
+  ]
+}

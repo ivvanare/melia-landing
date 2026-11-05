@@ -402,3 +402,49 @@ main > section.section--hero > .wrap {
 .footer .wrap .grid > div > a + a {
   margin-top: 0;
 }
+
+/* ---------- Match direction 03's own measurements ----------
+   The artboard reads at a 1100px measure with a quieter scale than the kit's
+   default; measured on the artboard: content 1008px, h1 63px, h2 29px. */
+main > section > .wrap {
+  max-width: 1088px;
+}
+h1.hero-text {
+  font-size: clamp(34px, 4.4vw, 64px);
+}
+main > section h2 {
+  font-size: clamp(22px, 1.9vw, 30px);
+  letter-spacing: -0.025em;
+}
+main > section .section-head .lead {
+  font-size: 15px;
+}
+.nav .nav__bar {
+  max-width: none;
+  padding-inline: 40px;
+}
+
+/* ---------- Direction 03 does not force a screen per section ----------
+   The artboard is 972 / 366 / 366 tall: it uses padding, not a locked height.
+   Measured on the artboard: section padding 88px block, content 1088 centred. */
+main > section.section {
+  height: auto;
+  min-height: 0;
+  padding-block: 88px;
+  display: block;
+}
+main > section.section--hero {
+  padding-block: 76px;
+  display: flex;
+  align-items: center;
+  min-height: 0;
+  height: auto;
+}
+main > section > .wrap {
+  margin-inline: auto;
+}
+/* the closing band keeps its own padding */
+main > section.ground-inverse {
+  padding-block: 96px;
+  height: auto;
+}

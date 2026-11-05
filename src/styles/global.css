@@ -20,7 +20,7 @@
   /* #FF5A36 as text on a light ground is 2.91:1; #B52603 is 6.07:1 */
   --p-accent-text: #b52603;
   --p-action: #ff5a36;
-  --p-action-ink: #111111;
+  --p-action-ink: #ffffff;
   --p-inv-bg: #1b1614;
   --p-inv-surface: #282320;
   --p-inv-ink: #faf7f4;
@@ -29,7 +29,7 @@
   --p-inv-accent-ink: #111111;
   --p-inv-accent-text: #ffb39c;
   --p-inv-action: #ff5a36;
-  --p-inv-action-ink: #111111;
+  --p-inv-action-ink: #ffffff;
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
   --font-text: "Figtree", system-ui, sans-serif;
   --display-weight: 400;

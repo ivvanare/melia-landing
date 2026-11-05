@@ -1,305 +1,166 @@
-/* Hallmark · shape: Departures board on warm stock · genre: custom · theme: custom · redesign: full
- * paper: oklch(21% 0.028 262) · accent: oklch(68.6% 0.192 32.4) · display: Archivo · body: Archivo · hero: the board itself, head beside the first departure · nav: slab · footer: index columns · signature: the now-line crossing the board at the current hour, the rows below it receding
- * axes: paper/display/accent · posture: committed · contrast: pass · fold: pass · v2.0.0 */
-/* Hallmark · pre-emit critique: P1 H2 E1 S2 R1 V2 · weakest: the earlier build read cold; the ink and the stock are now tinted toward the lamps rather than the screen */
-/* Hallmark · direction: the third direction takes the board's structure (rows, hours, one object) and Spore's warmth (parchment ink, grain on the bands, soft radii). No catalog face is set: Archivo does the work, the coral marks only what is live now. */
-/* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser); the lint reads the dev CSS module and cannot see the imported base.css rule */
-/* Hallmark · pre-emit critique: P1 H2 E1 S2 R1 V2 · weakest: the hero wanted a card grid and got the board instead; the board is the page's one object and every section is a row of it */
-/* Hallmark · direction: Melia is a group deciding what to do tonight. The page is not a card wall but the departures board a city posts: time, plan, place, state, in ruled rows, with a hairline marking the hour you are standing in. Borrowed from Dose the idea of a tinted band as a category and from Ribbon the quiet type and hairline rules; neither theme is used, and no catalog face is set. Archivo at weight and width does the work; the coral marks only what is live now. */
-/* Hallmark · dropped mockup-rooftop.jpg · the phone mockup is gone: the live vote is now the board's own first row (NowPanel), which says the same thing with the page's real structure instead of a picture of a phone
-/* Hallmark · reworded "1,2 km" from "1.2 km" · the decimal comma is the convention this page is written in (gate 63 names meta strings, not the number format) */
-/* Hallmark · finish-review: in-thread (subagent provider unavailable) · 6 findings · 4 resolved 1 partial 1 open · answering what the old page did better: the phone mockup showed the product's own screen at a size the board row cannot, and the event cards were easier to scan as pictures; both are accepted losses, the board trades them for the page's one idea
- * open: 44c, the hero still leaves air under its action at 1280x800; settled by eye, not by a gate */
-/* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser); the lint reads the dev CSS module and cannot see the imported base.css rule */
-/* Hallmark · pre-emit critique: P1 H2 E1 S2 R1 V2 · weakest: section heads competed with the hero; the hero now holds one sentence and one action at --text-display and every section head drops to --text-section */
-/* Hallmark · dropped bolt, near_me, local_bar, smart_toy, restaurant, roofing, music_note, theater_comedy, local_cafe, nature_people, calendar_month, directions_walk, how_to_vote, phone_iphone · the glyph names moved into the chips' and categories' data arrays, so every one of them still paints; the linter reads literal name attributes only */
-/* Hallmark · dropped star, storefront · the store rating and the partner block carry the same words as text; a glyph beside them added no information (gate 82) · smart_toy still paints inside StoreBadges */
-/* Hallmark · reworded "¡Disfrutad juntos!" to "¡Disfrutad juntos!" (Title Case to sentence case, gate 67) and "1.2 km" to "1,2 km" (decimal comma, the Spanish convention this page is written in) · 67 names capitalised labels */
-/* Hallmark · dropped mockup-rooftop.jpg · the phone mockup is gone: the live vote is now the board's own first row (NowPanel), which says the same thing with the page's real structure instead of a picture of a phone
-/* Hallmark · reworded "1,2 km" from "1.2 km" · the decimal comma is the convention this page is written in (gate 63 names meta strings, not the number format) */
-/* Hallmark · finish-review: in-thread (subagent provider unavailable) · 6 findings · 4 resolved 1 partial 1 open · answering what the old page did better: the phone mockup showed the product's own screen at a size the board row cannot, and the event cards were easier to scan as pictures; both are accepted losses, the board trades them for the page's one idea
- * open: 44c, the hero still leaves air under its action at 1280x800; settled by eye, not by a gate */
-/* Hallmark · waived 34 · html and body compute overflow-x: clip (verified in the browser: html=clip, body=clip); the lint reads the dev CSS module and cannot see the imported base.css rule */
-
 @import "tailwindcss";
-@import "./tokens.css";
-@import "./base.css" layer(base);
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* tasteskill 2.5 · kind: product · site-kind: other
+ * Direction: warm paper, one grotesque with character, photographs of the night the app sells.
+ * The system lives in /assets (system.css, layout, cards, motion); this file only carries the
+ * palette the dealer printed and the few things the page needs on top of it. */
+
+@theme {
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-text: "Figtree", system-ui, sans-serif;
+}
+
+:root {
+  --p-bg: #faf7f4;
+  --p-surface: #edeae7;
+  --p-ink: #1b1614;
+  --p-muted: #676260;
+  --p-accent: #ff5a36;
+  --p-accent-ink: #111111;
+  --p-action: #ff5a36;
+  --p-action-ink: #111111;
+  --p-inv-bg: #1b1614;
+  --p-inv-surface: #282320;
+  --p-inv-ink: #faf7f4;
+  --p-inv-muted: #9d9996;
+  --p-inv-accent: #ff5a36;
+  --p-inv-accent-ink: #111111;
+  --p-inv-action: #ff5a36;
+  --p-inv-action-ink: #111111;
+  --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+  --font-text: "Figtree", system-ui, sans-serif;
+  --display-weight: 400;
+  --display-tracking: -0.03em;
+  --display-tracking-xl: -0.04em;
+  --display-stretch: 96%;
+}
+
+/* The inverse ground the theme toggle swaps to. */
+:root.theme-inv {
+  --p-bg: var(--p-inv-bg);
+  --p-surface: var(--p-inv-surface);
+  --p-ink: var(--p-inv-ink);
+  --p-muted: var(--p-inv-muted);
+  --p-accent: var(--p-inv-accent);
+  --p-action: var(--p-inv-action);
+  --p-action-ink: var(--p-inv-action-ink);
+  color-scheme: dark;
+}
 
 html,
 body {
+  background: var(--p-bg);
+  color: var(--p-ink);
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
   overflow-x: clip;
 }
 
-/* Light colourway of the same material (`lab`): cream ground, dark ink, the
-   pink accent darkened so it still clears AA on cream. The theme toggle swaps
-   between the two; neither is a dark-mode template of the other. */
-
-
-/* The grain sits on wells and bands only, never under running text in a column
-   and never over a photograph. */
-.grained {
-  position: relative;
-  isolation: isolate;
-}
-.grained::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  opacity: 0.15;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-  mix-blend-mode: screen;
-}
-.grained > * {
-  position: relative;
-  z-index: 1;
+/* The product screen in the hero: a real phone-shaped panel, built in CSS. */
+.screen {
+  background: var(--p-surface);
+  border: 1px solid color-mix(in oklab, var(--p-ink) 12%, transparent);
+  border-radius: 28px;
+  padding: 14px;
+  box-shadow: 0 24px 60px -28px color-mix(in oklab, var(--p-ink) 45%, transparent);
 }
 
-/* ---------- Carousel (tag strips) ---------- */
-.carousel.is-scrollable .carousel-track {
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    var(--mask-opaque) var(--space-lg),
-    var(--mask-opaque) calc(100% - var(--space-lg)),
-    transparent 100%
-  );
-}
-.carousel.is-scrollable.at-start .carousel-track {
-  mask-image: linear-gradient(to right, var(--mask-opaque) 55%, transparent 100%);
-}
-.carousel.is-scrollable.at-end .carousel-track {
-  mask-image: linear-gradient(to left, var(--mask-opaque) 55%, transparent 100%);
+.screen__bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 2px 6px 10px;
+  font-size: 12px;
+  color: var(--p-muted);
 }
 
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  display: none;
-  width: 44px;
-  height: 44px;
+.screen__live {
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-paper-3);
-  border: var(--rule-hair, 1px) solid var(--color-rule);
-  color: var(--color-ink);
+  gap: 6px;
+  background: var(--p-accent);
+  color: var(--p-accent-ink);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.screen__vote {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.screen__avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  border: 2px solid var(--p-surface);
+}
+
+.screen__avatar + .screen__avatar {
+  margin-left: -8px;
+}
+
+/* Category chips: a static wrapping row, no carousel (house rule 5). */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid color-mix(in oklab, var(--p-ink) 16%, transparent);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--p-ink);
+  background: transparent;
   cursor: pointer;
   transition:
-    background-color 0.2s var(--ease-out),
-    opacity 0.2s var(--ease-out),
-    transform 0.15s var(--ease-out);
-}
-.carousel-btn:hover {
-  background-color: var(--color-paper-2);
-}
-.carousel-btn:active {
-  transform: translateY(-50%) scale(0.94);
-}
-.carousel.is-scrollable .carousel-btn {
-  display: inline-flex;
-}
-.carousel-prev {
-  left: calc(var(--space-sm) * -1);
-}
-.carousel-next {
-  right: calc(var(--space-sm) * -1);
-}
-.carousel.at-start .carousel-prev,
-.carousel.at-end .carousel-next {
-  opacity: 0;
-  pointer-events: none;
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
 }
 
-/* ---------- Filter states (wiring preserved) ---------- */
+.chip:hover {
+  border-color: var(--p-accent);
+  color: var(--p-accent);
+}
+
 .chip[aria-pressed="true"] {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-accent-ink);
-}
-.chip-icon {
-  color: var(--color-muted);
-  transition: color 0.15s var(--ease-out);
-}
-.chip[aria-pressed="true"] .chip-icon {
-  color: var(--color-accent-ink);
+  background: var(--p-ink);
+  border-color: var(--p-ink);
+  color: var(--p-bg);
 }
 
-.cat-chip[aria-pressed="true"] {
-  background-color: var(--color-paper-3);
-  border-color: var(--color-accent-2);
-  color: var(--color-ink);
-}
-.cat-icon {
-  color: var(--color-muted);
-  transition: color 0.15s var(--ease-out);
-}
-.cat-chip[aria-pressed="true"] .cat-icon {
-  color: var(--color-accent-text);
+.chip__count {
+  margin-left: 6px;
+  font-size: 11px;
+  opacity: 0.65;
 }
 
-.time-pill {
-  color: var(--color-muted);
-  transition: color 0.15s var(--ease-out);
-}
-.time-pill:hover {
-  color: var(--color-ink);
-}
-.time-pill[aria-pressed="true"] {
-  background-color: var(--color-paper-3);
-  color: var(--color-ink);
+/* A photograph inside its frame zooms slightly on hover of the link that owns it. */
+.zoom img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* ---------- Theme toggle icon swap ---------- */
-/* Both icons render; only the inactive one is transparent, and the swap is a
-   cross-fade from a visible default, never from a hidden state. */
-.theme-icon {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  transition:
-    transform 0.4s var(--ease-out),
-    opacity 0.25s var(--ease-out);
-}
-
-
-/* Both icons are painted; the swap only hides one once the script that
-   toggles the theme is running, so nothing is invisible without JS. */
-.js .theme-icon-moon {
-  opacity: 0;
-  transform: rotate(100deg) scale(0.6);
-}
-.js .light .theme-icon-moon {
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-.js .light .theme-icon-sun {
-  opacity: 0;
-  transform: rotate(-100deg) scale(0.6);
-}
-#theme-toggle {
-  transition:
-    transform 0.15s var(--ease-out),
-    background-color 0.2s var(--ease-out);
-}
-#theme-toggle:active {
-  transform: scale(0.9);
-}
-
-/* Smooth page recolour only while toggling (user-triggered) */
-.theme-anim,
-.theme-anim * {
-  transition-property: background-color, border-color, color, fill, stroke !important;
-  transition-duration: 0.3s !important;
-  transition-timing-function: var(--ease-out) !important;
-}
-
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+.zoom:hover img {
+  transform: scale(1.03);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .theme-icon {
-    transition: opacity 0.15s var(--ease-out);
-    transform: none !important;
+  .zoom img,
+  .chip {
+    transition: none;
   }
-  #theme-toggle:active {
+  .zoom:hover img {
     transform: none;
   }
-  .carousel-track {
-    scroll-behavior: auto;
-  }
-}
-
-/* Section rhythm: every section opens on its own air. */
-main > section + section {
-  margin-top: 0;
-}
-
-/* A control that is not available still reads as a control. */
-button:disabled,
-input:disabled,
-[aria-disabled="true"] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-button:disabled:hover,
-[aria-disabled="true"]:hover {
-  background-color: inherit;
-  border-color: inherit;
-}
-
-/* Text never touches the edge of its own control. */
-.slab a,
-.slab button {
-  padding-block: var(--space-2xs);
-}
-
-/* When the strip wraps, there is nothing to page through: the arrows would
-   float over the second row. */
-@media (min-width: 1024px) {
-  .cat-wrap .carousel-btn {
-    display: none !important;
-  }
-}
-
-@media (min-width: 768px) {
-  .hero-chips .carousel-btn {
-    display: none !important;
-  }
-}
-
-/* One weight pair does the work: display 600, body 400, labels 500. */
-strong,
-b {
-  font-weight: 600;
-}
-
-/* A photographic band carries the same grain as the rest of the stock, so the
-   pictures sit in the paper rather than on top of it. */
-.grain-band {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--color-paper-3);
-  background-size: cover;
-  background-position: center;
-}
-.grain-band::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.13;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='150' height='150' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
-}
-.grain-band > * {
-  position: relative;
-  z-index: 1;
-}
-
-/* The closing band sits over a photograph: its own ground keeps the text at
-   AA regardless of what the picture does behind it. */
-.cta-ground {
-  background-image:
-    linear-gradient(
-      color-mix(in oklab, var(--color-paper) 88%, transparent),
-      color-mix(in oklab, var(--color-paper) 96%, transparent)
-    ),
-    var(--cta-photo, none);
-  background-size: cover;
-  background-position: center;
 }

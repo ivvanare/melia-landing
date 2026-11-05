@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es" data-radius="soft" data-buttons="solid">
+<head>
+<meta charset="utf-8">
+<title>Melia · system board</title>
+<style>
+  :root {
+    --p-bg: #faf7f4; --p-surface: #edeae7; --p-ink: #1b1614; --p-muted: #676260;
+    --p-accent: #ff5a36; --p-accent-ink: #111111; --p-accent-text: #b52603;
+    --p-action: #ff5a36; --p-action-ink: #ffffff;
+    --p-inv-bg: #1b1614; --p-inv-surface: #282320; --p-inv-ink: #faf7f4; --p-inv-muted: #9d9996;
+    --p-inv-accent-text: #ffb39c;
+    --font-display: "Bricolage Grotesque", system-ui, sans-serif;
+    --font-text: Figtree, system-ui, sans-serif;
+    --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 24px;
+    --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px;
+    --r-sm: 8px; --r-md: 12px; --r-lg: 20px; --r-btn: 8px;
+    --t-h1: clamp(38px, 3.24vw + 25.4px, 72px); --t-h2: clamp(30px, 1.72vw + 23.3px, 48px);
+    --t-h3: 24px; --t-body: 16px; --t-small: 14px; --t-label: 13px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; width: 1440px; padding: var(--s-9);
+    background: var(--p-bg); color: var(--p-ink);
+    font-family: var(--font-text); font-size: var(--t-body); line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { margin: 0; font-family: var(--font-display); font-weight: 400; letter-spacing: -0.03em; line-height: 1.05; }
+  h1 { font-size: var(--t-h1); letter-spacing: -0.04em; }
+  h2 { font-size: var(--t-h2); }
+  h3 { font-size: var(--t-h3); }
+  p { margin: 0; }
+  section { margin-bottom: var(--s-9); }
+  .label { font-size: var(--t-label); color: var(--p-muted); margin-bottom: var(--s-4); }
+  .row { display: flex; flex-wrap: wrap; gap: var(--s-5); }
+  .swatch { width: 190px; }
+  .swatch i { display: block; height: 84px; border-radius: var(--r-md); border: 1px solid rgba(27,22,20,.10); }
+  .swatch b { display: block; margin-top: var(--s-2); font-size: var(--t-small); font-weight: 500; }
+  .swatch span { display: block; font-size: var(--t-label); color: var(--p-muted); font-variant-numeric: tabular-nums; }
+
+  .btn { display: inline-flex; align-items: center; height: 44px; padding: 0 var(--s-5);
+         border-radius: var(--r-btn); font-family: var(--font-text); font-size: 15px; font-weight: 500;
+         border: 1px solid transparent; cursor: pointer; transition: background-color .18s ease; }
+  .btn--primary { background: var(--p-action); color: var(--p-action-ink); }
+  .btn--primary:hover { background: color-mix(in oklab, var(--p-action) 86%, var(--p-ink)); }
+  .btn--secondary { background: var(--p-bg); color: var(--p-ink); border-color: rgba(27,22,20,.28); }
+  .btn--secondary:hover { background: color-mix(in oklab, var(--p-bg) 94%, var(--p-ink)); }
+  .btn:focus-visible { outline: 2px solid var(--p-accent-text); outline-offset: 2px; }
+
+  .chip { border: 1px solid rgba(27,22,20,.16); border-radius: 999px; padding: 10px 16px;
+          font-size: var(--t-label); font-weight: 500; background: transparent; color: var(--p-ink); cursor: pointer; }
+  .chip:hover { border-color: var(--p-accent); color: var(--p-accent-text); }
+  .chip[aria-pressed="true"] { background: var(--p-ink); border-color: var(--p-ink); color: var(--p-bg); }
+
+  .card { background: var(--p-surface); border-radius: var(--r-lg); padding: var(--s-5); }
+  .screen { background: var(--p-surface); border: 1px solid rgba(27,22,20,.12); border-radius: 28px;
+            padding: 14px; width: 380px;
+            box-shadow: 0 24px 60px -28px color-mix(in oklab, var(--p-ink) 45%, transparent); }
+  .screen__live { display: inline-block; background: var(--p-accent); color: var(--p-accent-ink);
+                  border-radius: 999px; padding: 4px 10px; font-size: 11px; font-weight: 500; }
+
+  .inverse { background: var(--p-inv-bg); color: var(--p-inv-ink); padding: var(--s-7); border-radius: var(--r-lg); }
+  .inverse .label, .inverse span { color: var(--p-inv-muted); }
+  .inverse .accent-text { color: var(--p-inv-accent-text); }
+
+  table { border-collapse: collapse; width: 100%; font-size: var(--t-small); }
+  td { padding: var(--s-2) 0; border-bottom: 1px solid rgba(27,22,20,.10); }
+  td:last-child { text-align: right; font-variant-numeric: tabular-nums; color: var(--p-muted); }
+  .pass { color: #166534; font-weight: 500; }
+  .fail { color: #b52603; font-weight: 500; }
+</style>
+</head>
+<body>
+
+<h1>Melia</h1>
+<p class="label" style="margin-top:var(--s-3)">
+  Design system · warm paper, one grotesque with character, coral as the only signal
+</p>
+
+<section>
+  <p class="label">Colour</p>
+  <div class="row">
+    <div class="swatch"><i style="background:#faf7f4"></i><b>--p-bg</b><span>#faf7f4</span></div>
+    <div class="swatch"><i style="background:#edeae7"></i><b>--p-surface</b><span>#edeae7</span></div>
+    <div class="swatch"><i style="background:#1b1614"></i><b>--p-ink</b><span>#1b1614</span></div>
+    <div class="swatch"><i style="background:#676260"></i><b>--p-muted</b><span>#676260</span></div>
+    <div class="swatch"><i style="background:#ff5a36"></i><b>--p-accent</b><span>#ff5a36</span></div>
+    <div class="swatch"><i style="background:#b52603"></i><b>--p-accent-text</b><span>#b52603</span></div>
+  </div>
+</section>
+
+<section>
+  <p class="label">The coral rule — measured</p>
+  <table>
+    <tr><td>#FF5A36 as text on #faf7f4</td><td class="fail">2.91 · fails AA</td></tr>
+    <tr><td>#B52603 as text on #faf7f4</td><td class="pass">6.07 · passes</td></tr>
+    <tr><td>#FFFFFF on #FF5A36 (15px/500 label)</td><td class="fail">3.10 · AA large only</td></tr>
+    <tr><td>#C9361A fill with #FFFFFF</td><td class="pass">5.22 · passes</td></tr>
+    <tr><td>#FFB39C as text on #1b1614</td><td class="pass">10.40 · passes</td></tr>
+  </table>
+</section>
+
+<section>
+  <p class="label">Typography</p>
+  <h1>Menos “a ver qué hacemos”</h1>
+  <h2 style="margin-top:var(--s-3)">Planes recomendados para este fin de semana</h2>
+  <h3 style="margin-top:var(--s-3)">Rooftop Cibeles vs Ramen Hanabi</h3>
+  <p style="margin-top:var(--s-3)">Body — Terrazas, restaurantes y planes en tu ciudad.</p>
+  <p style="font-size:var(--t-small);color:var(--p-muted);margin-top:var(--s-2)">Small — Gran Vía, a 1,2 km · Grupo Los de Siempre</p>
+  <p style="font-size:var(--t-label);color:var(--p-muted);margin-top:var(--s-1)">Label — 21:14 · cierra en 12 min</p>
+</section>
+
+<section>
+  <p class="label">Components</p>
+  <div class="row" style="align-items:center">
+    <button class="btn btn--primary">Descargar gratis</button>
+    <button class="btn btn--secondary">Ver los planes</button>
+    <button class="chip" aria-pressed="false">Hoy</button>
+    <button class="chip" aria-pressed="true">Este fin de semana</button>
+  </div>
+  <div class="row" style="margin-top:var(--s-6);align-items:flex-start">
+    <div class="card" style="width:360px">
+      <h3 style="font-size:18px">Listas grupales con votación express</h3>
+      <p style="font-size:var(--t-small);color:var(--p-muted);margin-top:var(--s-2)">
+        Elige 2 o 3 opciones y votad con un simple toque.
+      </p>
+    </div>
+    <div class="screen">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:12px;color:var(--p-muted)">
+        <span>21:14</span><span class="screen__live">Votación en vivo</span><span>cierra en 12 min</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="label">Inverse ground</p>
+  <div class="inverse" style="width:820px">
+    <h2 style="font-size:var(--t-h2)">Tu próxima anécdota empieza este fin de semana.</h2>
+    <p style="margin-top:var(--s-3);color:var(--p-inv-muted);font-size:var(--t-small)">
+      Descarga Melia gratis en iOS o Android. <span class="accent-text">#FFB39C on #1b1614 = 10.40:1</span>
+    </p>
+  </div>
+</section>
+
+<section>
+  <p class="label">Spacing, radius, depth</p>
+  <div class="row" style="align-items:flex-end">
+    <div style="text-align:center"><div style="width:4px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">4</span></div>
+    <div style="text-align:center"><div style="width:8px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">8</span></div>
+    <div style="text-align:center"><div style="width:12px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">12</span></div>
+    <div style="text-align:center"><div style="width:16px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">16</span></div>
+    <div style="text-align:center"><div style="width:24px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">24</span></div>
+    <div style="text-align:center"><div style="width:32px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">32</span></div>
+    <div style="text-align:center"><div style="width:48px;height:48px;background:var(--p-ink)"></div><span style="font-size:11px">48</span></div>
+    <div style="margin-left:var(--s-7);display:flex;gap:var(--s-4)">
+      <div style="width:72px;height:72px;background:var(--p-surface);border-radius:8px"></div>
+      <div style="width:72px;height:72px;background:var(--p-surface);border-radius:12px"></div>
+      <div style="width:72px;height:72px;background:var(--p-surface);border-radius:20px"></div>
+    </div>
+  </div>
+  <p style="font-size:var(--t-label);color:var(--p-muted);margin-top:var(--s-3)">
+    Depth comes from borders and surface steps, not shadows. One exception: the product screen.
+  </p>
+</section>
+
+</body>
+</html>

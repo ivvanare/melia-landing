@@ -17,6 +17,8 @@
   --p-muted: #676260;
   --p-accent: #ff5a36;
   --p-accent-ink: #111111;
+  /* #FF5A36 as text on a light ground is 2.91:1; #B52603 is 6.07:1 */
+  --p-accent-text: #b52603;
   --p-action: #ff5a36;
   --p-action-ink: #111111;
   --p-inv-bg: #1b1614;
@@ -25,6 +27,7 @@
   --p-inv-muted: #9d9996;
   --p-inv-accent: #ff5a36;
   --p-inv-accent-ink: #111111;
+  --p-inv-accent-text: #ffb39c;
   --p-inv-action: #ff5a36;
   --p-inv-action-ink: #111111;
   --font-display: "Bricolage Grotesque", system-ui, sans-serif;
@@ -42,6 +45,7 @@
   --p-ink: var(--p-inv-ink);
   --p-muted: var(--p-inv-muted);
   --p-accent: var(--p-inv-accent);
+  --p-accent-text: var(--p-inv-accent-text);
   --p-action: var(--p-inv-action);
   --p-action-ink: var(--p-inv-action-ink);
   color-scheme: dark;
@@ -131,7 +135,7 @@ body {
 
 .chip:hover {
   border-color: var(--p-accent);
-  color: var(--p-accent);
+  color: var(--p-accent-text);
 }
 
 .chip[aria-pressed="true"] {

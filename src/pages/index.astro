@@ -1,84 +1,63 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const moods = [
-  { label: 'Gastronomía & Tapas', count: 640, on: true },
-  { label: 'Rooftops & Terrazas', count: 94, on: false },
-  { label: 'Música & Conciertos', count: 128, on: false },
-  { label: 'Stand-up & Microteatro', count: 82, on: false },
-  { label: 'Brunch & Cafés de Autor', count: 112, on: false },
-  { label: 'Escapadas & Aire Libre', count: 53, on: false },
-];
-
-const reasons = [
+const night = [
   {
-    title: 'Descubrimiento hiperlocal en tiempo real',
-    text: 'Filtra por distancia precisa, rango de precio real por persona y lugares con disponibilidad inmediata. Planes curados y verificados a diario.',
-    proof: 'Menos de 800 m a pie · abierto ahora · terraza con mesas libres',
-  },
-  {
-    title: 'Listas grupales con votación express',
-    text: 'Elige 2 o 3 opciones, comparte un enlace rápido y votad con un simple toque. Tus amigos no necesitan registrarse para votar.',
-    proof: 'Taberna La Carmencita · 75 % · 4 votos',
-  },
-  {
-    title: 'Tu agenda de ocio centralizada',
-    text: 'Sincronización instantánea con Google Calendar, Apple Calendar y recordatorios del clima para que nadie llegue tarde o sin plan b.',
-    proof: 'iCal · Google Calendar · Outlook',
-  },
-];
-
-const plans = [
-  {
-    time: '21:00',
-    day: 'Hoy, abierto ahora',
+    hour: '21:00',
     title: 'Sesión Acústica & Cerveza Artesanal',
-    text: 'Noche de cantautores independientes en el sótano acústico de Malasaña.',
-    place: 'Malasaña, a 1,5 km',
-    price: '15 € / pers.',
+    text: 'Noche de cantautores independientes en el sótano acústico de Malasaña. Degustación de 4 IPAs locales.',
+    meta: 'Malasaña, a 1,5 km · 15 €/pers. · abierto ahora',
     img: '/img/event-acoustic.jpg',
-    alt: 'Público en un concierto acústico pequeño',
+    alt: 'Concierto acústico en un sótano de Malasaña',
+    live: false,
   },
   {
-    time: '11:30',
-    day: 'Sábado',
+    hour: '21:30',
+    title: 'Rooftop Cibeles',
+    text: 'Terraza en la azotea con vistas a la ciudad. El plan que tu grupo está votando ahora mismo.',
+    meta: 'Gran Vía, a 1,2 km · 15 €/pers. · 4 de 5 han votado',
+    img: '/img/mockup-rooftop.jpg',
+    alt: 'Terraza de un rooftop de Madrid al atardecer',
+    live: true,
+  },
+  {
+    hour: '11:30',
     title: 'Brunch Botánico en Patio Central',
-    text: 'Tostas de masa madre, café de especialidad y repostería en un invernadero urbano.',
-    place: 'Salamanca, a 2,8 km',
-    price: '18 € / pers.',
+    text: 'Tostas de masa madre, café de especialidad y repostería en un invernadero urbano histórico.',
+    meta: 'Salamanca, a 2,8 km · 18 €/pers. · sábado',
     img: '/img/event-brunch.jpg',
     alt: 'Mesa de brunch en un patio con plantas',
+    live: false,
   },
   {
-    time: '20:00',
-    day: 'Domingo',
+    hour: '20:00',
     title: 'Noche de Micro Abierto & Tacos',
-    text: 'Cómicos consolidados probando material nuevo, cócteles de autor y barra mexicana.',
-    place: 'La Latina, a 0,9 km',
-    price: '12 € / pers.',
+    text: 'Cómicos consolidados probando material nuevo, con cócteles de autor y barra mexicana.',
+    meta: 'La Latina, a 0,9 km · 12 €/pers. · domingo',
     img: '/img/event-comedy.jpg',
     alt: 'Cómico actuando ante el público en un local pequeño',
+    live: false,
   },
 ];
 
 const steps = [
   {
     title: 'Descubre o propón',
-    text: 'Selecciona entre cientos de recomendaciones o añade tu propio plan preferido a la lista en segundos.',
+    text: 'Elige entre cientos de recomendaciones o añade tu propio plan a la lista en segundos.',
   },
   {
     title: 'Comparte y vota',
-    text: 'Envía el link al chat de amigos. Todos votan con un toque desde su navegador móvil sin instalar nada obligatorio.',
+    text: 'Envía el link al chat. Todos votan con un toque, sin instalar nada ni registrarse.',
   },
   {
     title: 'Disfrutad juntos',
-    text: 'Plan confirmado, enlace directo en Google Maps, recordatorio en calendario y control de presupuesto estimado.',
+    text: 'Plan confirmado, enlace a Google Maps, recordatorio en calendario y presupuesto estimado.',
   },
 ];
 ---
 
 <Base>
-  <a class="sr-only" href="#descubrir">Saltar al contenido</a>
+  <a class="sr-only" href="#top">Saltar al contenido</a>
 
   <header class="nav">
     <div class="wrap nav__bar">
@@ -86,9 +65,9 @@ const steps = [
         <span class="mark mark--initial" aria-hidden="true">M</span>Melia
       </a>
       <nav class="nav__links" aria-label="Principal">
-        <a class="nav__link" href="#como-funciona">Cómo funciona</a>
-        <a class="nav__link" href="#mapa-en-vivo">Planes</a>
-        <a class="nav__link" href="#creadores">Creadores</a>
+        <a class="nav__link" href="#noche">La noche</a>
+        <a class="nav__link" href="#votar">Cómo funciona</a>
+        <a class="nav__link" href="#locales">Creadores</a>
       </nav>
       <div class="nav__actions">
         <button
@@ -105,10 +84,10 @@ const steps = [
   </header>
 
   <main id="top">
-    <!-- 1 · HERO: alone on the first screen, text span-5, the product screen span-6 start-7 -->
-    <section class="section section--hero" id="descubrir">
+    <!-- HERO · the copy beside the clock, as in direction 03 -->
+    <section class="section section--hero hero hero--split" id="descubrir">
       <div class="wrap grid hero-text hero-split">
-        <div class="hero-copy span-5">
+        <div class="hero-copy span-6">
           <h1 class="hero-text">
             <span class="hl-1">Menos</span>
             <span class="hl-2"><s>“a ver qué hacemos”</s>,</span>
@@ -121,148 +100,59 @@ const steps = [
           </p>
           <div class="btn-row">
             <a class="btn btn--primary" href="#descargar">Descargar gratis</a>
-            <a class="btn btn--secondary" href="#mapa-en-vivo">Ver los planes</a>
-          </div>
-          <div class="hero-facts" style="display:flex;gap:1.75rem;flex-wrap:wrap;white-space:nowrap">
-            <span><b>+2,4k</b> planes activos</span>
-            <span><b>+180</b> ciudades</span>
-            <span><b>4,9</b> en las tiendas</span>
+            <a class="btn btn--secondary" href="#noche">Ver la noche entera</a>
           </div>
         </div>
 
-        <div class="hero-visual span-6 start-7">
-          <div class="screen">
-            <div class="screen__bar">
-              <span class="mono">21:14</span>
-              <span class="screen__live">Votación en vivo</span>
-              <span>cierra en 12 min</span>
+        <div class="hero-visual span-6">
+          <div class="clock" id="votar">
+            <div class="clock__top">
+              <span class="clock__now mono">21:14</span>
+              <span class="clock__live">Votación en vivo</span>
             </div>
-            <div class="stack-4">
-              <img
-                class="frame__img zoom"
-                src="/img/mockup-rooftop.jpg"
-                alt="Terraza de un rooftop de Madrid al atardecer"
-                style="border-radius:12px;aspect-ratio:16/9;object-fit:cover;width:100%;max-height:300px"
-              />
+            <p class="clock__q">
+              Tu grupo decide en 12 minutos a dónde van hoy.
+            </p>
+            <div class="clock__row">
+              <span class="clock__hour mono">21:30</span>
               <div>
-                <p class="t-card" style="margin:0">Rooftop Cibeles vs Ramen Hanabi</p>
-                <p class="t-small muted" style="margin:0">
-                  Gran Vía, a 1,2 km · Grupo Los de Siempre
-                </p>
-              </div>
-              <div style="display:flex;align-items:center;gap:10px">
-                <div style="display:flex">
-                  <span class="screen__avatar" style="background:#ff5a36;color:#111">MR</span>
-                  <span class="screen__avatar" style="background:#e2ddd8">SL</span>
-                  <span class="screen__avatar" style="background:#d5cfc9">AG</span>
-                  <span class="screen__avatar" style="background:#faf7f4">+2</span>
+                <div class="clock__t">Rooftop Cibeles</div>
+                <div class="clock__m">Gran Vía, a 1,2 km · 15 €/pers.</div>
+                <div class="clock__votes">
+                  <span class="av av--on">MR</span>
+                  <span class="av av--on">SL</span>
+                  <span class="av av--off">AG</span>
+                  <span class="av av--off">+2</span>
+                  <span>4 de 5 han votado</span>
                 </div>
-                <span class="t-small"><b>4 de 5</b> han votado</span>
-              </div>
-              <div class="screen__vote">
-                <button class="btn btn--primary btn--sm" type="button">¡Me apunto!</button>
-                <button class="btn btn--secondary btn--sm" type="button">Paso hoy</button>
               </div>
             </div>
+            <a class="btn btn--primary clock__cta" href="#descargar">¡Me apunto!</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 2 · PHOTO BAND: the street the app is about -->
-    <section class="section photo-band photo-band--bleed" style="--h: 1">
-      <img
-        class="frame__img"
-        src="/img/night-street.jpg"
-        alt="Terrazas y calles de Madrid al caer la noche"
-      />
-    </section>
-
-    <!-- 3 · MOODS -->
-    <section class="section" id="como-funciona">
-      <div class="wrap" style="justify-content:center">
-        <div class="section-head">
-          <h2>Planes según tu mood</h2>
-          <p class="lead">
-            640 planes abiertos ahora mismo en Madrid, ordenados por lo que te
-            apetece esta noche.
-          </p>
-        </div>
-        <div class="chips">
-          {
-            moods.map(({ label, count, on }) => (
-              <button
-                type="button"
-                class="chip"
-                data-category={label}
-                aria-pressed={on ? 'true' : 'false'}
-              >
-                {label}
-                <span class="chip__count">{count}</span>
-              </button>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- 4 · THREE REASONS -->
-    <section class="section">
-      <div class="wrap" style="justify-content:center">
-        <div class="section-head">
-          <h2>Tres razones para no volver a planear por chat</h2>
-          <p class="lead">
-            Salir de casa con tus personas favoritas toma dos minutos, sin los
-            eternos audios de WhatsApp.
-          </p>
-        </div>
-        <div class="grid">
-          {
-            reasons.map(({ title, text, proof }) => (
-              <article class="card span-4">
-                <h3 class="t-card">{title}</h3>
-                <p class="t-body">{text}</p>
-                <p class="t-small muted">{proof}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- 5 · THE NIGHT, hour by hour (direction 03) -->
-    <section class="section" id="mapa-en-vivo">
+    <!-- THE NIGHT, hour by hour -->
+    <section class="section" id="noche">
       <div class="wrap">
         <div class="section-head section-head--row">
           <h2>Esta noche, hora por hora</h2>
-          <div class="chips" role="group" aria-label="Rango de fechas">
-            {
-              ['Hoy', 'Este fin de semana', 'Próxima semana'].map((label, i) => (
-                <button
-                  type="button"
-                  class="chip"
-                  data-time={label}
-                  aria-pressed={i === 1 ? 'true' : 'false'}
-                >
-                  {label}
-                </button>
-              ))
-            }
-          </div>
+          <p class="lead">
+            Lo que está abierto ahora en Madrid, ordenado por lo que empieza antes.
+          </p>
         </div>
 
         <div class="night">
           {
-            plans.map(({ time, day, title, text, place, price, img, alt }, i) => (
-              <div class:list={['night__row', i === 0 && 'night__row--now']}>
-                <span class="night__hour mono">{time}</span>
-                <a class="night__slot zoom" href="#mapa-en-vivo">
+            night.map(({ hour, title, text, meta, img, alt, live }) => (
+              <div class:list={['night__row', live && 'night__row--now']}>
+                <span class="night__hour mono">{hour}</span>
+                <a class="night__slot zoom" href="#noche">
                   <div>
                     <h3 class="t-card">{title}</h3>
                     <p class="t-body">{text}</p>
-                    <p class="t-small muted">
-                      {place} · {price} · {day}
-                    </p>
+                    <p class="t-small muted">{meta}</p>
                   </div>
                   <img src={img} alt={alt} loading="lazy" />
                 </a>
@@ -273,117 +163,43 @@ const steps = [
       </div>
     </section>
 
-    <!-- 6 · MAP -->
+    <!-- THREE STEPS -->
     <section class="section">
       <div class="wrap">
-        <div class="grid">
-          <div class="span-7">
-            <h2>Explora tu barrio en tiempo real</h2>
-            <p class="lead">
-              42 planes y mesas activas a menos de 2 km, en locales verificados de
-              Madrid.
-            </p>
-            <dl class="rows">
-              <div>
-                <dt>Cibeles</dt>
-                <dd>mesas libres</dd>
-              </div>
-              <div>
-                <dt>Malasaña</dt>
-                <dd>hora feliz hasta las 23:00</dd>
-              </div>
-              <div>
-                <dt>A pie o en metro</dt>
-                <dd>todo a menos de 15 minutos</dd>
-              </div>
-            </dl>
-          </div>
-          <div class="span-5">
-            <div class="frame frame--photo" style="aspect-ratio:1/1;overflow:hidden;border-radius:14px">
-              <img
-                class="frame__img"
-                src="/img/map-madrid.png"
-                alt="Mapa del centro de Madrid con locales marcados"
-                style="width:100%;height:100%;object-fit:cover"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7 · THREE STEPS -->
-    <section class="section">
-      <div class="wrap" style="justify-content:center">
         <div class="section-head">
           <h2>Tres pasos y ya están en la calle</h2>
         </div>
-        <ol style="display:flex;flex-direction:column;border-top:1px solid rgba(27,22,20,.14)">
+        <div class="steps">
           {
             steps.map(({ title, text }, i) => (
-              <li
-                style="display:grid;grid-template-columns:4rem 14rem 1fr;gap:2rem;align-items:baseline;padding:1.6rem 0;border-bottom:1px solid rgba(27,22,20,.14)"
-              >
-                <span class="mono t-small muted">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <h3 class="t-card" style="margin:0">{title}</h3>
-                <p class="t-body" style="margin:0">{text}</p>
-              </li>
+              <div class="step">
+                <span class="step__n mono">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="t-card">{title}</h3>
+                <p class="t-body">{text}</p>
+              </div>
             ))
           }
-        </ol>
-      </div>
-    </section>
-
-    <!-- 8 · FOR VENUES -->
-    <section class="section" id="creadores">
-      <div class="wrap">
-        <div class="grid">
-          <div class="span-6">
-            <h2>¿Gestionas un local o creas experiencias urbanas?</h2>
-            <p class="lead">
-              Únete a la red de creadores de Melia y conecta con personas listas
-              para salir hoy.
-            </p>
-            <a class="btn btn--primary" href="mailto:aliados@melia.app"
-              >Conectar con aliados</a
-            >
-          </div>
-          <div class="span-6">
-            <div class="frame frame--photo zoom" style="aspect-ratio:4/3;overflow:hidden;border-radius:14px">
-              <img
-                class="frame__img"
-                src="/img/venue-host.jpg"
-                alt="Responsable de un local tras su barra"
-                style="width:100%;height:100%;object-fit:cover"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- 9 · CLOSING -->
+    <!-- CLOSING -->
     <section class="section ground-inverse" id="descargar">
       <div class="wrap closing">
         <h2>Tu próxima anécdota empieza este fin de semana.</h2>
         <p class="lead">
           Descarga Melia gratis en iOS o Android y deja de preguntarte qué hacer.
-          Sal, descubre y vive la ciudad con tu grupo.
+          Sin suscripciones forzadas, 100 % colaborativo para grupos.
         </p>
         <div class="btn-row">
           <a class="btn btn--primary" href="#descargar">App Store</a>
           <a class="btn btn--secondary" href="#descargar">Google Play</a>
         </div>
-        <p class="t-small muted">
-          Sin suscripciones forzadas, 100 % colaborativo para grupos.
-        </p>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" id="locales">
     <div class="wrap">
       <div class="grid">
         <div class="span-4">
@@ -391,8 +207,8 @@ const steps = [
             ><span class="mark mark--initial" aria-hidden="true">M</span>Melia</span
           >
           <p class="t-small muted">
-            Descubre eventos auténticos, vota salidas con tu grupo de amigos y
-            coordina planes inolvidables en minutos.
+            Descubre eventos auténticos, vota salidas con tu grupo y coordina
+            planes en minutos.
           </p>
           <p class="t-small muted">
             Disponible en España: Madrid, Barcelona, Valencia, Sevilla.
@@ -400,54 +216,29 @@ const steps = [
         </div>
         <div class="span-3">
           <p class="t-label">Explorar</p>
-          <a href="#mapa-en-vivo">Planes destacados</a>
-          <a href="#mapa-en-vivo">Rutas de fin de semana</a>
-          <a href="#mapa-en-vivo">Gastronomía y bares</a>
+          <a href="#noche">Planes destacados</a>
+          <a href="#noche">Rutas de fin de semana</a>
+          <a href="#noche">Gastronomía</a>
         </div>
         <div class="span-3">
           <p class="t-label">Producto</p>
-          <a href="#como-funciona">Votación grupal</a>
-          <a href="#como-funciona">Sincronización con calendario</a>
-          <a href="#mapa-en-vivo">Radar urbano</a>
+          <a href="#votar">Votación grupal</a>
+          <a href="#noche">Radar urbano</a>
+          <a href="#noche">Calendario</a>
         </div>
         <div class="span-2">
           <p class="t-label">Compañía</p>
-          <a href="#creadores">Red de aliados</a>
-          <a href="#creadores">Soporte</a>
+          <a href="#locales">Red de aliados</a>
+          <a href="#locales">Soporte</a>
         </div>
       </div>
       <p class="t-small muted credits" style="margin-top:2rem">
-        © 2025 Melia. Todos los derechos reservados · Español (ES) · Hecho con ❤️
-        para amigos que salen
+        © 2025 Melia · Español (ES)
       </p>
     </div>
   </footer>
 
   <script>
-    // Static chips keep real state; no carousel, no timers.
-    document
-      .querySelectorAll<HTMLElement>('[data-category]')
-      .forEach((chip) => {
-        chip.addEventListener('click', () => {
-          const on = chip.getAttribute('aria-pressed') !== 'true';
-          document
-            .querySelectorAll<HTMLElement>('[data-category]')
-            .forEach((c) =>
-              c.setAttribute('aria-pressed', c === chip && on ? 'true' : 'false'),
-            );
-        });
-      });
-
-    document.querySelectorAll<HTMLElement>('[data-time]').forEach((pill) => {
-      pill.addEventListener('click', () => {
-        document
-          .querySelectorAll<HTMLElement>('[data-time]')
-          .forEach((p) =>
-            p.setAttribute('aria-pressed', p === pill ? 'true' : 'false'),
-          );
-      });
-    });
-
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
       const inv = document.documentElement.classList.toggle('theme-inv');
       localStorage.setItem('melia-theme', inv ? 'dark' : 'light');

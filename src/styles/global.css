@@ -270,3 +270,135 @@ body {
     transform: none;
   }
 }
+
+/* ---------- The clock card (direction 03 hero) ---------- */
+.clock {
+  background: var(--p-surface);
+  border-radius: var(--r-lg);
+  padding: 28px;
+}
+.clock__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.clock__now {
+  font-family: var(--font-display);
+  font-size: 56px;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+.clock__live {
+  background: var(--p-accent);
+  color: var(--p-ink);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.clock__q {
+  margin-top: 18px;
+  font-size: 14px;
+  color: var(--p-muted);
+}
+.clock__row {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 16px;
+  align-items: start;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in oklab, var(--p-ink) 14%, transparent);
+}
+.clock__hour {
+  font-size: 15px;
+}
+.clock__t {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.clock__m {
+  font-size: 13px;
+  color: var(--p-muted);
+  margin-top: 2px;
+}
+.clock__votes {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--p-muted);
+}
+.av {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 500;
+  border: 2px solid var(--p-surface);
+}
+.av + .av {
+  margin-left: -9px;
+}
+.av--on {
+  background: var(--p-accent);
+  color: var(--p-ink);
+}
+.av--off {
+  background: #dfd9d4;
+}
+.clock__cta {
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* ---------- Three steps ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.step {
+  padding-top: 16px;
+  border-top: 2px solid var(--p-ink);
+}
+.step__n {
+  font-size: 13px;
+  color: var(--p-accent-text);
+}
+.step h3 {
+  margin-top: 6px;
+}
+.step p {
+  margin-top: 8px;
+  color: var(--p-muted);
+}
+
+@media (max-width: 940px) {
+  .steps {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* The hero holds one screen: centre its content instead of leaving the tail empty. */
+main > section.section--hero {
+  display: flex;
+  align-items: center;
+}
+main > section.section--hero > .wrap {
+  width: 100%;
+}
+
+/* Footer links stack as a list, not as running text. */
+.footer .wrap a {
+  display: block;
+  padding: 3px 0;
+}
+.footer .wrap .grid > div > a + a {
+  margin-top: 0;
+}

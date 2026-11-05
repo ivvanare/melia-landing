@@ -448,3 +448,34 @@ main > section.ground-inverse {
   padding-block: 96px;
   height: auto;
 }
+
+/* ---------- The bar ----------
+   It was fixed, so it floated over the hero instead of holding its own place,
+   and the first line sat right under it. Sticky keeps it in flow and still
+   pins on scroll. */
+header.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in oklab, var(--p-bg) 92%, transparent);
+  backdrop-filter: saturate(160%) blur(10px);
+  border-bottom: 1px solid color-mix(in oklab, var(--p-ink) 10%, transparent);
+}
+header.nav .nav__bar {
+  height: 84px;
+}
+header.nav .nav__logo {
+  font-family: var(--font-display);
+  font-size: 21px;
+  letter-spacing: -0.02em;
+}
+header.nav .nav__link {
+  font-size: 14px;
+  color: var(--p-muted);
+}
+header.nav .nav__link:hover {
+  color: var(--p-ink);
+}
+main {
+  padding-top: 0;
+}

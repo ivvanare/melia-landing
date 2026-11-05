@@ -177,7 +177,7 @@ const steps = [
 
     <!-- 3 · MOODS -->
     <section class="section" id="como-funciona">
-      <div class="wrap">
+      <div class="wrap" style="justify-content:center">
         <div class="section-head">
           <h2>Planes según tu mood</h2>
           <p class="lead">
@@ -205,7 +205,7 @@ const steps = [
 
     <!-- 4 · THREE REASONS -->
     <section class="section">
-      <div class="wrap">
+      <div class="wrap" style="justify-content:center">
         <div class="section-head">
           <h2>Tres razones para no volver a planear por chat</h2>
           <p class="lead">
@@ -228,7 +228,7 @@ const steps = [
     </section>
 
     <!-- 5 · THE PLANS -->
-    <section class="section" id="mapa-en-vivo">
+    <section class="section" id="mapa-en-vivo" style="--h: 2">
       <div class="wrap">
         <div class="section-head section-head--row">
           <h2>Planes recomendados para este fin de semana</h2>
@@ -297,11 +297,12 @@ const steps = [
             </dl>
           </div>
           <div class="span-5">
-            <div class="frame frame--photo">
+            <div class="frame frame--photo" style="aspect-ratio:1/1;overflow:hidden;border-radius:14px">
               <img
                 class="frame__img"
                 src="/img/map-madrid.png"
                 alt="Mapa del centro de Madrid con locales marcados"
+                style="width:100%;height:100%;object-fit:cover"
               />
             </div>
           </div>
@@ -311,19 +312,21 @@ const steps = [
 
     <!-- 7 · THREE STEPS -->
     <section class="section">
-      <div class="wrap">
+      <div class="wrap" style="justify-content:center">
         <div class="section-head">
           <h2>Tres pasos y ya están en la calle</h2>
         </div>
-        <ol class="rows">
+        <ol style="display:flex;flex-direction:column;border-top:1px solid rgba(27,22,20,.14)">
           {
             steps.map(({ title, text }, i) => (
-              <li class="stack-2">
-                <span class="step-num mono">
+              <li
+                style="display:grid;grid-template-columns:4rem 14rem 1fr;gap:2rem;align-items:baseline;padding:1.6rem 0;border-bottom:1px solid rgba(27,22,20,.14)"
+              >
+                <span class="mono t-small muted">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 class="t-card">{title}</h3>
-                <p class="t-body">{text}</p>
+                <h3 class="t-card" style="margin:0">{title}</h3>
+                <p class="t-body" style="margin:0">{text}</p>
               </li>
             ))
           }
@@ -346,11 +349,12 @@ const steps = [
             >
           </div>
           <div class="span-6">
-            <div class="frame frame--photo zoom">
+            <div class="frame frame--photo zoom" style="aspect-ratio:4/3;overflow:hidden;border-radius:14px">
               <img
                 class="frame__img"
                 src="/img/venue-host.jpg"
                 alt="Responsable de un local tras su barra"
+                style="width:100%;height:100%;object-fit:cover"
               />
             </div>
           </div>

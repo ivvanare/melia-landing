@@ -168,3 +168,105 @@ body {
     transform: none;
   }
 }
+
+/* ---------- Hero line: a contrast, not a paragraph (direction 03) ---------- */
+.hl-1 {
+  display: block;
+  font-size: 0.42em;
+  color: var(--p-muted);
+  letter-spacing: -0.01em;
+}
+.hl-1--b {
+  margin-top: 0.14em;
+}
+.hl-2 {
+  display: block;
+  font-size: 0.78em;
+  color: var(--p-muted);
+  line-height: 1.12;
+}
+.hl-2 s {
+  text-decoration-color: var(--p-accent);
+  text-decoration-thickness: 3px;
+}
+.hl-3 {
+  display: block;
+  font-size: 1em;
+  color: var(--p-accent-text);
+  letter-spacing: -0.045em;
+}
+
+/* ---------- The night as a timetable ---------- */
+.night {
+  border-top: 1px solid color-mix(in oklab, var(--p-ink) 12%, transparent);
+}
+.night__row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  border-bottom: 1px solid color-mix(in oklab, var(--p-ink) 12%, transparent);
+}
+.night__hour {
+  padding: 22px 0;
+  font-size: 15px;
+  color: var(--p-muted);
+  border-top: 1px solid color-mix(in oklab, var(--p-ink) 12%, transparent);
+}
+.night__slot {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 28px;
+  align-items: center;
+  padding: 22px 0;
+  border-top: 1px solid color-mix(in oklab, var(--p-ink) 12%, transparent);
+  text-decoration: none;
+  color: inherit;
+}
+.night__slot img {
+  width: 220px;
+  height: 132px;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.night__slot:hover img {
+  transform: scale(1.03);
+}
+.night__slot h3 {
+  transition: color 0.18s ease;
+}
+.night__slot:hover h3 {
+  color: var(--p-accent-text);
+}
+/* today's row is the one that is live */
+.night__row--now .night__hour,
+.night__row--now .night__slot {
+  border-top: 2px solid var(--p-accent);
+}
+.night__row--now .night__hour {
+  color: var(--p-accent-text);
+  font-weight: 500;
+}
+
+@media (max-width: 940px) {
+  .night__row {
+    grid-template-columns: 64px 1fr;
+  }
+  .night__slot {
+    grid-template-columns: 1fr;
+  }
+  .night__slot img {
+    width: 100%;
+    height: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .night__slot img,
+  .night__slot h3 {
+    transition: none;
+  }
+  .night__slot:hover img {
+    transform: none;
+  }
+}

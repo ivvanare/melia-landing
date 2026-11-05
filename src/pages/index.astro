@@ -110,7 +110,10 @@ const steps = [
       <div class="wrap grid hero-text hero-split">
         <div class="hero-copy span-5">
           <h1 class="hero-text">
-            Menos “a ver qué hacemos”, más ¡ya estamos aquí!
+            <span class="hl-1">Menos</span>
+            <span class="hl-2"><s>“a ver qué hacemos”</s>,</span>
+            <span class="hl-1 hl-1--b">más</span>
+            <span class="hl-3">¡ya estamos aquí!</span>
           </h1>
           <p class="lead">
             Terrazas, restaurantes y planes en tu ciudad. Vota con tus amigos en
@@ -139,7 +142,7 @@ const steps = [
                 class="frame__img zoom"
                 src="/img/mockup-rooftop.jpg"
                 alt="Terraza de un rooftop de Madrid al atardecer"
-                style="border-radius:12px;aspect-ratio:16/10;object-fit:cover;width:100%"
+                style="border-radius:12px;aspect-ratio:16/9;object-fit:cover;width:100%;max-height:300px"
               />
               <div>
                 <p class="t-card" style="margin:0">Rooftop Cibeles vs Ramen Hanabi</p>
@@ -227,11 +230,11 @@ const steps = [
       </div>
     </section>
 
-    <!-- 5 · THE PLANS -->
-    <section class="section" id="mapa-en-vivo" style="--h: 2">
+    <!-- 5 · THE NIGHT, hour by hour (direction 03) -->
+    <section class="section" id="mapa-en-vivo">
       <div class="wrap">
         <div class="section-head section-head--row">
-          <h2>Planes recomendados para este fin de semana</h2>
+          <h2>Esta noche, hora por hora</h2>
           <div class="chips" role="group" aria-label="Rango de fechas">
             {
               ['Hoy', 'Este fin de semana', 'Próxima semana'].map((label, i) => (
@@ -247,24 +250,23 @@ const steps = [
             }
           </div>
         </div>
-        <div class="stack-6">
+
+        <div class="night">
           {
-            plans.map(({ time, day, title, text, place, price, img, alt }) => (
-              <a class="card card--split zoom" href="#mapa-en-vivo">
-                <div class="panel">
-                  <img class="frame__img" src={img} alt={alt} />
-                </div>
-                <div class="split-col">
-                  <span class="mono t-small">
-                    {time} · {day}
-                  </span>
-                  <h3 class="t-card">{title}</h3>
-                  <p class="t-body">{text}</p>
-                  <p class="t-small muted">
-                    {place} · {price}
-                  </p>
-                </div>
-              </a>
+            plans.map(({ time, day, title, text, place, price, img, alt }, i) => (
+              <div class:list={['night__row', i === 0 && 'night__row--now']}>
+                <span class="night__hour mono">{time}</span>
+                <a class="night__slot zoom" href="#mapa-en-vivo">
+                  <div>
+                    <h3 class="t-card">{title}</h3>
+                    <p class="t-body">{text}</p>
+                    <p class="t-small muted">
+                      {place} · {price} · {day}
+                    </p>
+                  </div>
+                  <img src={img} alt={alt} loading="lazy" />
+                </a>
+              </div>
             ))
           }
         </div>

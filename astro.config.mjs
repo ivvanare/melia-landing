@@ -10,6 +10,9 @@ export const SITE_URL = 'https://melia.app';
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
+  devToolbar: {
+    enabled: false,
+  },
   vite: {
     plugins: [tailwindcss()],
   },

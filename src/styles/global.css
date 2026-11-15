@@ -2005,6 +2005,7 @@ footer.closing-vip-stage,
 .footer-brand-stage {
   position: relative;
   cursor: default;
+  overflow: visible !important;
   transition: transform 0.4s ease;
 }
 

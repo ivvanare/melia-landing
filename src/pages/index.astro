@@ -1,6 +1,113 @@
 ---
 import Base from '../layouts/Base.astro';
 
+const filterCategories = [
+  { id: 'all', label: '🔥 Top esta semana' },
+  { id: 'terrazas', label: '🍸 Terrazas & Copas' },
+  { id: 'gastro', label: '🍽️ Joyas gastronómicas' },
+  { id: 'musica', label: '🎶 Música & Cultura' },
+  { id: 'barato', label: '💸 Por menos de 15€' },
+];
+
+const curatedPlaces = [
+  {
+    id: 'cibeles',
+    title: 'Rooftop Cibeles & Sunset',
+    category: 'terrazas',
+    categoryLabel: '🍸 Terraza & Copas',
+    badge: '🔥 TRENDING',
+    zone: 'Gran Vía',
+    distance: 'A 450m',
+    price: '15 €/pers.',
+    rating: '4.9',
+    reviews: 142,
+    img: '/img/mockup-rooftop.jpg',
+    alt: 'Terraza Rooftop Cibeles con vistas panorámicas',
+    description: 'Vistas panorámicas al Palacio de Cibeles con cócteles de autor y música chill al atardecer.',
+    vibeTag: 'Vistas 360°',
+  },
+  {
+    id: 'ardosa',
+    title: 'Bodega de la Ardosa',
+    category: 'gastro',
+    categoryLabel: '🍽️ Joyas gastronómicas',
+    badge: '✨ CASTIZO',
+    zone: 'Malasaña',
+    distance: 'A 600m',
+    price: '12 €/pers.',
+    rating: '4.8',
+    reviews: 320,
+    img: '/img/group-toast.jpg',
+    alt: 'Brindis de cañas y tapas en Malasaña',
+    description: 'Tortilla de patatas legendaria, cañas perfectamente tiradas y ambiente castizo desde 1892.',
+    vibeTag: 'Tapas de autor',
+  },
+  {
+    id: 'circulo',
+    title: 'Terraza Círculo de Bellas Artes',
+    category: 'terrazas',
+    categoryLabel: '🍸 Terraza & Copas',
+    badge: '👑 TOP VISTAS',
+    zone: 'Alcalá',
+    distance: 'A 800m',
+    price: '18 €/pers.',
+    rating: '4.9',
+    reviews: 580,
+    img: '/img/night-street.jpg',
+    alt: 'Vistas de Gran Vía iluminada de noche',
+    description: 'El atardecer más fotogénico de Madrid sobre los tejados de la capital y la Diosa Minerva.',
+    vibeTag: 'Atardecer épico',
+  },
+  {
+    id: 'cafe-central',
+    title: 'Café Central · Jazz & Cocktails',
+    category: 'musica',
+    categoryLabel: '🎶 Música & Cultura',
+    badge: '🎷 ÍNTIMO',
+    zone: 'Huertas',
+    distance: 'A 950m',
+    price: '16 €/pers.',
+    rating: '4.9',
+    reviews: 210,
+    img: '/img/event-acoustic.jpg',
+    alt: 'Concierto acústico en local íntimo',
+    description: 'Música en directo, iluminación tenue y coctelería clásica para veladas especiales entre amigos.',
+    vibeTag: 'Directo en vivo',
+  },
+  {
+    id: 'perejila',
+    title: 'Taberna La Perejila',
+    category: 'barato',
+    categoryLabel: '💸 Por menos de 15€',
+    badge: '🔥 VIRAL',
+    zone: 'La Latina',
+    distance: 'A 1.1km',
+    price: '10 €/pers.',
+    rating: '4.7',
+    reviews: 184,
+    img: '/img/venue-host.jpg',
+    alt: 'Taberna castiza en La Latina',
+    description: 'Vermut de grifo, tostas generosas y música alegre en el epicentro de la Cava Baja.',
+    vibeTag: 'Plan barato',
+  },
+  {
+    id: 'invernadero',
+    title: 'Brunch Botánico Invernadero',
+    category: 'gastro',
+    categoryLabel: '🍽️ Joyas gastronómicas',
+    badge: '🌿 SECRETO',
+    zone: 'Gran Vía',
+    distance: 'A 350m',
+    price: '19 €/pers.',
+    rating: '4.8',
+    reviews: 295,
+    img: '/img/event-brunch.jpg',
+    alt: 'Brunch en patio botánico con plantas',
+    description: 'Un oasis verde subterráneo con tartas caseras, café de especialidad y mimosas para el fin de semana.',
+    vibeTag: 'Brunch secreto',
+  },
+];
+
 const zones = [
   {
     id: 'rooftops',
@@ -149,9 +256,10 @@ const steps = [
         <span class="mark mark--initial" aria-hidden="true">M</span>Melia
       </a>
       <nav class="nav__links" aria-label="Principal">
-        <a class="nav__link" href="#votar">Votación en vivo</a>
+        <a class="nav__link" href="#catalogo">Descubrir lugares</a>
         <a class="nav__link" href="#como-funciona">Cómo funciona</a>
-        <a class="nav__link" href="#noche">Planes de hoy</a>
+        <a class="nav__link" href="#votar">Votación en vivo</a>
+        <a class="nav__link" href="#noche">Barrios de Madrid</a>
       </nav>
       <div class="nav__actions">
         <button
@@ -198,58 +306,52 @@ const steps = [
 
       <div class="wrap grid hero-text hero-split relative z-10">
         <div class="hero-copy span-6 flex flex-col items-start">
-          <div class="kinetic-badge hero-badge inline-flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4 shadow-sm transition-colors duration-300">
+          <div class="kinetic-badge hero-badge inline-flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold mb-3 shadow-sm transition-colors duration-300">
             <span class="w-2 h-2 rounded-full bg-orange-600 animate-ping"></span>
-            <span>Planes grupales en 30 segundos</span>
+            <span>Radar de lugares & experiencias</span>
           </div>
 
-          <h1 class="text-5xl sm:text-6xl xl:text-[76px] font-black tracking-tighter text-[var(--p-ink)] leading-[0.96] transition-colors duration-200">
-            <span class="kinetic-less block text-2xl sm:text-3xl xl:text-[42px] font-black text-[var(--p-ink)] tracking-tight leading-none mb-1">
-              Menos
+          <h1 class="text-3xl sm:text-4xl xl:text-[52px] font-black tracking-tight text-[var(--p-ink)] leading-[1.04] transition-colors duration-200">
+            <span class="kinetic-line-1 block font-black text-[var(--p-ink)] tracking-tight">
+              Descubre los mejores lugares.
             </span>
-            <span class="kinetic-quote relative inline-block w-fit text-3xl sm:text-4xl xl:text-[54px] font-black text-[var(--p-ink)] tracking-tight my-1">
-              “a ver qué hacemos”,
-              <span class="kinetic-strike" style="position: absolute; left: -4px; right: -4px; top: 52%; height: 7px; background: #ff5a36; border-radius: 9999px; box-shadow: 0 1px 2px rgba(0,0,0,0.18); pointer-events: none;"></span>
-            </span>
-            <span class="kinetic-more block text-2xl sm:text-3xl xl:text-[42px] font-black text-[var(--p-ink)] tracking-tight leading-none mt-2 mb-1">
-              más
-            </span>
-            <span class="kinetic-punchline block bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-transparent mt-1 tracking-tighter leading-[0.92] drop-shadow-sm">
-              ¡ya estamos aquí!
+            <span class="kinetic-line-2 block font-black text-[var(--p-ink)] tracking-tight mt-1">
+              Y decide con tu grupo{" "}
+              <span class="kinetic-punchline inline-block bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-transparent">en 1 toque.</span>
             </span>
           </h1>
 
-          <p class="kinetic-desc mt-6 text-base sm:text-lg text-[var(--p-muted)] max-w-md leading-relaxed text-left transition-colors duration-200">
-            Elige 2 o 3 opciones, manda el link al grupo y voten en 30 segundos. <strong class="text-[var(--p-ink)] font-bold">Sin descargar apps</strong>, sin crear cuentas y sin debates eternos.
+          <p class="kinetic-desc mt-4 text-sm sm:text-base text-[var(--p-muted)] max-w-md leading-relaxed text-left transition-colors duration-200">
+            Terrazas escondidas, restaurantes virales y planes secretos. Guarda tus favoritos y ármales votación en WhatsApp <strong class="text-[var(--p-ink)] font-bold">sin descargar nada</strong>.
           </p>
 
-          <div class="kinetic-buttons mt-8 flex flex-wrap items-center gap-3.5">
+          <div class="kinetic-buttons mt-6 flex flex-wrap items-center gap-3">
+            <a
+              href="#catalogo"
+              class="relative group px-6 py-3.5 rounded-2xl bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-extrabold text-sm sm:text-base shadow-[0_0_35px_rgba(249,115,22,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2"
+            >
+              <span style="color: #ffffff !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); font-weight: 800;">Explorar lugares 🔥</span>
+            </a>
             <button
               type="button"
               id="hero-create-btn"
-              class="relative group px-7 py-4 rounded-2xl bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-extrabold text-base shadow-[0_0_35px_rgba(249,115,22,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2"
+              class="hero-btn-secondary px-5 py-3.5 rounded-2xl font-bold text-sm sm:text-base transition-colors shadow-sm inline-flex items-center justify-center cursor-pointer"
             >
-              <span style="color: #ffffff !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); font-weight: 800;">Crear plan con amigos ✨</span>
+              Crear sala de votación ✨
             </button>
-            <a
-              href="#como-funciona"
-              class="hero-btn-secondary px-6 py-4 rounded-2xl font-bold text-base transition-colors shadow-sm inline-flex items-center justify-center"
-            >
-              Ver cómo funciona
-            </a>
           </div>
 
-          <div class="kinetic-proof mt-9 flex items-center gap-3.5">
-            <div class="flex -space-x-2.5 shrink-0">
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" alt="Sofía" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" alt="Marcos" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" alt="Ana" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" alt="Leo" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <span class="w-9 h-9 rounded-full bg-[var(--p-surface)] text-[var(--p-ink)] text-[11px] font-black flex items-center justify-center border-2 border-[var(--p-bg)]">
+          <div class="kinetic-proof mt-6 flex items-center gap-3">
+            <div class="flex -space-x-2 shrink-0">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" alt="Sofía" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" alt="Marcos" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" alt="Ana" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" alt="Leo" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <span class="w-8 h-8 rounded-full bg-[var(--p-surface)] text-[var(--p-ink)] text-[10px] font-black flex items-center justify-center border-2 border-[var(--p-bg)]">
                 +1.4k
               </span>
             </div>
-            <p class="text-xs sm:text-sm text-[var(--p-muted)] leading-snug flex-1 min-w-0 text-left transition-colors duration-200">
+            <p class="text-xs text-[var(--p-muted)] leading-snug flex-1 min-w-0 text-left transition-colors duration-200">
               Más de <strong class="text-[var(--p-ink)] font-bold">1.420 planes cerrados</strong> esta semana en Madrid y Barcelona sin discusiones.
             </p>
           </div>
@@ -277,38 +379,44 @@ const steps = [
                 </feMerge>
               </filter>
             </defs>
-            <!-- Cable 1: WhatsApp (Arriba Izq) -> Rim Izquierdo -->
+            <!-- Cable 1: Distancia (Arriba Izq) -> Rim Izquierdo -->
             <path d="M 50 45 C 30 75, 45 110, 87 115" stroke="url(#rootline-glow-orange)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
             <circle cx="87" cy="115" r="4" fill="#FF5A36" filter="url(#neon-glow)" />
 
-            <!-- Cable 2: Pin Votan sin app (Arriba Der) -> Rim Derecho -->
+            <!-- Cable 2: Rating (Arriba Der) -> Rim Derecho -->
             <path d="M 545 55 C 575 80, 565 115, 526 125" stroke="url(#rootline-glow-emerald)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
             <circle cx="526" cy="125" r="4" fill="#10B981" filter="url(#neon-glow)" />
 
-            <!-- Cable 3: Votos en vivo (Abajo Izq) -> Rim Inferior -->
+            <!-- Cable 3: Acción social (Abajo Izq) -> Rim Inferior -->
             <path d="M 70 635 C 45 615, 55 580, 87 560" stroke="url(#rootline-glow-orange)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
             <circle cx="87" cy="560" r="4" fill="#FF5A36" filter="url(#neon-glow)" />
           </svg>
 
-          <!-- NODO SATÉLITE 1: WhatsApp flotando arriba-izquierda -->
+          <!-- NODO SATÉLITE 1: Distancia & estado en vivo -->
           <div class="satellite-node satellite-node--1 hidden sm:flex items-center gap-2.5 absolute -top-4 -left-4 xl:-left-6 z-20 px-3.5 py-2.5 rounded-2xl animate-float-slow">
-            <span class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xs">💬</span>
+            <span class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xs">📍</span>
             <div class="text-left">
-              <p class="text-[11px] font-bold leading-tight">Link enviado al grupo</p>
-              <p class="text-[10px] text-emerald-500 font-mono font-semibold">melia.app/v/viernes</p>
+              <p class="text-[11px] font-bold leading-tight">A 600m de ti</p>
+              <p class="text-[10px] text-emerald-500 font-mono font-semibold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                Abierto ahora
+              </p>
             </div>
           </div>
 
-          <!-- NODO SATÉLITE 2: Pin destino flotando arriba-derecha -->
+          <!-- NODO SATÉLITE 2: Trending & Rating -->
           <div class="satellite-node satellite-node--2 hidden sm:flex items-center gap-2 absolute top-2 -right-3 xl:-right-5 z-20 px-3.5 py-2 rounded-2xl animate-float-delayed">
-            <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
-            <span class="text-xs font-extrabold text-orange-500">⚡ Votan sin app</span>
+            <span class="text-xs">🔥</span>
+            <div class="text-left">
+              <span class="text-xs font-extrabold text-orange-500">Nuevo en Malasaña</span>
+              <span class="text-[10px] text-amber-400 font-bold ml-1">★ 4.9</span>
+            </div>
           </div>
 
-          <!-- NODO SATÉLITE 3: Contador en vivo flotando abajo-izquierda -->
+          <!-- NODO SATÉLITE 3: Acción social de grupo -->
           <div class="satellite-node satellite-node--3 hidden sm:flex items-center gap-2 absolute -bottom-4 left-1 xl:left-3 z-20 px-3.5 py-2 rounded-full animate-float-delayed">
-            <span class="text-sm">🔥</span>
-            <span class="text-xs font-bold">+3 amigos votando ahora</span>
+            <span class="text-sm">🎟️</span>
+            <span class="text-xs font-bold">Invita a tu grupo en 1 clic</span>
           </div>
 
           <!-- Stage for livestream-style floating emojis -->
@@ -340,48 +448,64 @@ const steps = [
 
               <div class="ballot__options" id="ballot-options">
                 <!-- Option 1 -->
-                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3.5 transition-all cursor-pointer hover:border-orange-500" data-option="cibeles" data-leader="true" tabindex="0" role="button" aria-pressed="false" id="opt-cibeles">
-                  <div class="ballot__opt-top flex items-center justify-between">
-                    <div class="ballot__opt-title font-extrabold text-sm sm:text-base text-[#141414] flex items-center gap-2">
-                      <span id="opt-cibeles-title">🍸 Rooftop Cibeles</span>
+                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3 transition-all cursor-pointer hover:border-orange-500 bg-white" data-option="cibeles" data-leader="true" tabindex="0" role="button" aria-pressed="false" id="opt-cibeles">
+                  <div class="flex items-center gap-3">
+                    <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-neutral-900">
+                      <img src="/img/mockup-rooftop.jpg" alt="Rooftop Cibeles" class="w-full h-full object-cover" />
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/70 text-[9px] font-black text-orange-400">4.9★</span>
                     </div>
-                    <span class="text-xs text-neutral-500 font-medium">Gran Vía · 15 €/pers.</span>
-                  </div>
-                  <div class="w-full h-2.5 bg-neutral-200/80 rounded-full mt-2.5 overflow-hidden">
-                    <div class="h-full bg-orange-500 rounded-full transition-all duration-500" id="bar-cibeles" style="width: 60%"></div>
-                  </div>
-                  <div class="flex items-center justify-between mt-2.5 text-xs">
-                    <div class="flex -space-x-1.5" id="avs-cibeles">
-                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" class="w-6 h-6 rounded-full border border-white" alt="Sofía" />
-                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" class="w-6 h-6 rounded-full border border-white" alt="Marcos" />
-                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" class="w-6 h-6 rounded-full border border-white" alt="Ana" />
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="font-bold text-neutral-600" id="count-cibeles">3 votos (60%)</span>
-                      <span class="px-3 py-1 rounded-lg bg-[#141414] text-white text-xs font-bold transition-colors" id="btn-cibeles">Votar</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="ballot__opt-top flex items-center justify-between gap-1">
+                        <div class="ballot__opt-title font-extrabold text-xs sm:text-sm text-[#141414] truncate">
+                          <span id="opt-cibeles-title">🍸 Rooftop Cibeles</span>
+                        </div>
+                        <span class="text-[11px] text-neutral-500 font-medium shrink-0">Gran Vía · 15 €</span>
+                      </div>
+                      <div class="w-full h-2 bg-neutral-200/80 rounded-full mt-2 overflow-hidden">
+                        <div class="h-full bg-orange-500 rounded-full transition-all duration-500" id="bar-cibeles" style="width: 60%"></div>
+                      </div>
+                      <div class="flex items-center justify-between mt-2 text-xs">
+                        <div class="flex -space-x-1.5" id="avs-cibeles">
+                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" class="w-5 h-5 rounded-full border border-white" alt="Sofía" />
+                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" class="w-5 h-5 rounded-full border border-white" alt="Marcos" />
+                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" class="w-5 h-5 rounded-full border border-white" alt="Ana" />
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <span class="font-bold text-neutral-600 text-[11px]" id="count-cibeles">3 votos (60%)</span>
+                          <span class="px-2.5 py-1 rounded-lg bg-[#141414] text-white text-[11px] font-bold transition-colors" id="btn-cibeles">Votar</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
 
                 <!-- Option 2 -->
-                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3.5 transition-all cursor-pointer hover:border-orange-400 bg-white" data-option="malasana" data-leader="false" tabindex="0" role="button" aria-pressed="false" id="opt-malasana">
-                  <div class="ballot__opt-top flex items-center justify-between">
-                    <div class="ballot__opt-title font-extrabold text-sm sm:text-base text-[#141414] flex items-center gap-2">
-                      <span id="opt-malasana-title">🌮 Tacos & Acústico</span>
+                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3 transition-all cursor-pointer hover:border-orange-400 bg-white" data-option="malasana" data-leader="false" tabindex="0" role="button" aria-pressed="false" id="opt-malasana">
+                  <div class="flex items-center gap-3">
+                    <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-neutral-900">
+                      <img src="/img/group-toast.jpg" alt="Bodega de la Ardosa" class="w-full h-full object-cover" />
+                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/70 text-[9px] font-black text-amber-400">4.8★</span>
                     </div>
-                    <span class="text-xs text-neutral-500 font-medium">Malasaña · 12 €/pers.</span>
-                  </div>
-                  <div class="w-full h-2.5 bg-neutral-200/80 rounded-full mt-2.5 overflow-hidden">
-                    <div class="h-full bg-neutral-400 rounded-full transition-all duration-500" id="bar-malasana" style="width: 40%"></div>
-                  </div>
-                  <div class="flex items-center justify-between mt-2.5 text-xs">
-                    <div class="flex -space-x-1.5" id="avs-malasana">
-                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" class="w-6 h-6 rounded-full border border-white" alt="Laura" />
-                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Carla&backgroundColor=d1d4f9" class="w-6 h-6 rounded-full border border-white" alt="Carlos" />
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <span class="font-bold text-neutral-600" id="count-malasana">2 votos (40%)</span>
-                      <span class="px-3 py-1 rounded-lg bg-neutral-100 text-[#141414] text-xs font-bold transition-colors border border-neutral-200" id="btn-malasana">Votar</span>
+                    <div class="flex-1 min-w-0">
+                      <div class="ballot__opt-top flex items-center justify-between gap-1">
+                        <div class="ballot__opt-title font-extrabold text-xs sm:text-sm text-[#141414] truncate">
+                          <span id="opt-malasana-title">🍽️ Bodega de la Ardosa</span>
+                        </div>
+                        <span class="text-[11px] text-neutral-500 font-medium shrink-0">Malasaña · 12 €</span>
+                      </div>
+                      <div class="w-full h-2 bg-neutral-200/80 rounded-full mt-2 overflow-hidden">
+                        <div class="h-full bg-neutral-400 rounded-full transition-all duration-500" id="bar-malasana" style="width: 40%"></div>
+                      </div>
+                      <div class="flex items-center justify-between mt-2 text-xs">
+                        <div class="flex -space-x-1.5" id="avs-malasana">
+                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" class="w-5 h-5 rounded-full border border-white" alt="Laura" />
+                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Carla&backgroundColor=d1d4f9" class="w-5 h-5 rounded-full border border-white" alt="Carlos" />
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <span class="font-bold text-neutral-600 text-[11px]" id="count-malasana">2 votos (40%)</span>
+                          <span class="px-2.5 py-1 rounded-lg bg-neutral-100 text-[#141414] text-[11px] font-bold transition-colors border border-neutral-200" id="btn-malasana">Votar</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -542,6 +666,242 @@ const steps = [
         <span class="ticker-item">🔥 EL PLAN GANADOR SE CIERRA SOLO <span class="ticker-dot">•</span></span>
       </div>
     </div>
+
+    <!-- =========================================================================
+         PATTERN 1B: CURATED FEVER-STYLE PLACES CATALOG WITH SOCIAL VOTING
+         ========================================================================= -->
+    <section class="fever-catalog-section relative bg-[var(--p-bg)] transition-colors duration-300 py-20 md:py-28 border-t border-[var(--p-border)]" id="catalogo">
+      <div class="wrap max-w-6xl mx-auto px-6">
+        
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-600 dark:text-orange-400 text-xs font-bold mb-4 shadow-sm">
+            <span>🔥 ESCAPARATE DE EXPERIENCIAS EN MADRID</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-[var(--p-ink)] leading-[1.08]">
+            Los mejores lugares de tu ciudad.{" "}
+            <br class="hidden sm:inline" />
+            <span class="bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-transparent">Listos para votar.</span>
+          </h2>
+          <p class="mt-4 text-base sm:text-lg text-[var(--p-muted)] leading-relaxed">
+            Terrazas con vistas 360°, tabernas castizas, conciertos íntimos y barras secretas. Guarda tus favoritos y ármales votación en WhatsApp con un clic.
+          </p>
+
+          <!-- Interactive Filter Pills (Horizontal scroll on mobile, wrapped on desktop) -->
+          <div class="flex items-center gap-2.5 mt-6 sm:mt-8 overflow-x-auto sm:flex-wrap sm:justify-center pb-2 pt-1 no-scrollbar -mx-6 sm:mx-0 px-6 sm:px-0" id="catalog-filters" role="tablist" aria-label="Filtros de lugares">
+            {
+              filterCategories.map((cat, idx) => (
+                <button
+                  type="button"
+                  class={`catalog-filter-btn shrink-0 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+                    idx === 0
+                      ? 'active bg-orange-600 text-white shadow-[0_4px_14px_rgba(249,115,22,0.35)]'
+                      : 'bg-[var(--p-surface)] text-[var(--p-muted)] border border-[var(--p-border)] hover:border-orange-500/50 hover:text-[var(--p-ink)]'
+                  }`}
+                  data-category={cat.id}
+                  role="tab"
+                  aria-selected={idx === 0 ? 'true' : 'false'}
+                >
+                  {cat.label}
+                </button>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Places Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" id="catalog-grid">
+          {
+            curatedPlaces.map((place) => (
+              <article
+                class="catalog-place-card group rounded-[24px] bg-[var(--p-surface)] border border-[var(--p-border)] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col"
+                data-place-id={place.id}
+                data-place-category={place.category}
+              >
+                <!-- Image Container with Badges -->
+                <div class="relative w-full h-52 sm:h-56 overflow-hidden bg-neutral-900">
+                  <img
+                    src={place.img}
+                    alt={place.alt}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none"></div>
+                  
+                  <!-- Top Badges -->
+                  <div class="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between pointer-events-none">
+                    <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-[11px] font-extrabold text-orange-400 border border-orange-400/30">
+                      {place.badge}
+                    </span>
+                    <span class="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md text-xs font-bold text-white border border-white/20">
+                      {place.price}
+                    </span>
+                  </div>
+
+                  <!-- Bottom Rating inside image -->
+                  <div class="absolute bottom-3 left-3.5 flex items-center gap-1.5 text-xs font-bold text-white pointer-events-none">
+                    <span class="text-amber-400">★</span>
+                    <span>{place.rating}</span>
+                    <span class="text-white/70 font-normal">({place.reviews} reseñas)</span>
+                  </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-5 sm:p-6 flex-1 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between text-xs text-[var(--p-muted)] font-medium mb-1.5">
+                      <span class="text-orange-600 dark:text-orange-400 font-bold">{place.categoryLabel}</span>
+                      <span>📍 {place.zone} · {place.distance}</span>
+                    </div>
+
+                    <h3 class="text-lg sm:text-xl font-black text-[var(--p-ink)] tracking-tight group-hover:text-orange-600 transition-colors">
+                      {place.title}
+                    </h3>
+
+                    <p class="mt-2 text-xs sm:text-sm text-[var(--p-muted)] leading-relaxed line-clamp-2">
+                      {place.description}
+                    </p>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="mt-5 pt-4 border-t border-[var(--p-border)] flex items-center gap-2.5">
+                    <button
+                      type="button"
+                      class="btn-place-vote flex-1 px-4 py-2.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs sm:text-sm shadow-sm active:scale-95 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
+                      data-add-title={place.title}
+                    >
+                      <span>＋ Invitar / Votar</span>
+                    </button>
+                    <a
+                      href="#votar"
+                      class="px-3.5 py-2.5 rounded-xl bg-[var(--p-bg)] hover:bg-[var(--p-surface)] text-[var(--p-ink)] border border-[var(--p-border)] text-xs font-bold transition-colors"
+                      title="Ver en votación"
+                    >
+                      Ver
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+
+        <!-- Floating Notification / Toast when a place is added to voting -->
+        <div id="catalog-add-toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#141414] text-white px-5 py-3 rounded-2xl shadow-2xl border border-white/20 flex items-center gap-3.5 transition-all duration-300 pointer-events-none opacity-0 translate-y-4">
+          <span class="text-xl">✨</span>
+          <div class="text-left text-xs sm:text-sm font-semibold">
+            <span id="toast-place-name">Lugar</span> añadido a tu sala de votación.
+          </div>
+          <a href="#votar" class="pointer-events-auto px-3 py-1.5 rounded-lg bg-orange-600 hover:bg-orange-500 text-white text-xs font-bold transition-colors">
+            Subir a votar ↑
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- PATTERN 1: TYPOGRAPHIC LIST WITH FLANKING FLYERS -->
+    <section class="typo-flyers-section" id="noche">
+      <div class="wrap">
+        <div class="typo-section-head">
+          <span class="vibe-tag" style="background:color-mix(in oklab, var(--p-accent) 14%, transparent); color:var(--p-accent-text); border-color:color-mix(in oklab, var(--p-accent) 26%, transparent); font-size:12px; font-weight:600;">
+            📍 EXPLORADOR RÁPIDO POR BARRIOS
+          </span>
+          <h2 class="typo-section-title">DESCUBRE MADRID ZONA A ZONA</h2>
+          <p class="lead" style="margin-top:12px;">
+            Pasa el cursor por cada barrio o momento para desplegar los planes más votados y sumarlos a tu grupo con un toque.
+          </p>
+        </div>
+
+        <div class="typo-list" id="typo-list">
+          {
+            zones.map((zone) => (
+              <div
+                class="typo-row"
+                data-zone-id={zone.id}
+                data-active={zone.active ? 'true' : 'false'}
+                tabindex="0"
+                role="button"
+                aria-pressed={zone.active ? 'true' : 'false'}
+              >
+                <!-- Desktop Left Flyer -->
+                <div class="typo-flyer typo-flyer--left" style={`--flyer-tilt: ${zone.flyerLeft.tilt};`}>
+                  <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} class="typo-flyer-img" loading="lazy" />
+                  <div class="typo-flyer-body">
+                    <div class="typo-flyer-top">
+                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
+                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerLeft.price}</span>
+                    </div>
+                    <h4 class="typo-flyer-title">{zone.flyerLeft.title}</h4>
+                    <div class="typo-flyer-foot">
+                      <span>{zone.flyerLeft.friendsCount} amigos votaron</span>
+                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title} title="Sumar a la votación">
+                        ＋ Sumar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Center Typographic Name + Sublink -->
+                <div class="typo-row-content">
+                  <h3 class="typo-row-name">{zone.name}</h3>
+                  <a href="#votar" class="typo-row-sublink">
+                    <span>Ver {zone.count} planes hoy ↗</span>
+                  </a>
+                </div>
+
+                <!-- Desktop Right Flyer -->
+                <div class="typo-flyer typo-flyer--right" style={`--flyer-tilt: ${zone.flyerRight.tilt};`}>
+                  <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} class="typo-flyer-img" loading="lazy" />
+                  <div class="typo-flyer-body">
+                    <div class="typo-flyer-top">
+                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
+                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerRight.price}</span>
+                    </div>
+                    <h4 class="typo-flyer-title">{zone.flyerRight.title}</h4>
+                    <div class="typo-flyer-foot">
+                      <span>{zone.flyerRight.friendsCount} amigos votaron</span>
+                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title} title="Sumar a la votación">
+                        ＋ Sumar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile Accordion Drawer -->
+                <div class="typo-mobile-flyers">
+                  <div class="typo-mobile-card">
+                    <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
+                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
+                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerLeft.title}</h5>
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <span class="mono" style="font-size:11px;">{zone.flyerLeft.price}</span>
+                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title}>＋</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="typo-mobile-card">
+                    <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
+                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
+                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerRight.title}</h5>
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <span class="mono" style="font-size:11px;">{zone.flyerRight.price}</span>
+                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title}>＋</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
 
     <!-- PATTERN 2: STICKY SCROLL STORYTELLING ("3 PASOS A LA CALLE") -->
     <section class="sticky-story-section" id="como-funciona">
@@ -722,108 +1082,7 @@ const steps = [
       </div>
     </section>
 
-    <!-- PATTERN 1: TYPOGRAPHIC LIST WITH FLANKING FLYERS -->
-    <section class="typo-flyers-section" id="noche">
-      <div class="wrap">
-        <div class="typo-section-head">
-          <span class="vibe-tag" style="background:color-mix(in oklab, var(--p-accent) 14%, transparent); color:var(--p-accent-text); border-color:color-mix(in oklab, var(--p-accent) 26%, transparent); font-size:12px; font-weight:600;">
-            🔥 RADAR DE PLANES HOY EN MADRID
-          </span>
-          <h2 class="typo-section-title">LOS MEJORES PLANES ESTA NOCHE</h2>
-          <p class="lead" style="margin-top:12px;">
-            Pasa el cursor por cada barrio o momento para desplegar los planes más votados y sumarlos a tu grupo con un toque.
-          </p>
-        </div>
-
-        <div class="typo-list" id="typo-list">
-          {
-            zones.map((zone) => (
-              <div
-                class="typo-row"
-                data-zone-id={zone.id}
-                data-active={zone.active ? 'true' : 'false'}
-                tabindex="0"
-                role="button"
-                aria-pressed={zone.active ? 'true' : 'false'}
-              >
-                <!-- Desktop Left Flyer -->
-                <div class="typo-flyer typo-flyer--left" style={`--flyer-tilt: ${zone.flyerLeft.tilt};`}>
-                  <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} class="typo-flyer-img" loading="lazy" />
-                  <div class="typo-flyer-body">
-                    <div class="typo-flyer-top">
-                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
-                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerLeft.price}</span>
-                    </div>
-                    <h4 class="typo-flyer-title">{zone.flyerLeft.title}</h4>
-                    <div class="typo-flyer-foot">
-                      <span>{zone.flyerLeft.friendsCount} amigos votaron</span>
-                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title} title="Sumar a la votación">
-                        ＋ Sumar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Center Typographic Name + Sublink -->
-                <div class="typo-row-content">
-                  <h3 class="typo-row-name">{zone.name}</h3>
-                  <a href="#votar" class="typo-row-sublink">
-                    <span>Ver {zone.count} planes hoy ↗</span>
-                  </a>
-                </div>
-
-                <!-- Desktop Right Flyer -->
-                <div class="typo-flyer typo-flyer--right" style={`--flyer-tilt: ${zone.flyerRight.tilt};`}>
-                  <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} class="typo-flyer-img" loading="lazy" />
-                  <div class="typo-flyer-body">
-                    <div class="typo-flyer-top">
-                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
-                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerRight.price}</span>
-                    </div>
-                    <h4 class="typo-flyer-title">{zone.flyerRight.title}</h4>
-                    <div class="typo-flyer-foot">
-                      <span>{zone.flyerRight.friendsCount} amigos votaron</span>
-                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title} title="Sumar a la votación">
-                        ＋ Sumar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Mobile Accordion Drawer -->
-                <div class="typo-mobile-flyers">
-                  <div class="typo-mobile-card">
-                    <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
-                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
-                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
-                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerLeft.title}</h5>
-                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                        <span class="mono" style="font-size:11px;">{zone.flyerLeft.price}</span>
-                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title}>＋</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="typo-mobile-card">
-                    <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
-                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
-                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
-                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerRight.title}</h5>
-                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
-                        <span class="mono" style="font-size:11px;">{zone.flyerRight.price}</span>
-                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title}>＋</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-  </main>
+    </main>
 
   <!-- =========================================================================
        PATTERN 4: VIP FINAL PASS + MINIMALIST BRAND HORIZON FOOTER
@@ -1428,6 +1687,77 @@ const steps = [
             btn.removeAttribute('data-added');
             if (label) label.textContent = 'Añadir a votación';
           }, 3000);
+        });
+      });
+    })();
+
+    // =========================================================================
+    // PATTERN 1B: FEVER-STYLE CURATED PLACES CATALOG & FILTER PILLS
+    // =========================================================================
+    (() => {
+      const filterBtns = document.querySelectorAll('.catalog-filter-btn');
+      const placeCards = document.querySelectorAll('.catalog-place-card');
+      const placeVoteBtns = document.querySelectorAll('.btn-place-vote');
+      const toastEl = document.getElementById('catalog-add-toast');
+      const toastPlaceName = document.getElementById('toast-place-name');
+      let toastTimeout: any;
+
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach((b) => {
+            b.classList.remove('active', 'bg-orange-600', 'text-white', 'shadow-[0_4px_14px_rgba(249,115,22,0.35)]');
+            b.classList.add('bg-[var(--p-surface)]', 'text-[var(--p-muted)]', 'border', 'border-[var(--p-border)]');
+            b.setAttribute('aria-selected', 'false');
+          });
+          btn.classList.add('active', 'bg-orange-600', 'text-white', 'shadow-[0_4px_14px_rgba(249,115,22,0.35)]');
+          btn.classList.remove('bg-[var(--p-surface)]', 'text-[var(--p-muted)]');
+          btn.setAttribute('aria-selected', 'true');
+
+          const selectedCat = btn.getAttribute('data-category');
+          placeCards.forEach((card) => {
+            const cardCat = card.getAttribute('data-place-category');
+            if (selectedCat === 'all' || cardCat === selectedCat) {
+              (card as HTMLElement).style.display = 'flex';
+            } else {
+              (card as HTMLElement).style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // Add to poll from place card
+      placeVoteBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const title = btn.getAttribute('data-add-title') || 'Lugar';
+          if (toastPlaceName) toastPlaceName.textContent = title;
+
+          const opt2Input = document.getElementById('input-opt-2') as HTMLInputElement | null;
+          if (opt2Input) {
+            opt2Input.value = title;
+          }
+          const opt2Title = document.getElementById('opt-malasana-title');
+          if (opt2Title) opt2Title.textContent = title;
+
+          // Toast show
+          if (toastEl) {
+            toastEl.style.opacity = '1';
+            toastEl.style.transform = 'translate(-50%, 0)';
+            toastEl.style.pointerEvents = 'auto';
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+              toastEl.style.opacity = '0';
+              toastEl.style.transform = 'translate(-50%, 16px)';
+              toastEl.style.pointerEvents = 'none';
+            }, 3500);
+          }
+
+          const originalText = btn.innerHTML;
+          btn.innerHTML = '<span>✓ ¡Añadido!</span>';
+          btn.classList.add('bg-emerald-600');
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.classList.remove('bg-emerald-600');
+          }, 2500);
         });
       });
     })();

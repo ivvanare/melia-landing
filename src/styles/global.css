@@ -2483,6 +2483,7 @@ header.nav.nav--hidden {
 /* Generous anchor scroll clearance so sections never sit under the floating navbar */
 #descubrir,
 #votar,
+#catalogo,
 #como-funciona,
 #noche,
 #descargar,
@@ -3027,8 +3028,8 @@ main > section.ground-inverse {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    padding-top: 96px !important;
-    padding-bottom: 24px !important;
+    padding-top: 88px !important;
+    padding-bottom: 32px !important;
     margin: 0 !important;
     position: relative !important;
   }
@@ -3040,24 +3041,12 @@ main > section.ground-inverse {
     max-width: 1088px !important;
     margin-inline: auto !important;
     height: auto !important;
-    max-height: 100% !important;
     align-items: center !important;
   }
 
   .hero-text.hero-split {
     width: 100% !important;
     align-items: center !important;
-  }
-}
-
-@media (min-width: 1024px) and (min-height: 720px) {
-  main > section.section--hero,
-  main > section.hero,
-  #descubrir {
-    height: 100vh !important;
-    height: 100svh !important;
-    max-height: 100vh !important;
-    max-height: 100svh !important;
   }
 }
 
@@ -3142,6 +3131,14 @@ main > section.ground-inverse {
   animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.14s both;
 }
 
+.kinetic-line-1 {
+  animation: heroFadeUp 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.kinetic-line-2 {
+  animation: heroFadeUp 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.26s both;
+}
+
 .kinetic-quote {
   animation: heroFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both;
 }
@@ -3193,6 +3190,8 @@ main > section.ground-inverse {
 @media (prefers-reduced-motion: reduce) {
   .kinetic-badge,
   .kinetic-less,
+  .kinetic-line-1,
+  .kinetic-line-2,
   .kinetic-quote,
   .kinetic-more,
   .kinetic-punchline,
@@ -3213,3 +3212,94 @@ main > section.ground-inverse {
     transform: rotate(-2deg) scaleX(1) !important;
   }
 }
+
+/* Utility: Hide Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   FEVER-STYLE CURATED PLACES CATALOG
+   ========================================================================== */
+
+.catalog-place-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.25s ease;
+}
+
+.catalog-place-card:hover {
+  transform: translateY(-5px);
+}
+
+:root.theme-inv .catalog-place-card {
+  background: #141416 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+}
+
+:root.theme-inv .catalog-place-card:hover {
+  border-color: rgba(255, 90, 54, 0.45) !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65) !important;
+}
+
+:root.theme-inv .catalog-filter-btn {
+  background: #18191d !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: #a1a1aa !important;
+}
+
+:root.theme-inv .catalog-filter-btn:hover {
+  border-color: rgba(255, 90, 54, 0.5) !important;
+  color: #ffffff !important;
+}
+
+.catalog-filter-btn.active,
+:root.theme-inv .catalog-filter-btn.active {
+  background: #ff5a36 !important;
+  color: #ffffff !important;
+  border-color: #ff5a36 !important;
+  box-shadow: 0 4px 16px rgba(255, 90, 54, 0.4) !important;
+}
+
+.btn-place-vote {
+  background: #ff5a36 !important;
+  color: #ffffff !important;
+  transition: all 0.2s ease;
+}
+
+.btn-place-vote:hover {
+  background: #ff441b !important;
+  box-shadow: 0 4px 16px rgba(255, 90, 54, 0.35);
+}
+
+/* Catalog Grid override of system.css .grid > * { grid-column: 1 / -1 } */
+#catalog-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 24px !important;
+}
+
+@media (min-width: 640px) {
+  #catalog-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 24px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #catalog-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    gap: 32px !important;
+  }
+}
+
+#catalog-grid > article.catalog-place-card {
+  grid-column: auto !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+
+

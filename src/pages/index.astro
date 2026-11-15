@@ -1,57 +1,141 @@
 ---
 import Base from '../layouts/Base.astro';
 
-const night = [
+const zones = [
   {
-    hour: '21:00',
-    title: 'Sesión Acústica & Cerveza Artesanal',
-    text: 'Noche de cantautores independientes en el sótano acústico de Malasaña. Degustación de 4 IPAs locales.',
-    meta: 'Malasaña, a 1,5 km · 15 €/pers. · abierto ahora',
-    img: '/img/event-acoustic.jpg',
-    alt: 'Concierto acústico en un sótano de Malasaña',
-    live: false,
+    id: 'rooftops',
+    name: 'Rooftops en Gran Vía',
+    count: 12,
+    active: true,
+    flyerLeft: {
+      title: 'Rooftop Cibeles & Sunset',
+      vibe: '🔥 Trending hoy',
+      price: '15 €/pers.',
+      friendsCount: 5,
+      img: '/img/mockup-rooftop.jpg',
+      alt: 'Terraza de un rooftop de Madrid al atardecer',
+      tilt: '-3.5deg',
+    },
+    flyerRight: {
+      title: 'Terraza Círculo de Bellas Artes',
+      vibe: '🍸 Vistas 360°',
+      price: '18 €/pers.',
+      friendsCount: 4,
+      img: '/img/night-street.jpg',
+      alt: 'Vistas panorámicas nocturnas de Gran Vía',
+      tilt: '3.5deg',
+    },
   },
   {
-    hour: '21:30',
-    title: 'Rooftop Cibeles',
-    text: 'Terraza en la azotea con vistas a la ciudad. El plan que tu grupo está votando ahora mismo.',
-    meta: 'Gran Vía, a 1,2 km · 15 €/pers. · 4 de 5 han votado',
-    img: '/img/mockup-rooftop.jpg',
-    alt: 'Terraza de un rooftop de Madrid al atardecer',
-    live: true,
+    id: 'malasana',
+    name: 'Malasaña & Conde Duque',
+    count: 18,
+    active: false,
+    flyerLeft: {
+      title: 'Sesión Acústica & IPAs',
+      vibe: '🎸 Música en vivo',
+      price: '14 €/pers.',
+      friendsCount: 3,
+      img: '/img/event-acoustic.jpg',
+      alt: 'Concierto acústico en sótano de Malasaña',
+      tilt: '-2.5deg',
+    },
+    flyerRight: {
+      title: 'Tapas de Autor & Vermut',
+      vibe: '🍻 Grupos pequeños',
+      price: '16 €/pers.',
+      friendsCount: 6,
+      img: '/img/group-toast.jpg',
+      alt: 'Brindis de amigos de cañas en Malasaña',
+      tilt: '2.5deg',
+    },
   },
   {
-    hour: '11:30',
-    title: 'Brunch Botánico en Patio Central',
-    text: 'Tostas de masa madre, café de especialidad y repostería en un invernadero urbano histórico.',
-    meta: 'Salamanca, a 2,8 km · 18 €/pers. · sábado',
-    img: '/img/event-brunch.jpg',
-    alt: 'Mesa de brunch en un patio con plantas',
-    live: false,
+    id: 'latina',
+    name: 'Tardeo en La Latina',
+    count: 15,
+    active: false,
+    flyerLeft: {
+      title: 'Micro Abierto & Tacos',
+      vibe: '🌮 Cenas con risas',
+      price: '12 €/pers.',
+      friendsCount: 4,
+      img: '/img/event-comedy.jpg',
+      alt: 'Cómico actuando ante el público en local pequeño',
+      tilt: '-3deg',
+    },
+    flyerRight: {
+      title: 'Cañas & Cava Baja',
+      vibe: '💸 Plan barato',
+      price: '10 €/pers.',
+      friendsCount: 5,
+      img: '/img/venue-host.jpg',
+      alt: 'Taberna castiza en La Latina con ambiente',
+      tilt: '3deg',
+    },
   },
   {
-    hour: '20:00',
-    title: 'Noche de Micro Abierto & Tacos',
-    text: 'Cómicos consolidados probando material nuevo, con cócteles de autor y barra mexicana.',
-    meta: 'La Latina, a 0,9 km · 12 €/pers. · domingo',
-    img: '/img/event-comedy.jpg',
-    alt: 'Cómico actuando ante el público en un local pequeño',
-    live: false,
+    id: 'musica',
+    name: 'Copas & Música en Vivo',
+    count: 14,
+    active: false,
+    flyerLeft: {
+      title: 'Jazz Club & Cócteles',
+      vibe: '🎷 Directo íntimo',
+      price: '15 €/pers.',
+      friendsCount: 4,
+      img: '/img/event-acoustic.jpg',
+      alt: 'Club de jazz con cócteles de autor',
+      tilt: '-2deg',
+    },
+    flyerRight: {
+      title: 'DJ Set en Azotea Secreta',
+      vibe: '🪩 Hasta las 03:00',
+      price: '18 €/pers.',
+      friendsCount: 7,
+      img: '/img/mockup-rooftop.jpg',
+      alt: 'Sesión de música electrónica en azotea',
+      tilt: '3.5deg',
+    },
+  },
+  {
+    id: 'brunch',
+    name: 'Brunch de Domingo',
+    count: 9,
+    active: false,
+    flyerLeft: {
+      title: 'Brunch Botánico Invernadero',
+      vibe: '🥐 Masa madre & café',
+      price: '18 €/pers.',
+      friendsCount: 6,
+      img: '/img/event-brunch.jpg',
+      alt: 'Mesa de brunch en patio con plantas',
+      tilt: '-3deg',
+    },
+    flyerRight: {
+      title: 'Patio Histórico & Mimosas',
+      vibe: '🌿 Estilo chill',
+      price: '20 €/pers.',
+      friendsCount: 5,
+      img: '/img/group-toast.jpg',
+      alt: 'Amigos disfrutando un brunch al sol',
+      tilt: '2.5deg',
+    },
   },
 ];
 
 const steps = [
   {
-    title: 'Descubre o propón',
-    text: 'Elige entre cientos de recomendaciones o añade tu propio plan a la lista en segundos.',
+    title: '1. Elige o propón los finalistas',
+    text: 'Explora terrazas, cócteles o picoteo en tu zona y añade 2 o 3 opciones a la votación en 15 segundos.',
   },
   {
-    title: 'Comparte y vota',
-    text: 'Envía el link al chat. Todos votan con un toque, sin instalar nada ni registrarse.',
+    title: '2. Pasa el enlace al grupo de WhatsApp',
+    text: 'Tus amigos abren el link en cualquier navegador y votan con un toque. Sin descargar apps ni crear cuentas obligatorias.',
   },
   {
-    title: 'Disfrutad juntos',
-    text: 'Plan confirmado, enlace a Google Maps, recordatorio en calendario y presupuesto estimado.',
+    title: '3. Plan cerrado y ruta lista',
+    text: 'La opción más votada gana al cumplirse el tiempo. Todos reciben el punto de encuentro en Google Maps y la hora fijada.',
   },
 ];
 ---
@@ -60,23 +144,39 @@ const steps = [
   <a class="sr-only" href="#top">Saltar al contenido</a>
 
   <header class="nav">
-    <div class="wrap nav__bar">
+    <div class="nav__bar">
       <a class="nav__logo" href="#top">
         <span class="mark mark--initial" aria-hidden="true">M</span>Melia
       </a>
       <nav class="nav__links" aria-label="Principal">
-        <a class="nav__link" href="#noche">La noche</a>
-        <a class="nav__link" href="#votar">Cómo funciona</a>
-        <a class="nav__link" href="#locales">Creadores</a>
+        <a class="nav__link" href="#votar">Votación en vivo</a>
+        <a class="nav__link" href="#como-funciona">Cómo funciona</a>
+        <a class="nav__link" href="#noche">Planes de hoy</a>
       </nav>
       <div class="nav__actions">
         <button
           id="theme-toggle"
           type="button"
           aria-label="Cambiar entre tema claro y oscuro"
-          class="chip"
+          title="Cambiar tema"
+          class="theme-toggle-btn"
         >
-          Tema
+          <!-- Sun Icon (visible en modo oscuro para volver a claro) -->
+          <svg class="theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"></circle>
+            <line x1="12" y1="2" x2="12" y2="5"></line>
+            <line x1="12" y1="19" x2="12" y2="22"></line>
+            <line x1="2" y1="12" x2="5" y2="12"></line>
+            <line x1="19" y1="12" x2="22" y2="12"></line>
+            <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line>
+            <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line>
+            <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line>
+            <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line>
+          </svg>
+          <!-- Moon Icon (visible en modo claro para pasar a oscuro) -->
+          <svg class="theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
         </button>
         <a class="btn btn--primary" href="#descargar">Descargar gratis</a>
       </div>
@@ -84,78 +184,638 @@ const steps = [
   </header>
 
   <main id="top">
-    <!-- HERO · the copy beside the clock, as in direction 03 -->
-    <section class="section section--hero hero hero--split" id="descubrir">
-      <div class="wrap grid hero-text hero-split">
-        <div class="hero-copy span-6">
-          <h1 class="hero-text">
-            <span class="hl-1">Menos</span>
-            <span class="hl-2"><s>“a ver qué hacemos”</s>,</span>
-            <span class="hl-1 hl-1--b">más</span>
-            <span class="hl-3">¡ya estamos aquí!</span>
+    <!-- HERO · Rootline Hero (HorizonX) with atmospheric spotlight & glowing cables -->
+    <section class="section section--hero hero hero--split relative overflow-hidden bg-[var(--p-bg)] transition-colors duration-300" id="descubrir">
+      <!-- 1. ATMÓSFERA: Haz de luz cenital + Grilla radial -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <!-- Spotlight superior cónico -->
+        <div class="kinetic-spotlight absolute -top-36 left-1/2 -translate-x-1/2 w-[900px] h-[520px] bg-gradient-to-b from-orange-500/25 via-orange-600/5 to-transparent blur-[90px] rounded-full"></div>
+        <!-- Resplandor cálido detrás del widget -->
+        <div class="absolute top-10 right-[5%] w-[520px] h-[520px] rounded-full bg-orange-500/15 blur-[120px]"></div>
+        <!-- Patrón de cuadrícula en perspectiva con máscara radial -->
+        <div class="hero-rootline-grid absolute inset-0 opacity-[0.14]"></div>
+      </div>
+
+      <div class="wrap grid hero-text hero-split relative z-10">
+        <div class="hero-copy span-6 flex flex-col items-start">
+          <div class="kinetic-badge hero-badge inline-flex w-fit items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold mb-4 shadow-sm transition-colors duration-300">
+            <span class="w-2 h-2 rounded-full bg-orange-600 animate-ping"></span>
+            <span>Planes grupales en 30 segundos</span>
+          </div>
+
+          <h1 class="text-5xl sm:text-6xl xl:text-[76px] font-black tracking-tighter text-[var(--p-ink)] leading-[0.96] transition-colors duration-200">
+            <span class="kinetic-less block text-2xl sm:text-3xl xl:text-[42px] font-black text-[var(--p-ink)] tracking-tight leading-none mb-1">
+              Menos
+            </span>
+            <span class="kinetic-quote relative inline-block w-fit text-3xl sm:text-4xl xl:text-[54px] font-black text-[var(--p-ink)] tracking-tight my-1">
+              “a ver qué hacemos”,
+              <span class="kinetic-strike" style="position: absolute; left: -4px; right: -4px; top: 52%; height: 7px; background: #ff5a36; border-radius: 9999px; box-shadow: 0 1px 2px rgba(0,0,0,0.18); pointer-events: none;"></span>
+            </span>
+            <span class="kinetic-more block text-2xl sm:text-3xl xl:text-[42px] font-black text-[var(--p-ink)] tracking-tight leading-none mt-2 mb-1">
+              más
+            </span>
+            <span class="kinetic-punchline block bg-gradient-to-r from-orange-500 via-orange-600 to-amber-500 bg-clip-text text-transparent mt-1 tracking-tighter leading-[0.92] drop-shadow-sm">
+              ¡ya estamos aquí!
+            </span>
           </h1>
-          <p class="lead">
-            Terrazas, restaurantes y planes en tu ciudad. Vota con tus amigos en
-            30 segundos.
+
+          <p class="kinetic-desc mt-6 text-base sm:text-lg text-[var(--p-muted)] max-w-md leading-relaxed text-left transition-colors duration-200">
+            Elige 2 o 3 opciones, manda el link al grupo y voten en 30 segundos. <strong class="text-[var(--p-ink)] font-bold">Sin descargar apps</strong>, sin crear cuentas y sin debates eternos.
           </p>
-          <div class="btn-row">
-            <a class="btn btn--primary" href="#descargar">Descargar gratis</a>
-            <a class="btn btn--secondary" href="#noche">Ver la noche entera</a>
+
+          <div class="kinetic-buttons mt-8 flex flex-wrap items-center gap-3.5">
+            <button
+              type="button"
+              id="hero-create-btn"
+              class="relative group px-7 py-4 rounded-2xl bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-extrabold text-base shadow-[0_0_35px_rgba(249,115,22,0.45),inset_0_1px_0_rgba(255,255,255,0.4)] transition-all cursor-pointer active:scale-95 inline-flex items-center gap-2"
+            >
+              <span style="color: #ffffff !important; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35); font-weight: 800;">Crear plan con amigos ✨</span>
+            </button>
+            <a
+              href="#como-funciona"
+              class="hero-btn-secondary px-6 py-4 rounded-2xl font-bold text-base transition-colors shadow-sm inline-flex items-center justify-center"
+            >
+              Ver cómo funciona
+            </a>
+          </div>
+
+          <div class="kinetic-proof mt-9 flex items-center gap-3.5">
+            <div class="flex -space-x-2.5 shrink-0">
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" alt="Sofía" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" alt="Marcos" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" alt="Ana" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" alt="Leo" class="w-9 h-9 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <span class="w-9 h-9 rounded-full bg-[var(--p-surface)] text-[var(--p-ink)] text-[11px] font-black flex items-center justify-center border-2 border-[var(--p-bg)]">
+                +1.4k
+              </span>
+            </div>
+            <p class="text-xs sm:text-sm text-[var(--p-muted)] leading-snug flex-1 min-w-0 text-left transition-colors duration-200">
+              Más de <strong class="text-[var(--p-ink)] font-bold">1.420 planes cerrados</strong> esta semana en Madrid y Barcelona sin discusiones.
+            </p>
           </div>
         </div>
 
-        <div class="hero-visual span-6">
-          <div class="clock" id="votar">
-            <div class="clock__top">
-              <span class="clock__now mono">21:14</span>
-              <span class="clock__live">Votación en vivo</span>
+        <div class="hero-visual kinetic-widget span-6 relative py-4 sm:py-6">
+          <!-- CABLES LUMINOSOS SVG (Rootlines de HorizonX con pulsos de luz) -->
+          <svg class="hero-rootlines-svg pointer-events-none absolute -inset-16 w-[calc(100%+128px)] h-[calc(100%+128px)] z-20 overflow-visible" viewBox="0 0 640 700" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="rootline-glow-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FF5A36" stop-opacity="0.3" />
+                <stop offset="50%" stop-color="#FF5A36" stop-opacity="1" />
+                <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.6" />
+              </linearGradient>
+              <linearGradient id="rootline-glow-emerald" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#10B981" stop-opacity="0.4" />
+                <stop offset="50%" stop-color="#10B981" stop-opacity="1" />
+                <stop offset="100%" stop-color="#FF5A36" stop-opacity="0.6" />
+              </linearGradient>
+              <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <!-- Cable 1: WhatsApp (Arriba Izq) -> Rim Izquierdo -->
+            <path d="M 50 45 C 30 75, 45 110, 87 115" stroke="url(#rootline-glow-orange)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
+            <circle cx="87" cy="115" r="4" fill="#FF5A36" filter="url(#neon-glow)" />
+
+            <!-- Cable 2: Pin Votan sin app (Arriba Der) -> Rim Derecho -->
+            <path d="M 545 55 C 575 80, 565 115, 526 125" stroke="url(#rootline-glow-emerald)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
+            <circle cx="526" cy="125" r="4" fill="#10B981" filter="url(#neon-glow)" />
+
+            <!-- Cable 3: Votos en vivo (Abajo Izq) -> Rim Inferior -->
+            <path d="M 70 635 C 45 615, 55 580, 87 560" stroke="url(#rootline-glow-orange)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
+            <circle cx="87" cy="560" r="4" fill="#FF5A36" filter="url(#neon-glow)" />
+          </svg>
+
+          <!-- NODO SATÉLITE 1: WhatsApp flotando arriba-izquierda -->
+          <div class="satellite-node satellite-node--1 hidden sm:flex items-center gap-2.5 absolute -top-4 -left-4 xl:-left-6 z-20 px-3.5 py-2.5 rounded-2xl animate-float-slow">
+            <span class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xs">💬</span>
+            <div class="text-left">
+              <p class="text-[11px] font-bold leading-tight">Link enviado al grupo</p>
+              <p class="text-[10px] text-emerald-500 font-mono font-semibold">melia.app/v/viernes</p>
             </div>
-            <p class="clock__q">
-              Tu grupo decide en 12 minutos a dónde van hoy.
-            </p>
-            <div class="clock__row">
-              <span class="clock__hour mono">21:30</span>
+          </div>
+
+          <!-- NODO SATÉLITE 2: Pin destino flotando arriba-derecha -->
+          <div class="satellite-node satellite-node--2 hidden sm:flex items-center gap-2 absolute top-2 -right-3 xl:-right-5 z-20 px-3.5 py-2 rounded-2xl animate-float-delayed">
+            <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+            <span class="text-xs font-extrabold text-orange-500">⚡ Votan sin app</span>
+          </div>
+
+          <!-- NODO SATÉLITE 3: Contador en vivo flotando abajo-izquierda -->
+          <div class="satellite-node satellite-node--3 hidden sm:flex items-center gap-2 absolute -bottom-4 left-1 xl:left-3 z-20 px-3.5 py-2 rounded-full animate-float-delayed">
+            <span class="text-sm">🔥</span>
+            <span class="text-xs font-bold">+3 amigos votando ahora</span>
+          </div>
+
+          <!-- Stage for livestream-style floating emojis -->
+          <div id="emoji-stage" class="pointer-events-none absolute inset-0 overflow-visible z-30"></div>
+
+          <!-- 3D TILT WRAPPER & CENTRAL BALLOT WIDGET -->
+          <div id="poll-card-tilt" class="poll-card-tilt-wrap relative z-10 w-full transition-transform duration-200 ease-out">
+            <div class="ballot-widget" id="votar" role="region" aria-label="Widget interactivo de Melia">
+              <!-- Floating confetti & emojis layer -->
+              <div class="confetti-layer" id="confetti-layer" aria-hidden="true"></div>
+
+              <!-- STATE 1: DEMO VIVA (DEFAULT) -->
+              <div class="ballot-view" id="view-demo" data-active="true">
+                <div class="flex items-center justify-between gap-2 pb-3 border-b border-neutral-200">
+                  <div class="flex items-center gap-2">
+                    <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 text-[11px] font-extrabold">
+                      <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                      EN VIVO
+                    </span>
+                  <span class="text-xs font-semibold text-neutral-500">#viernes-madrid (5 amigos)</span>
+                </div>
+                <span class="font-mono text-xs font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-lg border border-neutral-200" id="ballot-timer">14:58 restantes</span>
+              </div>
+
               <div>
-                <div class="clock__t">Rooftop Cibeles</div>
-                <div class="clock__m">Gran Vía, a 1,2 km · 15 €/pers.</div>
-                <div class="clock__votes">
-                  <span class="av av--on">MR</span>
-                  <span class="av av--on">SL</span>
-                  <span class="av av--off">AG</span>
-                  <span class="av av--off">+2</span>
-                  <span>4 de 5 han votado</span>
+                <h2 class="text-xl sm:text-2xl font-black text-[#141414] tracking-tight mt-1" id="poll-title-heading">¿A dónde salimos hoy?</h2>
+                <p class="text-xs text-neutral-500 mt-0.5">Tu grupo tiene 15 min para desempatar. Toca para votar:</p>
+              </div>
+
+              <div class="ballot__options" id="ballot-options">
+                <!-- Option 1 -->
+                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3.5 transition-all cursor-pointer hover:border-orange-500" data-option="cibeles" data-leader="true" tabindex="0" role="button" aria-pressed="false" id="opt-cibeles">
+                  <div class="ballot__opt-top flex items-center justify-between">
+                    <div class="ballot__opt-title font-extrabold text-sm sm:text-base text-[#141414] flex items-center gap-2">
+                      <span id="opt-cibeles-title">🍸 Rooftop Cibeles</span>
+                    </div>
+                    <span class="text-xs text-neutral-500 font-medium">Gran Vía · 15 €/pers.</span>
+                  </div>
+                  <div class="w-full h-2.5 bg-neutral-200/80 rounded-full mt-2.5 overflow-hidden">
+                    <div class="h-full bg-orange-500 rounded-full transition-all duration-500" id="bar-cibeles" style="width: 60%"></div>
+                  </div>
+                  <div class="flex items-center justify-between mt-2.5 text-xs">
+                    <div class="flex -space-x-1.5" id="avs-cibeles">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" class="w-6 h-6 rounded-full border border-white" alt="Sofía" />
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" class="w-6 h-6 rounded-full border border-white" alt="Marcos" />
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" class="w-6 h-6 rounded-full border border-white" alt="Ana" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-neutral-600" id="count-cibeles">3 votos (60%)</span>
+                      <span class="px-3 py-1 rounded-lg bg-[#141414] text-white text-xs font-bold transition-colors" id="btn-cibeles">Votar</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Option 2 -->
+                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3.5 transition-all cursor-pointer hover:border-orange-400 bg-white" data-option="malasana" data-leader="false" tabindex="0" role="button" aria-pressed="false" id="opt-malasana">
+                  <div class="ballot__opt-top flex items-center justify-between">
+                    <div class="ballot__opt-title font-extrabold text-sm sm:text-base text-[#141414] flex items-center gap-2">
+                      <span id="opt-malasana-title">🌮 Tacos & Acústico</span>
+                    </div>
+                    <span class="text-xs text-neutral-500 font-medium">Malasaña · 12 €/pers.</span>
+                  </div>
+                  <div class="w-full h-2.5 bg-neutral-200/80 rounded-full mt-2.5 overflow-hidden">
+                    <div class="h-full bg-neutral-400 rounded-full transition-all duration-500" id="bar-malasana" style="width: 40%"></div>
+                  </div>
+                  <div class="flex items-center justify-between mt-2.5 text-xs">
+                    <div class="flex -space-x-1.5" id="avs-malasana">
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" class="w-6 h-6 rounded-full border border-white" alt="Laura" />
+                      <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Carla&backgroundColor=d1d4f9" class="w-6 h-6 rounded-full border border-white" alt="Carlos" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <span class="font-bold text-neutral-600" id="count-malasana">2 votos (40%)</span>
+                      <span class="px-3 py-1 rounded-lg bg-neutral-100 text-[#141414] text-xs font-bold transition-colors border border-neutral-200" id="btn-malasana">Votar</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Reacciones rápidas con explosión de emojis -->
+              <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between flex-wrap gap-2">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs text-neutral-500 mr-1 font-semibold">Reaccionar:</span>
+                  <button type="button" data-emoji="🔥" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-orange-50 hover:bg-orange-100 border border-orange-200 text-xs font-bold text-orange-800 cursor-pointer active:scale-90 transition-transform">🔥 Fiestón</button>
+                  <button type="button" data-emoji="🍸" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 text-xs font-bold text-neutral-700 cursor-pointer active:scale-90 transition-transform">🍸 Chill</button>
+                  <button type="button" data-emoji="💸" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 cursor-pointer active:scale-90 transition-transform">💸 Barato</button>
+                </div>
+              </div>
+
+              <!-- Post-vote feedback toast -->
+              <div class="ballot__toast" id="ballot-toast" style="display:none;">
+                <span>🎉</span>
+                <span id="toast-msg">¡Voto registrado! Cero apps, cero registros para tus amigos.</span>
+              </div>
+
+              <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs">
+                <span id="poll-footer-msg" class="text-neutral-500">Compartido por Marcos vía WhatsApp</span>
+                <button type="button" id="btn-to-creator" class="font-black text-orange-600 hover:text-orange-700 cursor-pointer">
+                  ✨ Probar crear el mío →
+                </button>
+              </div>
+            </div>
+
+            <!-- STATE 2: MODO CREADOR (ZERO-FRICTION SANDBOX) -->
+            <div class="ballot-view" id="view-creator" data-active="false">
+              <div class="creator-head">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:18px;">✍️</span>
+                  <div>
+                    <h3 style="font-size:16px; margin:0; font-weight:600;">Crea tu votación en 15s</h3>
+                    <p class="t-small muted" style="margin:0;">Sin registro ni formularios largos</p>
+                  </div>
+                </div>
+                <button type="button" class="btn-ghost-back" id="btn-creator-back">← Volver</button>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="input-plan-title">
+                  <span>Título del plan</span>
+                  <span class="muted">ej. Viernes noche</span>
+                </label>
+                <input
+                  type="text"
+                  id="input-plan-title"
+                  class="form-input"
+                  value="Viernes de cañas y picoteo"
+                  placeholder="¿Cómo se llama la salida?"
+                />
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Opciones a votar</span>
+                  <span class="muted">2 o 3 opciones</span>
+                </label>
+                <input
+                  type="text"
+                  id="input-opt-1"
+                  class="form-input"
+                  value="Rooftop al atardecer"
+                  style="margin-bottom:6px;"
+                />
+                <input
+                  type="text"
+                  id="input-opt-2"
+                  class="form-input"
+                  value="Tapas en La Latina"
+                />
+                
+                <div class="quick-chips">
+                  <span class="t-small muted" style="align-self:center; font-size:11px;">Sugerencias:</span>
+                  <button type="button" class="quick-chip" data-val="🍕 Pizza Napolitana & Cervezas">🍕 Pizza Napolitana</button>
+                  <button type="button" class="quick-chip" data-val="🍸 Cócteles de autor">🍸 Cócteles</button>
+                  <button type="button" class="quick-chip" data-val="🎳 Bolos & Burgers">🎳 Bolos & Burgers</button>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Cierre de votación</span>
+                  <span class="muted">El reloj define</span>
+                </label>
+                <div class="timer-pills" role="radiogroup">
+                  <button type="button" class="timer-pill" data-time="15m" aria-selected="true">15 min</button>
+                  <button type="button" class="timer-pill" data-time="1h" aria-selected="false">1 hora</button>
+                  <button type="button" class="timer-pill" data-time="21h" aria-selected="false">Hasta las 21:00</button>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn--primary" id="btn-submit-create" style="width:100%; justify-content:center; margin-top:4px;">
+                Generar link para WhatsApp 🚀
+              </button>
+            </div>
+
+            <!-- STATE 3: LINK LISTO PARA COMPARTIR (CONVERSIÓN VIRAL) -->
+            <div class="ballot-view" id="view-ready" data-active="false">
+              <div style="text-align:center; padding:12px 0 6px;">
+                <span style="font-size:36px; display:inline-block; animation:pop-in 0.4s ease;">🎉</span>
+                <h3 style="font-size:20px; font-weight:700; margin-top:6px;">¡Votación lista para tu grupo!</h3>
+                <p class="t-small muted" style="margin-top:2px;">
+                  Pega este link en tu chat. Tus amigos votan con un toque, sin apps ni passwords.
+                </p>
+              </div>
+
+              <div class="share-ready-box">
+                <div class="share-link-display">
+                  <span id="ready-url-text" style="color:var(--p-accent-text); font-weight:600;">melia.app/v/viernes-48x</span>
+                  <button type="button" class="ballot__share-pill" id="ready-copy-inline">Copiar 📋</button>
+                </div>
+
+                <div class="chat-bubble" style="background:#202c33; color:#e9edef; max-width:100%; text-align:left; border-radius:12px;">
+                  <p class="t-small" style="color:#53bdeb; font-weight:600; margin:0 0 2px;">Tú (en WhatsApp)</p>
+                  <p style="margin:0; font-size:13px;" id="ready-wa-preview">
+                    ¡Gente! Voten rápido a cuál salimos hoy antes de que cierre la mesa 👇
+                  </p>
+                  <div style="background:#111b21; border-radius:8px; padding:8px 10px; margin-top:8px; border-left:3px solid var(--p-accent);">
+                    <p style="font-weight:600; font-size:12px; margin:0;" id="ready-wa-title">Viernes de cañas y picoteo</p>
+                    <p class="t-small muted" style="margin:2px 0 0; font-size:11px;">melia.app · Votación en vivo (15 min)</p>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" class="btn btn--primary" id="btn-ready-copy-main" style="width:100%; justify-content:center;">
+                Copiar link y mandar al grupo 📲
+              </button>
+              
+              <button type="button" class="btn-ghost-back" id="btn-ready-reset" style="width:100%; justify-content:center; margin-top:4px;">
+                ← Probar otra votación en vivo
+              </button>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTINUOUS RUNNING TICKER -->
+    <div class="ticker-wrap" aria-hidden="true">
+      <div class="ticker-track">
+        <span class="ticker-item">⚡ CERO DEBATES ETERNOS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">🍸 VOTACIÓN EN 30 SEGUNDOS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">📲 SIN DESCARGAR APPS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">📍 RUTA LISTA EN GOOGLE MAPS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">🍻 DECIDAN EN 1 TOQUE <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">🔥 EL PLAN GANADOR SE CIERRA SOLO <span class="ticker-dot">•</span></span>
+        <!-- duplicate track for seamless infinite loop -->
+        <span class="ticker-item">⚡ CERO DEBATES ETERNOS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">🍸 VOTACIÓN EN 30 SEGUNDOS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">📲 SIN DESCARGAR APPS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">📍 RUTA LISTA EN GOOGLE MAPS <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">🍻 DECIDAN EN 1 TOQUE <span class="ticker-dot">•</span></span>
+        <span class="ticker-item">🔥 EL PLAN GANADOR SE CIERRA SOLO <span class="ticker-dot">•</span></span>
+      </div>
+    </div>
+
+    <!-- PATTERN 2: STICKY SCROLL STORYTELLING ("3 PASOS A LA CALLE") -->
+    <section class="sticky-story-section" id="como-funciona">
+      <div class="sticky-story-viewport">
+        <!-- Vertical Progress Fill Line -->
+        <div class="story-track-wrap" aria-hidden="true">
+          <div class="story-track-fill" id="story-track-fill"></div>
+        </div>
+
+        <div class="story-stage-grid">
+          <!-- Col Left: Phase Large Typography -->
+          <div class="story-col-left">
+            <span class="story-step-badge" id="story-badge">EL PROBLEMA</span>
+            <h2 class="story-step-title" id="story-title">BASTA DE DEBATES ETERNOS</h2>
+          </div>
+
+          <!-- Col Center: Realistic iPhone with 4-Scene Crossfade -->
+          <div class="story-col-phone">
+            <div class="iphone-frame" id="iphone-frame" data-glow="0">
+              <div class="iphone-notch"></div>
+              
+              <div class="iphone-screen">
+                <!-- SCENE 0: EL CAOS HABITUAL DE WHATSAPP -->
+                <div class="phone-scene" id="phone-scene-0" data-active="true">
+                  <div class="wa-bubble wa-bubble--incoming" style="transform:rotate(-2deg); margin-top:8px;">
+                    <div class="wa-author wa-author--1">Marcos</div>
+                    <div style="font-size:12px;">¿Alguien reservó algo para hoy o qué hacemos? 🫠</div>
+                    <div class="wa-time">20:32</div>
+                  </div>
+
+                  <div class="wa-bubble wa-bubble--incoming" style="transform:rotate(1.5deg); align-self:flex-start; width:190px;">
+                    <div class="wa-author wa-author--2">Sofía</div>
+                    <div class="wa-audio-row">
+                      <div class="wa-audio-play" style="width:26px; height:26px; font-size:12px;">▶</div>
+                      <div class="wa-audio-wave"><div class="wa-audio-wave-fill"></div></div>
+                      <span style="font-size:10px; color:#8696a0;">2:14</span>
+                    </div>
+                    <div class="wa-time">20:35</div>
+                  </div>
+
+                  <div class="wa-bubble wa-bubble--incoming" style="transform:rotate(-1deg); align-self:flex-end;">
+                    <div class="wa-author wa-author--3">Lucas</div>
+                    <div style="font-size:12px;">A mí me da igual, lo que vote la mayoría...</div>
+                    <div class="wa-time">20:41</div>
+                  </div>
+
+                  <div class="wa-bubble wa-bubble--incoming" style="transform:rotate(2deg); align-self:flex-start;">
+                    <div class="wa-author wa-author--1">Dani</div>
+                    <div style="font-size:12px;">¿Pero adónde vamos? Ya no hay mesa en ningún lado 💀</div>
+                    <div class="wa-time">21:10</div>
+                  </div>
+
+                  <div class="chaos-overlay-banner" style="position:relative; transform:none; left:auto; margin-top:auto; font-size:11px; padding:6px 12px;">
+                    <span>🚨</span>
+                    <span>22:45 — Siguen discutiendo en el sofá</span>
+                  </div>
+                </div>
+
+                <!-- SCENE 1: PASO 01 (SELECCIÓN EN MELIA) -->
+                <div class="phone-scene" id="phone-scene-1" data-active="false">
+                  <div style="background:#202c33; border-radius:14px; padding:12px; border:1px solid rgba(255,255,255,0.08);">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                      <span style="font-size:10px; font-weight:700; color:#ff9e7d; text-transform:uppercase;">MELIA · CREAR PLAN</span>
+                      <span class="mono" style="font-size:10px; color:#8696a0;">15s</span>
+                    </div>
+                    <div style="font-size:13px; font-weight:600; color:#e9edef; margin-bottom:8px;">Viernes noche en Madrid</div>
+
+                    <!-- Selected Option 1 -->
+                    <div style="background:#111b21; border-radius:10px; padding:8px 10px; border:1.5px solid var(--p-accent); margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+                      <div>
+                        <div style="font-size:12px; font-weight:600; color:#ffffff;">🍸 Rooftop Cibeles</div>
+                        <div style="font-size:10px; color:#8696a0;">Gran Vía · 15 €/pers.</div>
+                      </div>
+                      <span class="scene-option-check">✓</span>
+                    </div>
+
+                    <!-- Selected Option 2 -->
+                    <div style="background:#111b21; border-radius:10px; padding:8px 10px; border:1.5px solid var(--p-accent); display:flex; justify-content:space-between; align-items:center;">
+                      <div>
+                        <div style="font-size:12px; font-weight:600; color:#ffffff;">🌮 Tacos & Acústico</div>
+                        <div style="font-size:10px; color:#8696a0;">Malasaña · 12 €/pers.</div>
+                      </div>
+                      <span class="scene-option-check">✓</span>
+                    </div>
+                  </div>
+
+                  <div style="background:var(--p-accent); color:var(--p-action-ink); border-radius:10px; padding:10px; text-align:center; font-size:12px; font-weight:700; margin-top:auto;">
+                    Crear sala de votación ⚡
+                  </div>
+
+                  <div class="melia-success-banner" style="position:relative; transform:none; left:auto; font-size:11px; padding:6px 12px;">
+                    <span>⏱️</span>
+                    <span>20:30 — Opciones listas en 15 segundos</span>
+                  </div>
+                </div>
+
+                <!-- SCENE 2: PASO 02 (VOTACIÓN EN VIVO WHATSAPP) -->
+                <div class="phone-scene" id="phone-scene-2" data-active="false">
+                  <div class="melia-wa-card" style="box-shadow:none; max-width:100%;">
+                    <img src="/img/mockup-rooftop.jpg" alt="Rooftop Cibeles Madrid" class="melia-card-hero-img" style="height:110px;" />
+                    <div class="melia-card-content" style="padding:12px; gap:6px;">
+                      <span class="melia-card-pill" style="font-size:10px;">🟢 VOTACIÓN EN VIVO · 12 min</span>
+                      <div class="melia-card-title" style="font-size:14px;">Rooftop Cibeles vs Tacos</div>
+                      <div class="melia-card-sub" style="font-size:11px;">melia.app/v/viernes · 5 amigos votando</div>
+                      
+                      <!-- Mini Live Progress bars -->
+                      <div style="background:#111b21; border-radius:8px; padding:6px; margin-top:4px;">
+                        <div style="display:flex; justify-content:space-between; font-size:10px; color:#ffffff; margin-bottom:2px;">
+                          <span>🍸 Rooftop Cibeles</span>
+                          <span class="mono" id="scene-cibeles-pct">60%</span>
+                        </div>
+                        <div style="height:4px; background:rgba(255,255,255,0.1); border-radius:999px; overflow:hidden;">
+                          <div class="bar-cibeles-fill"></div>
+                        </div>
+                      </div>
+
+                      <div class="melia-card-btn" style="padding:8px; font-size:11px; margin-top:4px;">
+                        <span>Tocar para votar (sin descargar apps) →</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="melia-success-banner" style="position:relative; transform:none; left:auto; font-size:11px; padding:6px 12px; margin-top:auto;">
+                    <span>📲</span>
+                    <span>20:45 — Todos votan con 1 toque</span>
+                  </div>
+                </div>
+
+                <!-- SCENE 3: PASO 03 (PLAN CERRADO Y RUTA) -->
+                <div class="phone-scene" id="phone-scene-3" data-active="false">
+                  <div style="background:#1a2328; border:1px solid #10b981; border-radius:16px; padding:16px 14px; text-align:center;">
+                    <span style="background:rgba(16,185,129,0.2); color:#34d399; font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; text-transform:uppercase;">
+                      🏆 PLAN CONFIRMADO
+                    </span>
+                    <h4 style="color:#ffffff; font-size:16px; margin:8px 0 4px; font-family:var(--font-display);">
+                      Rooftop Cibeles
+                    </h4>
+                    <p style="color:#a8a3a0; font-size:11px; margin:0 0 12px;">
+                      21:30 · Mesa para 5 reservada en Gran Vía
+                    </p>
+
+                    <div style="background:#10b981; color:#062817; border-radius:10px; padding:10px; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:6px;">
+                      <span>Abrir punto en Google Maps 📍</span>
+                    </div>
+                  </div>
+
+                  <div class="scene-party-emojis" style="display:flex; justify-content:center; gap:8px; font-size:22px; margin-top:8px;">
+                    <span>🎉</span><span>🍸</span><span>🚀</span><span>✨</span>
+                  </div>
+
+                  <div class="melia-success-banner" style="position:relative; transform:none; left:auto; font-size:11px; padding:6px 12px; margin-top:auto;">
+                    <span>🎉</span>
+                    <span>21:15 — Plan cerrado y amigos en camino</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <a class="btn btn--primary clock__cta" href="#descargar">¡Me apunto!</a>
+          </div>
+
+          <!-- Col Right: Short copy & CTA -->
+          <div class="story-col-right">
+            <p class="story-step-desc" id="story-desc">
+              40 mensajes cruzados, 3 audios sin escuchar y las 22:45... Siguen todos en el sofá discutiendo sin plan.
+            </p>
+            <a href="#votar" class="story-pill-cta" id="story-cta">
+              <span>Probar votación ahora →</span>
+            </a>
           </div>
         </div>
+
+        <!-- Bottom Progress Dock -->
+        <div class="story-progress-dock" id="story-dock">
+          <button type="button" class="story-progress-btn" data-step-idx="0" data-active="true">00 Caos</button>
+          <button type="button" class="story-progress-btn" data-step-idx="1" data-active="false">01 Elige</button>
+          <button type="button" class="story-progress-btn" data-step-idx="2" data-active="false">02 Vota</button>
+          <button type="button" class="story-progress-btn" data-step-idx="3" data-active="false">03 Salida</button>
+        </div>
       </div>
     </section>
 
-    <!-- THE NIGHT, hour by hour -->
-    <section class="section" id="noche">
+    <!-- PATTERN 1: TYPOGRAPHIC LIST WITH FLANKING FLYERS -->
+    <section class="typo-flyers-section" id="noche">
       <div class="wrap">
-        <div class="section-head section-head--row">
-          <h2>Esta noche, hora por hora</h2>
-          <p class="lead">
-            Lo que está abierto ahora en Madrid, ordenado por lo que empieza antes.
+        <div class="typo-section-head">
+          <span class="vibe-tag" style="background:color-mix(in oklab, var(--p-accent) 14%, transparent); color:var(--p-accent-text); border-color:color-mix(in oklab, var(--p-accent) 26%, transparent); font-size:12px; font-weight:600;">
+            🔥 RADAR DE PLANES HOY EN MADRID
+          </span>
+          <h2 class="typo-section-title">LOS MEJORES PLANES ESTA NOCHE</h2>
+          <p class="lead" style="margin-top:12px;">
+            Pasa el cursor por cada barrio o momento para desplegar los planes más votados y sumarlos a tu grupo con un toque.
           </p>
         </div>
 
-        <div class="night">
+        <div class="typo-list" id="typo-list">
           {
-            night.map(({ hour, title, text, meta, img, alt, live }) => (
-              <div class:list={['night__row', live && 'night__row--now']}>
-                <span class="night__hour mono">{hour}</span>
-                <a class="night__slot zoom" href="#noche">
-                  <div>
-                    <h3 class="t-card">{title}</h3>
-                    <p class="t-body">{text}</p>
-                    <p class="t-small muted">{meta}</p>
+            zones.map((zone) => (
+              <div
+                class="typo-row"
+                data-zone-id={zone.id}
+                data-active={zone.active ? 'true' : 'false'}
+                tabindex="0"
+                role="button"
+                aria-pressed={zone.active ? 'true' : 'false'}
+              >
+                <!-- Desktop Left Flyer -->
+                <div class="typo-flyer typo-flyer--left" style={`--flyer-tilt: ${zone.flyerLeft.tilt};`}>
+                  <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} class="typo-flyer-img" loading="lazy" />
+                  <div class="typo-flyer-body">
+                    <div class="typo-flyer-top">
+                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
+                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerLeft.price}</span>
+                    </div>
+                    <h4 class="typo-flyer-title">{zone.flyerLeft.title}</h4>
+                    <div class="typo-flyer-foot">
+                      <span>{zone.flyerLeft.friendsCount} amigos votaron</span>
+                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title} title="Sumar a la votación">
+                        ＋ Sumar
+                      </button>
+                    </div>
                   </div>
-                  <img src={img} alt={alt} loading="lazy" />
-                </a>
+                </div>
+
+                <!-- Center Typographic Name + Sublink -->
+                <div class="typo-row-content">
+                  <h3 class="typo-row-name">{zone.name}</h3>
+                  <a href="#votar" class="typo-row-sublink">
+                    <span>Ver {zone.count} planes hoy ↗</span>
+                  </a>
+                </div>
+
+                <!-- Desktop Right Flyer -->
+                <div class="typo-flyer typo-flyer--right" style={`--flyer-tilt: ${zone.flyerRight.tilt};`}>
+                  <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} class="typo-flyer-img" loading="lazy" />
+                  <div class="typo-flyer-body">
+                    <div class="typo-flyer-top">
+                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
+                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerRight.price}</span>
+                    </div>
+                    <h4 class="typo-flyer-title">{zone.flyerRight.title}</h4>
+                    <div class="typo-flyer-foot">
+                      <span>{zone.flyerRight.friendsCount} amigos votaron</span>
+                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title} title="Sumar a la votación">
+                        ＋ Sumar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile Accordion Drawer -->
+                <div class="typo-mobile-flyers">
+                  <div class="typo-mobile-card">
+                    <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
+                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
+                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerLeft.title}</h5>
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <span class="mono" style="font-size:11px;">{zone.flyerLeft.price}</span>
+                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title}>＋</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="typo-mobile-card">
+                    <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
+                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
+                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerRight.title}</h5>
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <span class="mono" style="font-size:11px;">{zone.flyerRight.price}</span>
+                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title}>＋</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             ))
           }
@@ -163,85 +823,853 @@ const steps = [
       </div>
     </section>
 
-    <!-- THREE STEPS -->
-    <section class="section">
-      <div class="wrap">
-        <div class="section-head">
-          <h2>Tres pasos y ya están en la calle</h2>
-        </div>
-        <div class="steps">
-          {
-            steps.map(({ title, text }, i) => (
-              <div class="step">
-                <span class="step__n mono">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="t-card">{title}</h3>
-                <p class="t-body">{text}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- CLOSING -->
-    <section class="section ground-inverse" id="descargar">
-      <div class="wrap closing">
-        <h2>Tu próxima anécdota empieza este fin de semana.</h2>
-        <p class="lead">
-          Descarga Melia gratis en iOS o Android y deja de preguntarte qué hacer.
-          Sin suscripciones forzadas, 100 % colaborativo para grupos.
-        </p>
-        <div class="btn-row">
-          <a class="btn btn--primary" href="#descargar">App Store</a>
-          <a class="btn btn--secondary" href="#descargar">Google Play</a>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <footer class="footer" id="locales">
-    <div class="wrap">
-      <div class="grid">
-        <div class="span-4">
-          <span class="nav__logo" style="padding:0"
-            ><span class="mark mark--initial" aria-hidden="true">M</span>Melia</span
-          >
-          <p class="t-small muted">
-            Descubre eventos auténticos, vota salidas con tu grupo y coordina
-            planes en minutos.
-          </p>
-          <p class="t-small muted">
-            Disponible en España: Madrid, Barcelona, Valencia, Sevilla.
-          </p>
-        </div>
-        <div class="span-3">
-          <p class="t-label">Explorar</p>
-          <a href="#noche">Planes destacados</a>
-          <a href="#noche">Rutas de fin de semana</a>
-          <a href="#noche">Gastronomía</a>
-        </div>
-        <div class="span-3">
-          <p class="t-label">Producto</p>
-          <a href="#votar">Votación grupal</a>
-          <a href="#noche">Radar urbano</a>
-          <a href="#noche">Calendario</a>
-        </div>
-        <div class="span-2">
-          <p class="t-label">Compañía</p>
-          <a href="#locales">Red de aliados</a>
-          <a href="#locales">Soporte</a>
+  <!-- =========================================================================
+       PATTERN 4: VIP FINAL PASS + MINIMALIST BRAND HORIZON FOOTER
+       ========================================================================= -->
+  <footer class="closing-vip-stage relative bg-[#09090B] text-white overflow-hidden pt-20 md:pt-28 pb-6 border-t border-white/10" id="descargar">
+    <!-- Anchor for Locales / Aliados -->
+    <div id="locales" class="sr-only"></div>
+
+    <!-- Ambient Horizon Glow (Naranja cálido en la base) -->
+    <div class="pointer-events-none absolute -bottom-28 left-1/2 -translate-x-1/2 w-[950px] h-[400px] bg-orange-600/20 blur-[140px] rounded-full" aria-hidden="true"></div>
+
+    <div class="max-w-6xl mx-auto px-6 relative z-10">
+      
+      <!-- BLOQUE 1: CTA FINAL + TICKET VIP INTERACTIVO + QR (SLIM SIDE-BY-SIDE) -->
+      <div class="rounded-[28px] bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-[1px] shadow-[0_24px_70px_rgba(0,0,0,0.85)]">
+        <div class="rounded-[27px] bg-[#111215]/95 backdrop-blur-2xl p-6 sm:p-7 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 border-t border-white/15">
+          
+          <!-- Izquierda: Copy + Ticket VIP + Botones -->
+          <div class="w-full lg:max-w-[580px] flex-1 space-y-3 sm:space-y-3.5 text-left">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-300 text-xs font-bold">
+              <span>🎟️ CERO DESCARGAS OBLIGATORIAS</span>
+            </div>
+
+            <h2 class="text-2xl sm:text-3xl lg:text-[34px] font-black tracking-tight leading-[1.08] text-white">
+              Tu próxima anécdota empieza <span class="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">este fin de semana.</span>
+            </h2>
+
+            <p class="text-neutral-400 text-xs sm:text-sm max-w-lg leading-relaxed">
+              Crea tu primera sala de votación en 15 segundos y compártela en WhatsApp. Si quieres avisos push y mapa offline, descárgala en tu tienda favorita:
+            </p>
+
+            <!-- Pase digital VIP con efecto shimmer & hover (compacto) -->
+            <div class="vip-ticket-pass max-w-md rounded-xl bg-gradient-to-r from-white/[0.06] to-white/[0.02] border border-white/15 p-3 hover:border-orange-500/50 transition-all group relative overflow-hidden">
+              <div class="ticket-shimmer-sweep" aria-hidden="true"></div>
+              <div class="flex items-center justify-between text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
+                <span>MADRID · VIERNES NOCHE</span>
+                <span class="text-orange-400 font-bold">PASS #8921 · ADMIT ALL</span>
+              </div>
+              <div class="mt-1.5 flex items-center justify-between gap-3">
+                <div>
+                  <p class="font-black text-sm text-white group-hover:text-orange-300 transition-colors">
+                    Viernes de Rooftops & Tapas
+                  </p>
+                  <p class="text-[11px] text-neutral-400 mt-0.5">5 amigos confirmados · Cierra a las 21:30</p>
+                </div>
+                <span class="px-2.5 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[10px] font-extrabold tracking-wide shrink-0 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+                  CONFIRMADO
+                </span>
+              </div>
+            </div>
+
+            <!-- Botones de acción y tiendas (más compactos) -->
+            <div class="pt-0.5 flex flex-wrap items-center gap-2 sm:gap-2.5">
+              <a
+                href="#votar"
+                class="px-4.5 py-2.5 rounded-xl bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-extrabold text-xs sm:text-sm shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all inline-flex items-center gap-2 active:scale-95 cursor-pointer"
+              >
+                <span>Crear plan web ✨</span>
+              </a>
+              <a
+                href="#descargar"
+                class="px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-white font-bold text-xs sm:text-sm transition-colors inline-flex items-center gap-2"
+              >
+                <span> App Store</span>
+              </a>
+              <a
+                href="#descargar"
+                class="px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-white font-bold text-xs sm:text-sm transition-colors inline-flex items-center gap-2"
+              >
+                <span>▶ Google Play</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Derecha: Tarjeta QR estilizada (Slim & Side-by-side) -->
+          <div class="w-full lg:w-auto shrink-0 flex justify-center lg:justify-end">
+            <div class="w-full max-w-[210px] rounded-2xl bg-white p-3.5 text-center text-[#141414] shadow-[0_16px_40px_rgba(0,0,0,0.6)] rotate-1 hover:rotate-0 transition-transform duration-300">
+              <div class="rounded-xl border border-dashed border-neutral-300 p-2 bg-neutral-50 flex items-center justify-center">
+                <svg class="w-28 h-28 mx-auto rounded-md" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Código QR para abrir Melia en tu móvil">
+                  <rect width="200" height="200" rx="16" fill="#FAFAFA"/>
+                  <rect x="20" y="20" width="46" height="46" rx="8" fill="#141414"/>
+                  <rect x="28" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
+                  <rect x="35" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
+                  <rect x="134" y="20" width="46" height="46" rx="8" fill="#141414"/>
+                  <rect x="142" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
+                  <rect x="149" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
+                  <rect x="20" y="134" width="46" height="46" rx="8" fill="#141414"/>
+                  <rect x="28" y="142" width="30" height="30" rx="4" fill="#FFFFFF"/>
+                  <rect x="35" y="149" width="16" height="16" rx="2" fill="#FF5A36"/>
+                  <rect x="76" y="24" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="94" y="24" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="112" y="24" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="42" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="112" y="42" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="60" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="94" y="60" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="24" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="42" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="60" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="76" width="10" height="10" rx="2" fill="#FF5A36"/>
+                  <rect x="94" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="112" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="134" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="152" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="170" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="85" y="85" width="30" height="30" rx="8" fill="#141414"/>
+                  <circle cx="100" cy="100" r="8" fill="#FF5A36"/>
+                  <rect x="24" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="60" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="112" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="140" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="160" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="94" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="134" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="152" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="170" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="112" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="140" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="160" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="76" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="94" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="112" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="134" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                  <rect x="170" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                </svg>
+              </div>
+              <p class="mt-2 font-black text-xs text-[#141414]">Escanea desde tu móvil 📱</p>
+              <p class="text-[10.5px] text-neutral-500 mt-0.5 leading-snug">
+                Apunta con la cámara para entrar a una votación de prueba en tu teléfono.
+              </p>
+            </div>
+          </div>
+
         </div>
       </div>
-      <p class="t-small muted credits" style="margin-top:2rem">
-        © 2025 Melia · Español (ES)
-      </p>
+
+      <!-- BLOQUE 2: NAVEGACIÓN COMPACTA (FLUIDA, SIN LÍNEA DIVISORIA) -->
+      <div class="mt-10 sm:mt-12 pt-2 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-neutral-400">
+        <div class="flex items-center gap-3">
+          <span class="w-8 h-8 rounded-xl bg-orange-600 text-white font-black flex items-center justify-center text-sm shadow-[0_0_15px_rgba(249,115,22,0.5)]">
+            M
+          </span>
+          <span class="font-extrabold text-white text-base tracking-tight">Melia</span>
+          <span class="hidden sm:inline text-neutral-600">·</span>
+          <span class="hidden sm:inline text-xs text-neutral-500 font-medium">📍 Madrid · Barcelona · Valencia · Sevilla</span>
+        </div>
+
+        <nav class="flex flex-wrap justify-center gap-6 text-xs sm:text-sm font-medium" aria-label="Pie de página">
+          <a href="#votar" class="hover:text-white transition-colors">Votación en vivo</a>
+          <a href="#como-funciona" class="hover:text-white transition-colors">Cómo funciona</a>
+          <a href="#noche" class="hover:text-white transition-colors">Planes de hoy</a>
+          <a href="#locales" class="hover:text-white transition-colors">Red de aliados</a>
+          <a href="#descargar" class="hover:text-white transition-colors">Soporte</a>
+        </nav>
+
+        <div class="flex items-center gap-3 text-xs">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-9 h-9 rounded-full bg-white/[0.05] hover:bg-orange-500/20 hover:text-orange-400 hover:border-orange-500/40 border border-white/10 flex items-center justify-center transition-colors font-bold">IG</a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-9 h-9 rounded-full bg-white/[0.05] hover:bg-orange-500/20 hover:text-orange-400 hover:border-orange-500/40 border border-white/10 flex items-center justify-center transition-colors font-bold">TT</a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer" aria-label="X" class="w-9 h-9 rounded-full bg-white/[0.05] hover:bg-orange-500/20 hover:text-orange-400 hover:border-orange-500/40 border border-white/10 flex items-center justify-center transition-colors font-bold">X</a>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-2">
+        <p>© 2026 Melia · Todos los derechos reservados.</p>
+        <div class="flex items-center gap-4">
+          <a href="#" class="hover:text-neutral-300 transition-colors">Privacidad</a>
+          <a href="#" class="hover:text-neutral-300 transition-colors">Términos</a>
+          <span>Español (ES)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLOQUE 3: WATERMARK GIGANTE ESTILO EDITORIAL (INTERACTIVO CON RELIEVE Y PULSO) -->
+    <div class="footer-brand-stage group relative select-none mt-6 sm:mt-8 -mb-12 sm:-mb-16 md:-mb-20 text-center overflow-hidden cursor-default" aria-label="Firma de marca Melia">
+      <!-- Ambient Horizon Glow (Naranja cálido interactivo con pulso) -->
+      <div class="footer-horizon-glow" aria-hidden="true"></div>
+
+      <!-- Watermark Display Lettering: Capa base tenue constante -->
+      <span class="footer-brand-watermark footer-brand-watermark--base">
+        MELIA
+      </span>
+
+      <!-- Watermark Display Lettering: Capa iluminada con relieve, enmascarada en círculo sobre el cursor -->
+      <span class="footer-brand-watermark footer-brand-watermark--lit" aria-hidden="true">
+        MELIA
+      </span>
     </div>
   </footer>
 
   <script>
-    document.getElementById('theme-toggle')?.addEventListener('click', () => {
-      const inv = document.documentElement.classList.toggle('theme-inv');
-      localStorage.setItem('melia-theme', inv ? 'dark' : 'light');
+    // Theme toggle (Sun & Moon)
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('theme-inv');
+      localStorage.setItem('melia-theme', isDark ? 'dark' : 'light');
+      themeBtn.setAttribute('aria-label', isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
+      themeBtn.setAttribute('title', isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro');
     });
+
+    if (document.documentElement.classList.contains('theme-inv') && themeBtn) {
+      themeBtn.setAttribute('aria-label', 'Cambiar a tema claro');
+      themeBtn.setAttribute('title', 'Cambiar a tema claro');
+    }
+
+    // =========================================================================
+    // SMART FLOATING NAVBAR (HIDE ON SCROLL DOWN & NEAR FOOTER, SHOW ON SCROLL UP)
+    // =========================================================================
+    (() => {
+      const navHeader = document.querySelector('header.nav') as HTMLElement | null;
+      if (!navHeader) return;
+      let lastY = window.scrollY;
+      let isHidden = false;
+
+      const downloadSec = document.getElementById('descargar');
+
+      function hideNav() {
+        if (!isHidden) {
+          navHeader.classList.add('nav--hidden');
+          navHeader.style.transform = 'translateY(-160%)';
+          navHeader.style.opacity = '0';
+          navHeader.style.pointerEvents = 'none';
+          isHidden = true;
+        }
+      }
+
+      function showNav() {
+        if (isHidden) {
+          navHeader.classList.remove('nav--hidden');
+          navHeader.style.transform = 'translateY(0)';
+          navHeader.style.opacity = '1';
+          navHeader.style.pointerEvents = 'none'; // container is non-blocking, inner bar is clickable
+          isHidden = false;
+        }
+      }
+
+      function isOverClosingFooter(): boolean {
+        if (!downloadSec) return false;
+        const rect = downloadSec.getBoundingClientRect();
+        return rect.top <= window.innerHeight - 80;
+      }
+
+      // Clicking "Descargar gratis" in navbar instantly hides navbar before smooth scroll arrives
+      const downloadNavBtn = document.querySelector('.nav__actions .btn--primary');
+      downloadNavBtn?.addEventListener('click', () => {
+        hideNav();
+      });
+
+      window.addEventListener('scroll', () => {
+        const currentY = window.scrollY;
+        const diff = currentY - lastY;
+
+        // If user is anywhere near the closing VIP stage, navbar MUST be hidden
+        if (isOverClosingFooter()) {
+          hideNav();
+          lastY = currentY;
+          return;
+        }
+
+        // Near the absolute top of the page: always show
+        if (currentY <= 60) {
+          showNav();
+        } else if (diff > 6 && currentY > 100) {
+          // Scrolling down: tuck navbar away immediately
+          hideNav();
+        } else if (diff < -8 && isHidden) {
+          // Scrolling up: reveal navbar smoothly
+          showNav();
+        }
+
+        lastY = currentY;
+      }, { passive: true });
+    })();
+
+    // =========================================================================
+    // PARTIFUL-STYLE HERO WIDGET: 4-STATE MACHINE & MICRO-INTERACTIONS
+    // =========================================================================
+    (() => {
+      // Views
+      const viewDemo = document.getElementById('view-demo');
+      const viewCreator = document.getElementById('view-creator');
+      const viewReady = document.getElementById('view-ready');
+      const confettiLayer = document.getElementById('confetti-layer');
+
+      function switchView(viewName: 'demo' | 'creator' | 'ready') {
+        if (viewDemo) viewDemo.setAttribute('data-active', viewName === 'demo' ? 'true' : 'false');
+        if (viewCreator) viewCreator.setAttribute('data-active', viewName === 'creator' ? 'true' : 'false');
+        if (viewReady) viewReady.setAttribute('data-active', viewName === 'ready' ? 'true' : 'false');
+      }
+
+      // Hero primary button connects to widget creator sandbox
+      const heroCreateBtn = document.getElementById('hero-create-btn');
+      heroCreateBtn?.addEventListener('click', () => {
+        switchView('creator');
+        document.getElementById('votar')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('input-plan-title')?.focus();
+      });
+
+      document.getElementById('btn-to-creator')?.addEventListener('click', () => {
+        switchView('creator');
+        document.getElementById('input-plan-title')?.focus();
+      });
+
+      document.getElementById('btn-creator-back')?.addEventListener('click', () => {
+        switchView('demo');
+      });
+
+      document.getElementById('btn-ready-reset')?.addEventListener('click', () => {
+        switchView('demo');
+      });
+
+      // 3D Perspective Tilt on Mousemove (Rootline HorizonX)
+      const tiltCard = document.getElementById('poll-card-tilt');
+      if (tiltCard && window.matchMedia('(hover: hover)').matches) {
+        tiltCard.addEventListener('mousemove', (e) => {
+          const rect = tiltCard.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width - 0.5;
+          const y = (e.clientY - rect.top) / rect.height - 0.5;
+          tiltCard.style.transform = `perspective(1000px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg)`;
+        });
+        tiltCard.addEventListener('mouseleave', () => {
+          tiltCard.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+        });
+      }
+
+      // Quick chips suggestions in creator form
+      const chips = document.querySelectorAll('.quick-chip');
+      const opt2Input = document.getElementById('input-opt-2') as HTMLInputElement | null;
+      chips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const val = chip.getAttribute('data-val');
+          if (opt2Input && val) {
+            opt2Input.value = val;
+            opt2Input.focus();
+          }
+        });
+      });
+
+      // Timer pills selector
+      const timerPills = document.querySelectorAll('.timer-pill');
+      timerPills.forEach((pill) => {
+        pill.addEventListener('click', () => {
+          timerPills.forEach((p) => p.setAttribute('aria-selected', 'false'));
+          pill.setAttribute('aria-selected', 'true');
+        });
+      });
+
+      // Generate link in Creator mode
+      document.getElementById('btn-submit-create')?.addEventListener('click', () => {
+        const titleInput = (document.getElementById('input-plan-title') as HTMLInputElement)?.value || 'Salida de viernes';
+        const opt1 = (document.getElementById('input-opt-1') as HTMLInputElement)?.value || 'Opción 1';
+        const opt2 = (document.getElementById('input-opt-2') as HTMLInputElement)?.value || 'Opción 2';
+
+        // Update live poll labels
+        const heading = document.getElementById('poll-title-heading');
+        if (heading && titleInput) heading.textContent = titleInput;
+        const opt1Title = document.getElementById('opt-cibeles-title');
+        if (opt1Title && opt1) opt1Title.textContent = opt1;
+        const opt2Title = document.getElementById('opt-malasana-title');
+        if (opt2Title && opt2) opt2Title.textContent = opt2;
+
+        // Reset votes for fresh plan
+        state.counts.cibeles = 1;
+        state.counts.malasana = 0;
+        state.userVote = 'cibeles';
+        updateDemoUI();
+
+        const randomSlug = 'viernes-' + Math.floor(Math.random() * 89 + 10) + 'x';
+        const urlText = document.getElementById('ready-url-text');
+        const waTitle = document.getElementById('ready-wa-title');
+        const waPreview = document.getElementById('ready-wa-preview');
+
+        if (urlText) urlText.textContent = `melia.app/v/${randomSlug}`;
+        if (waTitle) waTitle.textContent = `${titleInput}: ${opt1} vs ${opt2}`;
+        if (waPreview) waPreview.textContent = `¡Gente! Voten rápido el plan para hoy: ${titleInput} 👇`;
+
+        switchView('ready');
+        spawnEmojis('🎉', 8);
+        launchConfetti(confettiLayer, ['🎉', '🚀', '🔥', '✨']);
+
+        const footerMsg = document.getElementById('poll-footer-msg');
+        if (footerMsg) {
+          footerMsg.innerHTML = `<strong style="color:var(--p-accent); font-weight:700;">🔗 Link listo:</strong> melia.app/v/${randomSlug}`;
+        }
+      });
+
+      // Copy helpers in Ready mode
+      function copyGeneratedLink(btnElement?: HTMLElement | null) {
+        const slug = document.getElementById('ready-url-text')?.textContent || 'melia.app/v/viernes';
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(`https://${slug}`).catch(() => {});
+        }
+        if (btnElement) {
+          const original = btnElement.textContent;
+          btnElement.textContent = '¡Enlace copiado! 🚀';
+          setTimeout(() => {
+            btnElement.textContent = original;
+          }, 2000);
+        }
+      }
+
+      document.getElementById('ready-copy-inline')?.addEventListener('click', (e) => {
+        copyGeneratedLink(e.currentTarget as HTMLElement);
+      });
+      document.getElementById('btn-ready-copy-main')?.addEventListener('click', (e) => {
+        copyGeneratedLink(e.currentTarget as HTMLElement);
+      });
+
+      // LIVESTREAM FLOATING EMOJIS & CONFETTI ENGINE
+      function spawnEmojis(symbol: string, count = 5) {
+        const stage = document.getElementById('emoji-stage');
+        if (!stage) return;
+        for (let i = 0; i < count; i++) {
+          const span = document.createElement('span');
+          span.textContent = symbol;
+          span.className = 'floating-emoji';
+          span.style.left = `${15 + Math.random() * 70}%`;
+          span.style.animationDelay = `${i * 0.08}s`;
+          stage.appendChild(span);
+          setTimeout(() => span.remove(), 1300);
+        }
+      }
+
+      function launchConfetti(container: HTMLElement | null, emojis: string[]) {
+        if (!container) return;
+        for (let i = 0; i < 8; i++) {
+          const span = document.createElement('span');
+          span.className = 'emoji-burst';
+          span.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+          span.style.left = `${30 + Math.random() * 40}%`;
+          span.style.top = `${40 + Math.random() * 20}%`;
+          span.style.setProperty('--tx', `${(Math.random() - 0.5) * 120}px`);
+          span.style.setProperty('--ty', `${-60 - Math.random() * 80}px`);
+          span.style.setProperty('--tr', `${(Math.random() - 0.5) * 60}deg`);
+          container.appendChild(span);
+          setTimeout(() => span.remove(), 1200);
+        }
+      }
+
+      // STATE 1: DEMO VIVA INTERACTION
+      const state = {
+        userVote: null as 'cibeles' | 'malasana' | null,
+        counts: { cibeles: 3, malasana: 2 },
+      };
+
+      const optCibeles = document.getElementById('opt-cibeles');
+      const optMalasana = document.getElementById('opt-malasana');
+      const barCibeles = document.getElementById('bar-cibeles');
+      const barMalasana = document.getElementById('bar-malasana');
+      const countCibeles = document.getElementById('count-cibeles');
+      const countMalasana = document.getElementById('count-malasana');
+      const btnCibeles = document.getElementById('btn-cibeles');
+      const btnMalasana = document.getElementById('btn-malasana');
+      const avsCibeles = document.getElementById('avs-cibeles');
+      const avsMalasana = document.getElementById('avs-malasana');
+      const toast = document.getElementById('ballot-toast');
+      const toastMsg = document.getElementById('toast-msg');
+
+      function updateDemoUI() {
+        const total = state.counts.cibeles + state.counts.malasana;
+        const pctCibeles = Math.round((state.counts.cibeles / total) * 100);
+        const pctMalasana = 100 - pctCibeles;
+
+        if (barCibeles) barCibeles.style.width = `${pctCibeles}%`;
+        if (barMalasana) barMalasana.style.width = `${pctMalasana}%`;
+
+        if (countCibeles) countCibeles.textContent = `${state.counts.cibeles} votos (${pctCibeles}%)`;
+        if (countMalasana) countMalasana.textContent = `${state.counts.malasana} votos (${pctMalasana}%)`;
+
+        const cibelesWins = state.counts.cibeles >= state.counts.malasana;
+        optCibeles?.setAttribute('data-leader', cibelesWins ? 'true' : 'false');
+        optMalasana?.setAttribute('data-leader', !cibelesWins ? 'true' : 'false');
+
+        // Cibeles
+        if (state.userVote === 'cibeles') {
+          optCibeles?.setAttribute('data-voted', 'true');
+          optCibeles?.setAttribute('aria-pressed', 'true');
+          if (btnCibeles) btnCibeles.textContent = '✓ Tu voto';
+          if (avsCibeles && !avsCibeles.querySelector('.ballot__av--you')) {
+            const youAv = document.createElement('span');
+            youAv.className = 'ballot__av ballot__av--you';
+            youAv.textContent = 'Tú';
+            avsCibeles.appendChild(youAv);
+          }
+        } else {
+          optCibeles?.removeAttribute('data-voted');
+          optCibeles?.setAttribute('aria-pressed', 'false');
+          if (btnCibeles) btnCibeles.textContent = 'Votar';
+          avsCibeles?.querySelector('.ballot__av--you')?.remove();
+        }
+
+        // Malasaña
+        if (state.userVote === 'malasana') {
+          optMalasana?.setAttribute('data-voted', 'true');
+          optMalasana?.setAttribute('aria-pressed', 'true');
+          if (btnMalasana) btnMalasana.textContent = '✓ Tu voto';
+          if (avsMalasana && !avsMalasana.querySelector('.ballot__av--you')) {
+            const youAv = document.createElement('span');
+            youAv.className = 'ballot__av ballot__av--you';
+            youAv.textContent = 'Tú';
+            avsMalasana.appendChild(youAv);
+          }
+        } else {
+          optMalasana?.removeAttribute('data-voted');
+          optMalasana?.setAttribute('aria-pressed', 'false');
+          if (btnMalasana) btnMalasana.textContent = 'Votar';
+          avsMalasana?.querySelector('.ballot__av--you')?.remove();
+        }
+
+        if (toast && toastMsg) {
+          if (state.userVote) {
+            toast.style.display = 'flex';
+            toastMsg.textContent = state.userVote === 'cibeles'
+              ? '¡Sumaste tu voto a Rooftop Cibeles! Sin instalar apps ni registro previo.'
+              : '¡Sumaste tu voto a Tacos & Acústico! Así de simple resuelve tu grupo.';
+          } else {
+            toast.style.display = 'none';
+          }
+        }
+      }
+
+      function handleVote(choice: 'cibeles' | 'malasana', el?: HTMLElement | null) {
+        if (state.userVote === choice) {
+          state.counts[choice]--;
+          state.userVote = null;
+        } else {
+          if (state.userVote) {
+            state.counts[state.userVote]--;
+          }
+          state.userVote = choice;
+          state.counts[choice]++;
+          spawnEmojis(choice === 'cibeles' ? '🍸' : '🌮', 6);
+          launchConfetti(confettiLayer, choice === 'cibeles' ? ['🍸', '✨', '🔥'] : ['🌮', '🎸', '🔥']);
+        }
+        updateDemoUI();
+      }
+
+      optCibeles?.addEventListener('click', () => handleVote('cibeles', optCibeles));
+      optMalasana?.addEventListener('click', () => handleVote('malasana', optMalasana));
+
+      // Vibe buttons reaction
+      const vibeButtons = document.querySelectorAll('.vibe-btn');
+      vibeButtons.forEach((vbtn) => {
+        vbtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const emoji = vbtn.getAttribute('data-emoji') || '🔥';
+          spawnEmojis(emoji, 6);
+          launchConfetti(confettiLayer, [emoji, emoji, '✨']);
+          vbtn.setAttribute('data-active', 'true');
+          setTimeout(() => vbtn.removeAttribute('data-active'), 1500);
+        });
+      });
+
+      // Live countdown timer simulation
+      let totalSeconds = 14 * 60 + 58;
+      const timerEl = document.getElementById('ballot-timer');
+      setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          const m = Math.floor(totalSeconds / 60);
+          const s = totalSeconds % 60;
+          if (timerEl) {
+            timerEl.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')} restantes`;
+          }
+        }
+      }, 1000);
+
+      // Subtle simulated friend vote every 10s if user hasn't interacted
+      let simVotes = 0;
+      setInterval(() => {
+        if (!state.userVote && simVotes < 3) {
+          simVotes++;
+          if (simVotes % 2 === 1) {
+            state.counts.cibeles++;
+          } else {
+            state.counts.malasana++;
+          }
+          updateDemoUI();
+        }
+      }, 10000);
+
+      // Add from Flyer to Hero Poll Creator
+      const addPollButtons = document.querySelectorAll('.btn-add-poll');
+      addPollButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const title = btn.getAttribute('data-add-title');
+          btn.setAttribute('data-added', 'true');
+          const label = btn.querySelector('.btn-add-label');
+          if (label) label.textContent = '✓ ¡Añadido!';
+
+          if (opt2Input && title) {
+            opt2Input.value = title;
+          }
+
+          switchView('creator');
+          document.getElementById('votar')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          launchConfetti(confettiLayer, ['🎯', '✨', '🔥']);
+
+          setTimeout(() => {
+            btn.removeAttribute('data-added');
+            if (label) label.textContent = 'Añadir a votación';
+          }, 3000);
+        });
+      });
+    })();
+
+    // =========================================================================
+    // PATTERN 1: TYPOGRAPHIC LIST HOVER & INTERACTION
+    // =========================================================================
+    (() => {
+      const typoRows = document.querySelectorAll('.typo-row');
+      typoRows.forEach((row) => {
+        row.addEventListener('mouseenter', () => {
+          typoRows.forEach((r) => {
+            r.setAttribute('data-active', 'false');
+            r.setAttribute('aria-pressed', 'false');
+          });
+          row.setAttribute('data-active', 'true');
+          row.setAttribute('aria-pressed', 'true');
+        });
+
+        row.addEventListener('click', () => {
+          typoRows.forEach((r) => {
+            r.setAttribute('data-active', 'false');
+            r.setAttribute('aria-pressed', 'false');
+          });
+          row.setAttribute('data-active', 'true');
+          row.setAttribute('aria-pressed', 'true');
+        });
+      });
+    })();
+
+    // =========================================================================
+    // PATTERN 2: STICKY SCROLL STORYTELLING ENGINE (FLUID & TACTILE)
+    // =========================================================================
+    (() => {
+      const storySec = document.getElementById('como-funciona');
+      const storyBadge = document.getElementById('story-badge');
+      const storyTitle = document.getElementById('story-title');
+      const storyDesc = document.getElementById('story-desc');
+      const storyCta = document.getElementById('story-cta');
+      const iphoneFrame = document.getElementById('iphone-frame');
+      const trackFill = document.getElementById('story-track-fill');
+      const scenes = [
+        document.getElementById('phone-scene-0'),
+        document.getElementById('phone-scene-1'),
+        document.getElementById('phone-scene-2'),
+        document.getElementById('phone-scene-3'),
+      ];
+      const dockBtns = document.querySelectorAll('.story-progress-btn');
+
+      const storySteps = [
+        {
+          badge: 'EL PROBLEMA',
+          title: 'BASTA DE DEBATES ETERNOS',
+          desc: '40 mensajes cruzados, 3 audios sin escuchar y las 22:45... Siguen todos en el sofá discutiendo sin plan.',
+          cta: 'Ver la solución de Melia ↓',
+        },
+        {
+          badge: 'PASO 01',
+          title: '01. ELIGE 2 O 3 OPCIONES',
+          desc: 'Explora terrazas, cócteles o picoteo cerca de ti y arma la votación para tu grupo en 15 segundos.',
+          cta: 'Probar crear sala ahora ✨',
+        },
+        {
+          badge: 'PASO 02',
+          title: '02. MANDA EL LINK AL GRUPO',
+          desc: 'Tus amigos votan con un toque desde Safari o Chrome. Sin descargar apps ni crear cuentas obligatorias.',
+          cta: 'Ver cómo votan en vivo →',
+        },
+        {
+          badge: 'PASO 03',
+          title: '03. PLAN CERRADO Y A LA CALLE',
+          desc: 'Al cumplirse el temporizador, gana el favorito. Todos reciben punto de encuentro en Maps y mesa confirmada.',
+          cta: 'Crear plan con amigos ✨',
+        },
+      ];
+
+      let activePhase = -1;
+
+      function setPhase(idx: number) {
+        if (idx === activePhase || idx < 0 || idx > 3) return;
+        const prevPhase = activePhase;
+        activePhase = idx;
+        const data = storySteps[idx];
+
+        // 1. Directional Scene transitions (past vs active vs future)
+        scenes.forEach((sc, i) => {
+          if (!sc) return;
+          if (i === idx) {
+            sc.setAttribute('data-active', 'true');
+            sc.setAttribute('data-past', 'false');
+          } else if (i < idx) {
+            sc.setAttribute('data-active', 'false');
+            sc.setAttribute('data-past', 'true');
+          } else {
+            sc.setAttribute('data-active', 'false');
+            sc.setAttribute('data-past', 'false');
+          }
+        });
+
+        // 2. Dynamic glow state on iPhone
+        if (iphoneFrame) {
+          iphoneFrame.setAttribute('data-glow', String(idx));
+        }
+
+        // 3. Smooth text crossfade
+        const leftCol = document.querySelector('.story-col-left');
+        const rightCol = document.querySelector('.story-col-right');
+
+        if (prevPhase !== -1 && leftCol && rightCol) {
+          leftCol.classList.add('is-swapping');
+          rightCol.classList.add('is-swapping');
+          setTimeout(() => {
+            if (storyBadge) storyBadge.textContent = data.badge;
+            if (storyTitle) storyTitle.textContent = data.title;
+            if (storyDesc) storyDesc.textContent = data.desc;
+            if (storyCta) {
+              const span = storyCta.querySelector('span');
+              if (span) span.textContent = data.cta;
+            }
+            leftCol.classList.remove('is-swapping');
+            rightCol.classList.remove('is-swapping');
+          }, 140);
+        } else {
+          if (storyBadge) storyBadge.textContent = data.badge;
+          if (storyTitle) storyTitle.textContent = data.title;
+          if (storyDesc) storyDesc.textContent = data.desc;
+          if (storyCta) {
+            const span = storyCta.querySelector('span');
+            if (span) span.textContent = data.cta;
+          }
+        }
+
+        // 4. Update Dock Buttons
+        dockBtns.forEach((btn, i) => {
+          btn.setAttribute('data-active', i === idx ? 'true' : 'false');
+        });
+      }
+
+      let ticking = false;
+
+      function updateStory() {
+        if (!storySec) return;
+        // On mobile (< 1024px), section is an interactive compact showcase with tabs, not sticky scroll
+        if (window.innerWidth < 1024) return;
+
+        const rect = storySec.getBoundingClientRect();
+        const total = storySec.offsetHeight - window.innerHeight;
+        if (total <= 0) return;
+
+        const progress = Math.min(Math.max(-rect.top / total, 0), 1);
+
+        // Continuous progress fill
+        if (trackFill) {
+          trackFill.style.height = `${(progress * 100).toFixed(1)}%`;
+        }
+
+        // Tactile micro-parallax on the iPhone frame
+        if (iphoneFrame) {
+          const parallax = (progress - 0.5) * 18;
+          iphoneFrame.style.transform = `translateY(${parallax.toFixed(1)}px)`;
+        }
+
+        // Continuous vote bar fill in Phase 2
+        if (progress >= 0.48 && progress <= 0.76) {
+          const subP = (progress - 0.48) / (0.76 - 0.48);
+          const fillPercent = Math.min(Math.max(Math.round(20 + subP * 48), 20), 68);
+          const barEl = document.querySelector('.bar-cibeles-fill') as HTMLElement | null;
+          const voteTextEl = document.getElementById('scene-cibeles-pct');
+          if (barEl) barEl.style.width = `${fillPercent}%`;
+          if (voteTextEl) voteTextEl.textContent = `${fillPercent}%`;
+        }
+
+        // Determine current phase with comfortable zones
+        let phase = 0;
+        if (progress < 0.25) phase = 0;
+        else if (progress < 0.50) phase = 1;
+        else if (progress < 0.75) phase = 2;
+        else phase = 3;
+
+        setPhase(phase);
+        ticking = false;
+      }
+
+      function handleStoryScroll() {
+        if (!ticking) {
+          requestAnimationFrame(updateStory);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', handleStoryScroll, { passive: true });
+      window.addEventListener('resize', handleStoryScroll, { passive: true });
+      setPhase(0);
+      updateStory();
+
+      dockBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const stepIdx = parseInt(btn.getAttribute('data-step-idx') || '0', 10);
+          setPhase(stepIdx);
+
+          if (window.innerWidth >= 1024 && storySec) {
+            const total = storySec.offsetHeight - window.innerHeight;
+            const targetY = storySec.offsetTop + (stepIdx * 0.25 * total) + 20;
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+          }
+        });
+      });
+
+      storyCta?.addEventListener('click', (e) => {
+        if (activePhase < 3) {
+          e.preventDefault();
+          const nextIdx = activePhase + 1;
+          setPhase(nextIdx);
+
+          if (window.innerWidth >= 1024 && storySec) {
+            const total = storySec.offsetHeight - window.innerHeight;
+            const targetY = storySec.offsetTop + (nextIdx * 0.25 * total) + 20;
+            window.scrollTo({ top: targetY, behavior: 'smooth' });
+          }
+        }
+      });
+    })();
+
+    // =========================================================================
+    // FOOTER BRAND WATERMARK CIRCULAR SPOTLIGHT & RELIEF EFFECT
+    // =========================================================================
+    (() => {
+      const brandStage = document.querySelector('.footer-brand-stage') as HTMLElement | null;
+      if (!brandStage) return;
+
+      brandStage.addEventListener('mousemove', (e) => {
+        const rect = brandStage.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        brandStage.style.setProperty('--mouse-x', `${x}px`);
+        brandStage.style.setProperty('--mouse-y', `${y}px`);
+      });
+
+      brandStage.addEventListener('mouseleave', () => {
+        brandStage.style.setProperty('--mouse-x', '-9999px');
+        brandStage.style.setProperty('--mouse-y', '-9999px');
+      });
+    })();
   </script>
 </Base>

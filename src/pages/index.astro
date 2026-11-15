@@ -588,44 +588,74 @@ const steps = [
                 role="button"
                 aria-pressed={zone.active ? 'true' : 'false'}
               >
+                <!-- Desktop Left Flyer (Flanking) -->
+                <div class="typo-flyer typo-flyer--left" style={`--flyer-tilt: ${zone.flyerLeft.tilt};`}>
+                  <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} class="typo-flyer-img" loading="lazy" />
+                  <div class="typo-flyer-body">
+                    <div class="typo-flyer-top">
+                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
+                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerLeft.price}</span>
+                    </div>
+                    <h4 class="typo-flyer-title">{zone.flyerLeft.title}</h4>
+                    <div class="typo-flyer-foot">
+                      <span>{zone.flyerLeft.friendsCount} amigos votaron</span>
+                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title} title="Sumar a la votación">
+                        ＋ Sumar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Center Typographic Name + Sublink -->
                 <div class="typo-row-content">
                   <h3 class="typo-row-name">{zone.name}</h3>
                   <a href="#votar" class="typo-row-sublink">
-                    <span>Ver {zone.count} planes hoy →</span>
+                    <span>Ver {zone.count} planes hoy ↗</span>
                   </a>
                 </div>
 
-                <!-- Clean Horizontal Cards (Matching reference) -->
-                <div class="typo-horizontal-cards">
-                  <!-- Left Card -->
-                  <div class="typo-clean-card">
-                    <div class="flex items-center gap-3 min-w-0">
-                      <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} class="w-12 h-12 rounded-xl object-cover shrink-0" loading="lazy" />
-                      <div class="text-left min-w-0">
-                        <span class="text-[10px] font-bold text-orange-400 block truncate uppercase">● {zone.flyerLeft.vibe}</span>
-                        <h4 class="text-xs sm:text-sm font-bold text-white truncate">{zone.flyerLeft.title}</h4>
-                        <p class="text-[11px] text-neutral-400 truncate mt-0.5">{zone.flyerLeft.price}</p>
+                <!-- Desktop Right Flyer (Flanking) -->
+                <div class="typo-flyer typo-flyer--right" style={`--flyer-tilt: ${zone.flyerRight.tilt};`}>
+                  <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} class="typo-flyer-img" loading="lazy" />
+                  <div class="typo-flyer-body">
+                    <div class="typo-flyer-top">
+                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
+                      <span class="mono" style="font-size:11px; font-weight:600;">{zone.flyerRight.price}</span>
+                    </div>
+                    <h4 class="typo-flyer-title">{zone.flyerRight.title}</h4>
+                    <div class="typo-flyer-foot">
+                      <span>{zone.flyerRight.friendsCount} amigos votaron</span>
+                      <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title} title="Sumar a la votación">
+                        ＋ Sumar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Mobile Accordion Drawer -->
+                <div class="typo-mobile-flyers">
+                  <div class="typo-mobile-card">
+                    <img src={zone.flyerLeft.img} alt={zone.flyerLeft.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
+                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+                      <span class="typo-flyer-tag">{zone.flyerLeft.vibe}</span>
+                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerLeft.title}</h5>
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <span class="mono" style="font-size:11px;">{zone.flyerLeft.price}</span>
+                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title}>＋</button>
                       </div>
                     </div>
-                    <button type="button" class="btn-add-poll btn-add-poll-clean" data-add-title={zone.flyerLeft.title}>
-                      Sumar
-                    </button>
                   </div>
 
-                  <!-- Right Card -->
-                  <div class="typo-clean-card">
-                    <div class="flex items-center gap-3 min-w-0">
-                      <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} class="w-12 h-12 rounded-xl object-cover shrink-0" loading="lazy" />
-                      <div class="text-left min-w-0">
-                        <span class="text-[10px] font-bold text-amber-400 block truncate uppercase">● {zone.flyerRight.vibe}</span>
-                        <h4 class="text-xs sm:text-sm font-bold text-white truncate">{zone.flyerRight.title}</h4>
-                        <p class="text-[11px] text-neutral-400 truncate mt-0.5">{zone.flyerRight.price}</p>
+                  <div class="typo-mobile-card">
+                    <img src={zone.flyerRight.img} alt={zone.flyerRight.alt} style="width:100%; height:110px; object-fit:cover;" loading="lazy" />
+                    <div style="padding:10px 12px; display:flex; flex-direction:column; gap:4px;">
+                      <span class="typo-flyer-tag">{zone.flyerRight.vibe}</span>
+                      <h5 style="margin:2px 0; font-size:13px; font-weight:600; line-height:1.2;">{zone.flyerRight.title}</h5>
+                      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px;">
+                        <span class="mono" style="font-size:11px;">{zone.flyerRight.price}</span>
+                        <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title}>＋</button>
                       </div>
                     </div>
-                    <button type="button" class="btn-add-poll btn-add-poll-clean" data-add-title={zone.flyerRight.title}>
-                      Sumar
-                    </button>
                   </div>
                 </div>
               </div>
@@ -829,126 +859,129 @@ const steps = [
     <div class="max-w-6xl mx-auto px-6 relative z-10">
       
       <!-- BLOQUE 1: CTA FINAL + TICKET VIP INTERACTIVO + QR (SLIM SIDE-BY-SIDE) -->
-      <div class="rounded-[28px] bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-[1px] shadow-[0_24px_70px_rgba(0,0,0,0.85)]">
-        <div class="rounded-[27px] bg-[#111215]/95 backdrop-blur-2xl p-6 sm:p-7 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-10 border-t border-white/15">
-          
-          <!-- Izquierda: Copy + Ticket VIP + Botones -->
-          <div class="w-full lg:max-w-[580px] flex-1 space-y-3 sm:space-y-3.5 text-left">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/15 border border-orange-500/30 text-orange-300 text-xs font-bold">
-              <span>🎟️ CERO DESCARGAS OBLIGATORIAS</span>
+      <div class="rounded-[32px] bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-[1px] shadow-[0_24px_70px_rgba(0,0,0,0.85)]">
+        <div class="rounded-[31px] bg-[#111215]/95 backdrop-blur-2xl p-6 sm:p-8 lg:p-10 border-t border-white/15">
+          <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+            
+            <!-- Izquierda: Copy + Botones -->
+            <div class="w-full lg:max-w-[580px] flex-1 text-left">
+              <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/25 text-orange-400 text-xs font-bold tracking-wide shadow-[0_0_15px_rgba(249,115,22,0.15)]">
+                <span class="w-2 h-2 rounded-full bg-orange-500 animate-ping"></span>
+                <span>⚡ CERO DESCARGAS OBLIGATORIAS</span>
+              </div>
+
+              <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-[1.08] text-white mt-4">
+                Tu próxima anécdota empieza<br />
+                <span class="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_2px_18px_rgba(249,115,22,0.4)]">este fin de semana.</span>
+              </h2>
+
+              <p class="text-neutral-300 text-sm sm:text-base max-w-lg leading-relaxed mt-4">
+                Crea tu sala en <strong class="text-white font-bold">15 segundos</strong> y compártela al grupo de WhatsApp. Tus amigos eligen en un toque, <strong class="text-white font-bold">sin apps ni registros</strong>. El plan se cierra solo y la noche arranca.
+              </p>
+
+              <p class="text-neutral-500 text-xs mt-2.5">
+                ¿Prefieres mapas offline y alertas de planes sorpresa? Descárgala en tu tienda favorita:
+              </p>
+
+              <!-- Botones de acción y tiendas -->
+              <div class="mt-5 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <a
+                  href="#votar"
+                  class="px-5 py-3 rounded-2xl bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-extrabold text-xs sm:text-sm shadow-[0_0_25px_rgba(249,115,22,0.45)] transition-all inline-flex items-center gap-2 active:scale-95 cursor-pointer"
+                >
+                  <span>Crear plan web</span>
+                  <span>⚡</span>
+                </a>
+                <a
+                  href="#descargar"
+                  class="px-5 py-3 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white font-bold text-xs sm:text-sm transition-colors inline-flex items-center gap-2"
+                >
+                  <span> App Store</span>
+                </a>
+                <a
+                  href="#descargar"
+                  class="px-5 py-3 rounded-2xl bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 text-white font-bold text-xs sm:text-sm transition-colors inline-flex items-center gap-2"
+                >
+                  <span>▶ Google Play</span>
+                </a>
+              </div>
             </div>
 
-            <h2 class="text-2xl sm:text-3xl lg:text-[34px] font-black tracking-tight leading-[1.08] text-white">
-              Tu próxima anécdota empieza <span class="bg-gradient-to-r from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-sm">este fin de semana.</span>
-            </h2>
-
-            <p class="text-neutral-400 text-xs sm:text-sm max-w-lg leading-relaxed">
-              Crea tu primera sala de votación en 15 segundos y compártela en WhatsApp. Si quieres avisos push y mapa offline, descárgala en tu tienda favorita:
-            </p>
-
-            <!-- Pase digital VIP con efecto shimmer & hover (compacto) -->
-            <div class="vip-ticket-pass max-w-md rounded-xl bg-gradient-to-r from-white/[0.06] to-white/[0.02] border border-white/15 p-3 hover:border-orange-500/50 transition-all group relative overflow-hidden">
-              <div class="ticket-shimmer-sweep" aria-hidden="true"></div>
-              <div class="flex items-center justify-between text-[10px] font-mono text-neutral-400 uppercase tracking-wider">
-                <span>MADRID · VIERNES NOCHE</span>
-                <span class="text-orange-400 font-bold">PASS #8921 · ADMIT ALL</span>
-              </div>
-              <div class="mt-1.5 flex items-center justify-between gap-3">
-                <div>
-                  <p class="font-black text-sm text-white group-hover:text-orange-300 transition-colors">
-                    Viernes de Rooftops & Tapas
-                  </p>
-                  <p class="text-[11px] text-neutral-400 mt-0.5">5 amigos confirmados · Cierra a las 21:30</p>
+            <!-- Derecha: Tarjeta QR estilizada (Slim & Side-by-side) -->
+            <div class="w-full lg:w-auto shrink-0 flex justify-center lg:justify-end">
+              <div class="w-full sm:w-[280px] rounded-[30px] bg-white p-5 text-center text-[#141414] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-300">
+                <div class="rounded-2xl bg-[#f4f4f5] p-3.5 flex items-center justify-center">
+                  <svg class="w-36 h-36 mx-auto rounded-md" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Código QR para abrir Melia en tu móvil">
+                    <rect width="200" height="200" rx="16" fill="#f4f4f5"/>
+                    <rect x="20" y="20" width="46" height="46" rx="8" fill="#141414"/>
+                    <rect x="28" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
+                    <rect x="35" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
+                    <rect x="134" y="20" width="46" height="46" rx="8" fill="#141414"/>
+                    <rect x="142" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
+                    <rect x="149" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
+                    <rect x="20" y="134" width="46" height="46" rx="8" fill="#141414"/>
+                    <rect x="28" y="142" width="30" height="30" rx="4" fill="#FFFFFF"/>
+                    <rect x="35" y="149" width="16" height="16" rx="2" fill="#FF5A36"/>
+                    <rect x="76" y="24" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="94" y="24" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="112" y="24" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="42" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="112" y="42" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="60" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="94" y="60" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="24" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="42" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="60" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="76" width="10" height="10" rx="2" fill="#FF5A36"/>
+                    <rect x="94" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="112" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="134" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="152" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="170" y="76" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="85" y="85" width="30" height="30" rx="8" fill="#141414"/>
+                    <circle cx="100" cy="100" r="8" fill="#FF5A36"/>
+                    <rect x="24" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="60" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="112" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="140" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="160" y="112" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="94" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="134" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="152" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="170" y="134" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="112" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="140" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="160" y="152" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="76" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="94" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="112" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="134" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                    <rect x="170" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                  </svg>
                 </div>
-                <span class="px-2.5 py-0.5 rounded-lg bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-[10px] font-extrabold tracking-wide shrink-0 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
-                  CONFIRMADO
-                </span>
+                <p class="mt-4 font-black text-sm text-[#141414]">Escanéalo desde tu móvil 📱</p>
+                <p class="text-xs text-neutral-500 mt-1 leading-snug">
+                  Entra a una votación en vivo en <strong class="text-neutral-700 font-semibold">1 toque</strong> y sin registros
+                </p>
               </div>
             </div>
 
-            <!-- Botones de acción y tiendas (más compactos) -->
-            <div class="pt-0.5 flex flex-wrap items-center gap-2 sm:gap-2.5">
-              <a
-                href="#votar"
-                class="px-4.5 py-2.5 rounded-xl bg-gradient-to-b from-orange-500 to-orange-600 hover:from-orange-400 hover:to-orange-500 text-white font-extrabold text-xs sm:text-sm shadow-[0_0_20px_rgba(249,115,22,0.35)] transition-all inline-flex items-center gap-2 active:scale-95 cursor-pointer"
-              >
-                <span>Crear plan web ✨</span>
-              </a>
-              <a
-                href="#descargar"
-                class="px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-white font-bold text-xs sm:text-sm transition-colors inline-flex items-center gap-2"
-              >
-                <span> App Store</span>
-              </a>
-              <a
-                href="#descargar"
-                class="px-4 py-2.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/15 text-white font-bold text-xs sm:text-sm transition-colors inline-flex items-center gap-2"
-              >
-                <span>▶ Google Play</span>
-              </a>
-            </div>
           </div>
 
-          <!-- Derecha: Tarjeta QR estilizada (Slim & Side-by-side) -->
-          <div class="w-full lg:w-auto shrink-0 flex justify-center lg:justify-end">
-            <div class="w-full max-w-[210px] rounded-2xl bg-white p-3.5 text-center text-[#141414] shadow-[0_16px_40px_rgba(0,0,0,0.6)] rotate-1 hover:rotate-0 transition-transform duration-300">
-              <div class="rounded-xl border border-dashed border-neutral-300 p-2 bg-neutral-50 flex items-center justify-center">
-                <svg class="w-28 h-28 mx-auto rounded-md" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Código QR para abrir Melia en tu móvil">
-                  <rect width="200" height="200" rx="16" fill="#FAFAFA"/>
-                  <rect x="20" y="20" width="46" height="46" rx="8" fill="#141414"/>
-                  <rect x="28" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
-                  <rect x="35" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
-                  <rect x="134" y="20" width="46" height="46" rx="8" fill="#141414"/>
-                  <rect x="142" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
-                  <rect x="149" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
-                  <rect x="20" y="134" width="46" height="46" rx="8" fill="#141414"/>
-                  <rect x="28" y="142" width="30" height="30" rx="4" fill="#FFFFFF"/>
-                  <rect x="35" y="149" width="16" height="16" rx="2" fill="#FF5A36"/>
-                  <rect x="76" y="24" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="94" y="24" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="112" y="24" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="42" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="112" y="42" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="60" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="94" y="60" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="24" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="42" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="60" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="76" width="10" height="10" rx="2" fill="#FF5A36"/>
-                  <rect x="94" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="112" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="134" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="152" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="170" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="85" y="85" width="30" height="30" rx="8" fill="#141414"/>
-                  <circle cx="100" cy="100" r="8" fill="#FF5A36"/>
-                  <rect x="24" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="60" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="112" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="140" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="160" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="94" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="134" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="152" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="170" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="112" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="140" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="160" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="76" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="94" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="112" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="134" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                  <rect x="170" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                </svg>
-              </div>
-              <p class="mt-2 font-black text-xs text-[#141414]">Escanea desde tu móvil 📱</p>
-              <p class="text-[10.5px] text-neutral-500 mt-0.5 leading-snug">
-                Apunta con la cámara para entrar a una votación de prueba en tu teléfono.
-              </p>
+          <!-- Bottom: Single line horizontal confirmation status -->
+          <div class="mt-8 pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs sm:text-sm">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.7)]"></span>
+              <span class="font-medium text-white/90">Viernes de Rooftops & Tapas</span>
+              <span class="text-neutral-500">·</span>
+              <span class="text-neutral-400">5 amigos confirmados</span>
             </div>
+            <span class="px-3 py-1 rounded-lg border border-emerald-500/40 text-emerald-400 text-xs font-bold bg-emerald-500/10 shrink-0 shadow-[0_0_12px_rgba(16,185,129,0.25)]">
+              ● CONFIRMADO
+            </span>
           </div>
 
         </div>

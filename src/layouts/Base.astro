@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = 'Melia — Sal sin rodeos',
-  description = 'Descubre terrazas con ambientazo, restaurantes auténticos y experiencias en tu ciudad. Crea listas con amigos, votad en 30 segundos y olvidad los debates eternos por chat.',
+  description = 'Descubre los mejores lugares en Madrid y decide con tu grupo en 1 toque. Votación en WhatsApp, sin descargas obligatorias y el plan cerrado al instante.',
   image = '/og.png',
   noindex = false,
 } = Astro.props;
@@ -22,8 +22,8 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'MobileApplication',
   name: 'Melia',
-  applicationCategory: 'TravelApplication',
-  operatingSystem: 'iOS, Android',
+  applicationCategory: 'SocialNetworkingApplication',
+  operatingSystem: 'iOS, Android, Web',
   description,
   url: canonical.href,
   image: ogImage.href,
@@ -36,6 +36,7 @@ const jsonLd = {
 <!doctype html>
 <html
   lang="es"
+  class="theme-inv"
   data-type="product"
   data-radius="soft"
   data-buttons="solid"
@@ -51,7 +52,11 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="page-type" content="product" />
     <meta name="site-kind" content="other" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <link rel="canonical" href={canonical.href} />
+    <link rel="alternate" hreflang="es-ES" href={canonical.href} />
+    <link rel="alternate" hreflang="x-default" href={canonical.href} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     {
       !noindex && (
@@ -70,6 +75,7 @@ const jsonLd = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical.href} />
     <meta property="og:image" content={ogImage.href} />
+    <meta property="og:image:alt" content="Melia — Decide con tu grupo a dónde salir en 1 toque" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -116,6 +122,6 @@ const jsonLd = {
   </head>
   <body>
     <slot />
-    <script is:inline src="/assets/backgrounds/backgrounds.js"></script>
+    <script is:inline defer src="/assets/backgrounds/backgrounds.js"></script>
   </body>
 </html>

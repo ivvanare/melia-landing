@@ -13,7 +13,7 @@ const zones = [
       vibe: '🔥 Trending hoy',
       price: '15 €/pers.',
       friendsCount: 5,
-      img: '/img/mockup-rooftop.jpg',
+      img: '/img/mockup-rooftop.webp',
       alt: 'Terraza de un rooftop de Madrid al atardecer',
       tilt: '-3.5deg',
     },
@@ -22,7 +22,7 @@ const zones = [
       vibe: '🍸 Vistas 360°',
       price: '18 €/pers.',
       friendsCount: 4,
-      img: '/img/night-street.jpg',
+      img: '/img/night-street.webp',
       alt: 'Vistas panorámicas nocturnas de Gran Vía',
       tilt: '3.5deg',
     },
@@ -37,7 +37,7 @@ const zones = [
       vibe: '🎸 Música en vivo',
       price: '14 €/pers.',
       friendsCount: 3,
-      img: '/img/event-acoustic.jpg',
+      img: '/img/event-acoustic.webp',
       alt: 'Concierto acústico en sótano de Malasaña',
       tilt: '-2.5deg',
     },
@@ -46,7 +46,7 @@ const zones = [
       vibe: '🍻 Grupos pequeños',
       price: '16 €/pers.',
       friendsCount: 6,
-      img: '/img/group-toast.jpg',
+      img: '/img/group-toast.webp',
       alt: 'Brindis de amigos de cañas en Malasaña',
       tilt: '2.5deg',
     },
@@ -61,7 +61,7 @@ const zones = [
       vibe: '🌮 Cenas con risas',
       price: '12 €/pers.',
       friendsCount: 4,
-      img: '/img/event-comedy.jpg',
+      img: '/img/event-comedy.webp',
       alt: 'Cómico actuando ante el público en local pequeño',
       tilt: '-3deg',
     },
@@ -70,7 +70,7 @@ const zones = [
       vibe: '💸 Plan barato',
       price: '10 €/pers.',
       friendsCount: 5,
-      img: '/img/venue-host.jpg',
+      img: '/img/venue-host.webp',
       alt: 'Taberna castiza en La Latina con ambiente',
       tilt: '3deg',
     },
@@ -85,7 +85,7 @@ const zones = [
       vibe: '🎷 Directo íntimo',
       price: '15 €/pers.',
       friendsCount: 4,
-      img: '/img/event-acoustic.jpg',
+      img: '/img/event-acoustic.webp',
       alt: 'Club de jazz con cócteles de autor',
       tilt: '-2deg',
     },
@@ -94,7 +94,7 @@ const zones = [
       vibe: '🪩 Hasta las 03:00',
       price: '18 €/pers.',
       friendsCount: 7,
-      img: '/img/mockup-rooftop.jpg',
+      img: '/img/mockup-rooftop.webp',
       alt: 'Sesión de música electrónica en azotea',
       tilt: '3.5deg',
     },
@@ -109,7 +109,7 @@ const zones = [
       vibe: '🥐 Masa madre & café',
       price: '18 €/pers.',
       friendsCount: 6,
-      img: '/img/event-brunch.jpg',
+      img: '/img/event-brunch.webp',
       alt: 'Mesa de brunch en patio con plantas',
       tilt: '-3deg',
     },
@@ -118,7 +118,7 @@ const zones = [
       vibe: '🌿 Estilo chill',
       price: '20 €/pers.',
       friendsCount: 5,
-      img: '/img/group-toast.jpg',
+      img: '/img/group-toast.webp',
       alt: 'Amigos disfrutando un brunch al sol',
       tilt: '2.5deg',
     },
@@ -150,37 +150,19 @@ const steps = [
         <span class="mark mark--initial" aria-hidden="true">M</span>Melia
       </a>
       <nav class="nav__links" aria-label="Principal">
-        <a class="nav__link" href="#noche">Descubrir lugares</a>
+        <a class="nav__link" href="#descubrir">Descubrir lugares</a>
         <a class="nav__link" href="#como-funciona">Cómo funciona</a>
         <a class="nav__link" href="#votar">Votación en vivo</a>
         <a class="nav__link" href="#noche">Barrios de Madrid</a>
       </nav>
       <div class="nav__actions">
-        <button
-          id="theme-toggle"
-          type="button"
-          aria-label="Cambiar entre tema claro y oscuro"
-          title="Cambiar tema"
-          class="theme-toggle-btn"
-        >
-          <!-- Sun Icon (visible en modo oscuro para volver a claro) -->
-          <svg class="theme-icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="4"></circle>
-            <line x1="12" y1="2" x2="12" y2="5"></line>
-            <line x1="12" y1="19" x2="12" y2="22"></line>
-            <line x1="2" y1="12" x2="5" y2="12"></line>
-            <line x1="19" y1="12" x2="22" y2="12"></line>
-            <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line>
-            <line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line>
-            <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line>
-            <line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line>
+        <div class="chip hidden sm:inline-flex items-center gap-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 text-xs font-semibold text-neutral-300 transition-colors cursor-pointer" title="Ciudad seleccionada">
+          <span>Madrid</span>
+          <svg class="w-3.5 h-3.5 text-neutral-400" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
           </svg>
-          <!-- Moon Icon (visible en modo claro para pasar a oscuro) -->
-          <svg class="theme-icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-          </svg>
-        </button>
-        <a class="btn btn--primary" href="#descargar">Descargar gratis</a>
+        </div>
+        <a class="btn btn--primary" href="#votar">Crear plan web</a>
       </div>
     </div>
   </header>
@@ -237,10 +219,10 @@ const steps = [
 
           <div class="kinetic-proof mt-6 flex items-center gap-3">
             <div class="flex -space-x-2 shrink-0">
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" alt="Sofía" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" alt="Marcos" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" alt="Ana" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
-              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" alt="Leo" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" alt="Sofía" width="32" height="32" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" alt="Marcos" width="32" height="32" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" alt="Ana" width="32" height="32" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
+              <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" alt="Leo" width="32" height="32" class="w-8 h-8 rounded-full border-2 border-[var(--p-bg)] object-cover" />
               <span class="w-8 h-8 rounded-full bg-[var(--p-surface)] text-[var(--p-ink)] text-[10px] font-black flex items-center justify-center border-2 border-[var(--p-bg)]">
                 +1.4k
               </span>
@@ -252,67 +234,6 @@ const steps = [
         </div>
 
         <div class="hero-visual kinetic-widget span-6 relative py-4 sm:py-6">
-          <!-- CABLES LUMINOSOS SVG (Rootlines de HorizonX con pulsos de luz) -->
-          <svg class="hero-rootlines-svg pointer-events-none absolute -inset-16 w-[calc(100%+128px)] h-[calc(100%+128px)] z-20 overflow-visible" viewBox="0 0 640 700" fill="none" aria-hidden="true">
-            <defs>
-              <linearGradient id="rootline-glow-orange" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#FF5A36" stop-opacity="0.3" />
-                <stop offset="50%" stop-color="#FF5A36" stop-opacity="1" />
-                <stop offset="100%" stop-color="#FBBF24" stop-opacity="0.6" />
-              </linearGradient>
-              <linearGradient id="rootline-glow-emerald" x1="100%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stop-color="#10B981" stop-opacity="0.4" />
-                <stop offset="50%" stop-color="#10B981" stop-opacity="1" />
-                <stop offset="100%" stop-color="#FF5A36" stop-opacity="0.6" />
-              </linearGradient>
-              <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
-                <feGaussianBlur stdDeviation="3.5" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-            <!-- Cable 1: Distancia (Arriba Izq) -> Rim Izquierdo -->
-            <path d="M 50 45 C 30 75, 45 110, 87 115" stroke="url(#rootline-glow-orange)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
-            <circle cx="87" cy="115" r="4" fill="#FF5A36" filter="url(#neon-glow)" />
-
-            <!-- Cable 2: Rating (Arriba Der) -> Rim Derecho -->
-            <path d="M 545 55 C 575 80, 565 115, 526 125" stroke="url(#rootline-glow-emerald)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
-            <circle cx="526" cy="125" r="4" fill="#10B981" filter="url(#neon-glow)" />
-
-            <!-- Cable 3: Acción social (Abajo Izq) -> Rim Inferior -->
-            <path d="M 70 635 C 45 615, 55 580, 87 560" stroke="url(#rootline-glow-orange)" stroke-width="2.5" stroke-dasharray="6 6" class="animate-dash" filter="url(#neon-glow)" />
-            <circle cx="87" cy="560" r="4" fill="#FF5A36" filter="url(#neon-glow)" />
-          </svg>
-
-          <!-- NODO SATÉLITE 1: Distancia & estado en vivo -->
-          <div class="satellite-node satellite-node--1 hidden sm:flex items-center gap-2.5 absolute -top-4 -left-4 xl:-left-6 z-20 px-3.5 py-2.5 rounded-2xl animate-float-slow">
-            <span class="w-7 h-7 rounded-full bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-xs">📍</span>
-            <div class="text-left">
-              <p class="text-[11px] font-bold leading-tight">A 600m de ti</p>
-              <p class="text-[10px] text-emerald-500 font-mono font-semibold flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                Abierto ahora
-              </p>
-            </div>
-          </div>
-
-          <!-- NODO SATÉLITE 2: Trending & Rating -->
-          <div class="satellite-node satellite-node--2 hidden sm:flex items-center gap-2 absolute top-2 -right-3 xl:-right-5 z-20 px-3.5 py-2 rounded-2xl animate-float-delayed">
-            <span class="text-xs">🔥</span>
-            <div class="text-left">
-              <span class="text-xs font-extrabold text-orange-500">Nuevo en Malasaña</span>
-              <span class="text-[10px] text-amber-400 font-bold ml-1">★ 4.9</span>
-            </div>
-          </div>
-
-          <!-- NODO SATÉLITE 3: Acción social de grupo -->
-          <div class="satellite-node satellite-node--3 hidden sm:flex items-center gap-2 absolute -bottom-4 left-1 xl:left-3 z-20 px-3.5 py-2 rounded-full animate-float-delayed">
-            <span class="text-sm">🎟️</span>
-            <span class="text-xs font-bold">Invita a tu grupo en 1 clic</span>
-          </div>
-
           <!-- Stage for livestream-style floating emojis -->
           <div id="emoji-stage" class="pointer-events-none absolute inset-0 overflow-visible z-30"></div>
 
@@ -330,104 +251,127 @@ const steps = [
                       <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                       EN VIVO
                     </span>
-                  <span class="text-xs font-semibold text-neutral-500">#viernes-madrid (5 amigos)</span>
+                    <span class="text-xs font-semibold text-neutral-500">#viernes-madrid (5 amigos)</span>
+                  </div>
+                  <span class="font-mono text-xs font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-lg border border-neutral-200" id="ballot-timer">14:58 restantes</span>
                 </div>
-                <span class="font-mono text-xs font-bold bg-neutral-100 text-neutral-800 px-2.5 py-1 rounded-lg border border-neutral-200" id="ballot-timer">14:58 restantes</span>
-              </div>
 
-              <div>
-                <h2 class="text-xl sm:text-2xl font-black text-[#141414] tracking-tight mt-1" id="poll-title-heading">¿A dónde salimos hoy?</h2>
-                <p class="text-xs text-neutral-500 mt-0.5">Tu grupo tiene 15 min para desempatar. Toca para votar:</p>
-              </div>
+                <div>
+                  <p class="text-xl sm:text-2xl font-black text-[#141414] tracking-tight mt-1" id="poll-title-heading">¿A dónde salimos hoy?</p>
+                  <p class="text-xs text-neutral-500 mt-0.5">La votación se cierra al llegar al 100% de quórum</p>
+                </div>
 
-              <div class="ballot__options" id="ballot-options">
-                <!-- Option 1 -->
-                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3 transition-all cursor-pointer hover:border-orange-500 bg-white" data-option="cibeles" data-leader="true" tabindex="0" role="button" aria-pressed="false" id="opt-cibeles">
-                  <div class="flex items-center gap-3">
-                    <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-neutral-900">
-                      <img src="/img/mockup-rooftop.jpg" alt="Rooftop Cibeles" class="w-full h-full object-cover" />
-                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/70 text-[9px] font-black text-orange-400">4.9★</span>
+                <div class="ballot__options" id="ballot-options">
+                  <!-- Option 1 -->
+                  <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3 transition-all cursor-pointer hover:border-orange-500 bg-white" data-option="cibeles" data-leader="true" tabindex="0" role="button" aria-pressed="false" id="opt-cibeles">
+                    <div class="flex items-center gap-3">
+                      <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-neutral-900">
+                        <img src="/img/mockup-rooftop.webp" alt="Rooftop Cibeles" width="64" height="64" fetchpriority="high" class="w-full h-full object-cover" />
+                        <span class="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/70 text-[9px] font-black text-orange-400">4.9★</span>
+                      </div>
+                      <div class="flex-1 min-w-0">
+                        <div class="ballot__opt-top flex items-center justify-between gap-1">
+                          <div class="ballot__opt-title font-extrabold text-xs sm:text-sm text-[#141414] truncate flex items-center gap-1.5">
+                            <span id="opt-cibeles-title">🍸 Rooftop Cibeles</span>
+                            <span class="px-1.5 py-0.5 rounded bg-orange-100 text-orange-700 text-[10px] font-bold">TOP!</span>
+                          </div>
+                          <span class="text-[11px] text-neutral-500 font-medium shrink-0">Gran Vía · 15 €</span>
+                        </div>
+                        <div class="w-full h-2 bg-neutral-200/80 rounded-full mt-2 overflow-hidden">
+                          <div class="h-full bg-orange-500 rounded-full transition-all duration-500" id="bar-cibeles" style="width: 60%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2 text-xs">
+                          <div class="flex -space-x-1.5" id="avs-cibeles">
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" width="20" height="20" class="w-5 h-5 rounded-full border border-white" alt="Sofía" />
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" width="20" height="20" class="w-5 h-5 rounded-full border border-white" alt="Marcos" />
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" width="20" height="20" class="w-5 h-5 rounded-full border border-white" alt="Ana" />
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span class="font-bold text-neutral-600 text-[11px]" id="count-cibeles">3 votos (60%)</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-[#141414] text-white text-[11px] font-bold transition-colors" id="btn-cibeles">Votar</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div class="flex-1 min-w-0">
-                      <div class="ballot__opt-top flex items-center justify-between gap-1">
-                        <div class="ballot__opt-title font-extrabold text-xs sm:text-sm text-[#141414] truncate">
-                          <span id="opt-cibeles-title">🍸 Rooftop Cibeles</span>
-                        </div>
-                        <span class="text-[11px] text-neutral-500 font-medium shrink-0">Gran Vía · 15 €</span>
+                  </div>
+
+                  <!-- Option 2 -->
+                  <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3 transition-all cursor-pointer hover:border-orange-400 bg-white" data-option="malasana" data-leader="false" tabindex="0" role="button" aria-pressed="false" id="opt-malasana">
+                    <div class="flex items-center gap-3">
+                      <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-neutral-900">
+                        <img src="/img/group-toast.webp" alt="Bodega de la Ardosa" width="64" height="64" fetchpriority="high" class="w-full h-full object-cover" />
+                        <span class="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/70 text-[9px] font-black text-amber-400">4.8★</span>
                       </div>
-                      <div class="w-full h-2 bg-neutral-200/80 rounded-full mt-2 overflow-hidden">
-                        <div class="h-full bg-orange-500 rounded-full transition-all duration-500" id="bar-cibeles" style="width: 60%"></div>
-                      </div>
-                      <div class="flex items-center justify-between mt-2 text-xs">
-                        <div class="flex -space-x-1.5" id="avs-cibeles">
-                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Sofia&backgroundColor=ffdfbf" class="w-5 h-5 rounded-full border border-white" alt="Sofía" />
-                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Marcos&backgroundColor=c0aede" class="w-5 h-5 rounded-full border border-white" alt="Marcos" />
-                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Ana&backgroundColor=b6e3f4" class="w-5 h-5 rounded-full border border-white" alt="Ana" />
+                      <div class="flex-1 min-w-0">
+                        <div class="ballot__opt-top flex items-center justify-between gap-1">
+                          <div class="ballot__opt-title font-extrabold text-xs sm:text-sm text-[#141414] truncate">
+                            <span id="opt-malasana-title">🍽️ Bodega de la Ardosa</span>
+                          </div>
+                          <span class="text-[11px] text-neutral-500 font-medium shrink-0">Malasaña · 12 €</span>
                         </div>
-                        <div class="flex items-center gap-2">
-                          <span class="font-bold text-neutral-600 text-[11px]" id="count-cibeles">3 votos (60%)</span>
-                          <span class="px-2.5 py-1 rounded-lg bg-[#141414] text-white text-[11px] font-bold transition-colors" id="btn-cibeles">Votar</span>
+                        <div class="w-full h-2 bg-neutral-200/80 rounded-full mt-2 overflow-hidden">
+                          <div class="h-full bg-neutral-400 rounded-full transition-all duration-500" id="bar-malasana" style="width: 40%"></div>
+                        </div>
+                        <div class="flex items-center justify-between mt-2 text-xs">
+                          <div class="flex -space-x-1.5" id="avs-malasana">
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" width="20" height="20" class="w-5 h-5 rounded-full border border-white" alt="Laura" />
+                            <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Carla&backgroundColor=d1d4f9" width="20" height="20" class="w-5 h-5 rounded-full border border-white" alt="Carlos" />
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <span class="font-bold text-neutral-600 text-[11px]" id="count-malasana">2 votos (40%)</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-neutral-100 text-[#141414] text-[11px] font-bold transition-colors border border-neutral-200" id="btn-malasana">Votar</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Option 2 -->
-                <div class="ballot__opt border-2 border-neutral-200 rounded-2xl p-3 transition-all cursor-pointer hover:border-orange-400 bg-white" data-option="malasana" data-leader="false" tabindex="0" role="button" aria-pressed="false" id="opt-malasana">
-                  <div class="flex items-center gap-3">
-                    <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden shrink-0 shadow-sm bg-neutral-900">
-                      <img src="/img/group-toast.jpg" alt="Bodega de la Ardosa" class="w-full h-full object-cover" />
-                      <span class="absolute top-1 left-1 px-1 py-0.2 rounded bg-black/70 text-[9px] font-black text-amber-400">4.8★</span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                      <div class="ballot__opt-top flex items-center justify-between gap-1">
-                        <div class="ballot__opt-title font-extrabold text-xs sm:text-sm text-[#141414] truncate">
-                          <span id="opt-malasana-title">🍽️ Bodega de la Ardosa</span>
-                        </div>
-                        <span class="text-[11px] text-neutral-500 font-medium shrink-0">Malasaña · 12 €</span>
-                      </div>
-                      <div class="w-full h-2 bg-neutral-200/80 rounded-full mt-2 overflow-hidden">
-                        <div class="h-full bg-neutral-400 rounded-full transition-all duration-500" id="bar-malasana" style="width: 40%"></div>
-                      </div>
-                      <div class="flex items-center justify-between mt-2 text-xs">
-                        <div class="flex -space-x-1.5" id="avs-malasana">
-                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Leo&backgroundColor=ffd5dc" class="w-5 h-5 rounded-full border border-white" alt="Laura" />
-                          <img src="https://api.dicebear.com/7.x/notionists/svg?seed=Carla&backgroundColor=d1d4f9" class="w-5 h-5 rounded-full border border-white" alt="Carlos" />
-                        </div>
-                        <div class="flex items-center gap-2">
-                          <span class="font-bold text-neutral-600 text-[11px]" id="count-malasana">2 votos (40%)</span>
-                          <span class="px-2.5 py-1 rounded-lg bg-neutral-100 text-[#141414] text-[11px] font-bold transition-colors border border-neutral-200" id="btn-malasana">Votar</span>
-                        </div>
-                      </div>
-                    </div>
+                <!-- Fila social: participantes -->
+                <div class="mt-3 pt-2.5 border-t border-neutral-200/80 flex items-center justify-between text-xs">
+                  <div class="flex items-center gap-1.5 flex-wrap">
+                    <span class="text-neutral-500 font-medium text-[11px]">Votarán:</span>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-[11px] font-semibold">👩 Paloma</span>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-[11px] font-semibold">🧔 Dani</span>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-neutral-100 text-neutral-700 text-[11px] font-semibold">👩 Rocío</span>
                   </div>
                 </div>
-              </div>
 
-              <!-- Reacciones rápidas con explosión de emojis -->
-              <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between flex-wrap gap-2">
-                <div class="flex items-center gap-1.5">
-                  <span class="text-xs text-neutral-500 mr-1 font-semibold">Reaccionar:</span>
-                  <button type="button" data-emoji="🔥" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-orange-50 hover:bg-orange-100 border border-orange-200 text-xs font-bold text-orange-800 cursor-pointer active:scale-90 transition-transform">🔥 Fiestón</button>
-                  <button type="button" data-emoji="🍸" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 text-xs font-bold text-neutral-700 cursor-pointer active:scale-90 transition-transform">🍸 Chill</button>
-                  <button type="button" data-emoji="💸" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 cursor-pointer active:scale-90 transition-transform">💸 Barato</button>
+                <!-- Reacciones rápidas con explosión de emojis -->
+                <div class="mt-2.5 pt-2.5 border-t border-neutral-200 flex items-center justify-between flex-wrap gap-2">
+                  <div class="flex items-center gap-1.5">
+                    <span class="text-xs text-neutral-500 mr-1 font-semibold">Reaccionar:</span>
+                    <button type="button" data-emoji="🔥" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-orange-50 hover:bg-orange-100 border border-orange-200 text-xs font-bold text-orange-800 cursor-pointer active:scale-90 transition-transform">🔥 Fiestón</button>
+                    <button type="button" data-emoji="🍸" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-neutral-100 hover:bg-neutral-200 border border-neutral-200 text-xs font-bold text-neutral-700 cursor-pointer active:scale-90 transition-transform">🍸 Chill</button>
+                    <button type="button" data-emoji="💸" class="vibe-btn emoji-btn px-2.5 py-1 rounded-full bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 text-xs font-bold text-emerald-800 cursor-pointer active:scale-90 transition-transform">💸 Barato</button>
+                  </div>
+                </div>
+
+                <!-- Post-vote feedback toast -->
+                <div class="ballot__toast" id="ballot-toast" style="display:none;">
+                  <span>🎉</span>
+                  <span id="toast-msg">¡Voto registrado! Cero apps, cero registros para tus amigos.</span>
+                </div>
+
+                <div class="mt-3 pt-2.5 border-t border-neutral-200 flex items-center justify-between text-xs">
+                  <span id="poll-footer-msg" class="text-neutral-500">Compartido vía WhatsApp</span>
+                  <button type="button" id="btn-to-creator" class="font-black text-orange-600 hover:text-orange-700 cursor-pointer">
+                    ✨ Probar crear el mío →
+                  </button>
+                </div>
+
+                <!-- Botón inferior del widget -->
+                <div class="mt-3">
+                  <button
+                    type="button"
+                    id="hero-invite-group-btn"
+                    class="w-full py-2.5 px-4 rounded-xl bg-[#141414] hover:bg-neutral-800 text-white font-bold text-xs flex items-center justify-center gap-2 transition-colors cursor-pointer shadow-sm active:scale-98"
+                  >
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Invita a tu grupo en 1 clic</span>
+                  </button>
                 </div>
               </div>
-
-              <!-- Post-vote feedback toast -->
-              <div class="ballot__toast" id="ballot-toast" style="display:none;">
-                <span>🎉</span>
-                <span id="toast-msg">¡Voto registrado! Cero apps, cero registros para tus amigos.</span>
-              </div>
-
-              <div class="mt-3 pt-3 border-t border-neutral-200 flex items-center justify-between text-xs">
-                <span id="poll-footer-msg" class="text-neutral-500">Compartido por Marcos vía WhatsApp</span>
-                <button type="button" id="btn-to-creator" class="font-black text-orange-600 hover:text-orange-700 cursor-pointer">
-                  ✨ Probar crear el mío →
-                </button>
-              </div>
-            </div>
 
             <!-- STATE 2: MODO CREADOR (ZERO-FRICTION SANDBOX) -->
             <div class="ballot-view" id="view-creator" data-active="false">
@@ -600,7 +544,7 @@ const steps = [
                     <div class="typo-flyer-foot">
                       <span>{zone.flyerLeft.friendsCount} amigos votaron</span>
                       <button type="button" class="btn-add-poll" data-add-title={zone.flyerLeft.title} title="Sumar a la votación">
-                        ＋ Sumar
+                        <span class="btn-add-label">＋ Sumar a votación</span>
                       </button>
                     </div>
                   </div>
@@ -626,7 +570,7 @@ const steps = [
                     <div class="typo-flyer-foot">
                       <span>{zone.flyerRight.friendsCount} amigos votaron</span>
                       <button type="button" class="btn-add-poll" data-add-title={zone.flyerRight.title} title="Sumar a la votación">
-                        ＋ Sumar
+                        <span class="btn-add-label">＋ Sumar a votación</span>
                       </button>
                     </div>
                   </div>
@@ -763,7 +707,7 @@ const steps = [
                 <!-- SCENE 2: PASO 02 (VOTACIÓN EN VIVO WHATSAPP) -->
                 <div class="phone-scene" id="phone-scene-2" data-active="false">
                   <div class="melia-wa-card" style="box-shadow:none; max-width:100%;">
-                    <img src="/img/mockup-rooftop.jpg" alt="Rooftop Cibeles Madrid" class="melia-card-hero-img" style="height:110px;" />
+                    <img src="/img/mockup-rooftop.webp" alt="Rooftop Cibeles Madrid" class="melia-card-hero-img" style="height:110px;" />
                     <div class="melia-card-content" style="padding:12px; gap:6px;">
                       <span class="melia-card-pill" style="font-size:10px;">🟢 VOTACIÓN EN VIVO · 12 min</span>
                       <div class="melia-card-title" style="font-size:14px;">Rooftop Cibeles vs Tacos</div>
@@ -911,55 +855,9 @@ const steps = [
             <div class="w-full lg:w-auto shrink-0 flex justify-center lg:justify-end">
               <div class="w-full sm:w-[280px] rounded-[30px] bg-white p-5 text-center text-[#141414] shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-transform duration-300">
                 <div class="rounded-2xl bg-[#f4f4f5] p-3.5 flex items-center justify-center">
-                  <svg class="w-36 h-36 mx-auto rounded-md" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Código QR para abrir Melia en tu móvil">
-                    <rect width="200" height="200" rx="16" fill="#f4f4f5"/>
-                    <rect x="20" y="20" width="46" height="46" rx="8" fill="#141414"/>
-                    <rect x="28" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
-                    <rect x="35" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
-                    <rect x="134" y="20" width="46" height="46" rx="8" fill="#141414"/>
-                    <rect x="142" y="28" width="30" height="30" rx="4" fill="#FFFFFF"/>
-                    <rect x="149" y="35" width="16" height="16" rx="2" fill="#FF5A36"/>
-                    <rect x="20" y="134" width="46" height="46" rx="8" fill="#141414"/>
-                    <rect x="28" y="142" width="30" height="30" rx="4" fill="#FFFFFF"/>
-                    <rect x="35" y="149" width="16" height="16" rx="2" fill="#FF5A36"/>
-                    <rect x="76" y="24" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="94" y="24" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="112" y="24" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="42" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="112" y="42" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="60" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="94" y="60" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="24" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="42" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="60" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="76" width="10" height="10" rx="2" fill="#FF5A36"/>
-                    <rect x="94" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="112" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="134" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="152" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="170" y="76" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="85" y="85" width="30" height="30" rx="8" fill="#141414"/>
-                    <circle cx="100" cy="100" r="8" fill="#FF5A36"/>
-                    <rect x="24" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="60" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="112" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="140" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="160" y="112" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="94" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="134" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="152" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="170" y="134" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="112" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="140" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="160" y="152" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="76" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="94" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="112" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="134" y="170" width="10" height="10" rx="2" fill="#141414"/>
-                    <rect x="170" y="170" width="10" height="10" rx="2" fill="#141414"/>
+                  <svg class="w-36 h-36 mx-auto rounded-md" viewBox="0 0 33 33" shape-rendering="crispEdges" role="img" aria-label="Código QR para abrir Melia en tu móvil">
+                    <path fill="#f4f4f5" d="M0 0h33v33H0z"/>
+                    <path stroke="#141414" d="M4 4.5h7m2 0h2m1 0h2m1 0h1m2 0h7M4 5.5h1m5 0h1m2 0h1m3 0h3m2 0h1m5 0h1M4 6.5h1m1 0h3m1 0h1m1 0h3m1 0h2m1 0h1m2 0h1m1 0h3m1 0h1M4 7.5h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h3m1 0h1M4 8.5h1m1 0h3m1 0h1m1 0h3m1 0h1m3 0h1m1 0h1m1 0h3m1 0h1M4 9.5h1m5 0h1m1 0h1m2 0h1m3 0h1m2 0h1m5 0h1M4 10.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M12 11.5h1m5 0h2M4 12.5h1m1 0h5m5 0h1m2 0h2m1 0h5M4 13.5h1m2 0h1m3 0h1m2 0h1m2 0h2m1 0h1m2 0h1m3 0h1M4 14.5h2m4 0h14m1 0h1m1 0h2M4 15.5h5m3 0h3m2 0h1m1 0h1m1 0h4m3 0h1M7 16.5h1m2 0h3m1 0h1m1 0h1m1 0h2m1 0h2m1 0h1m1 0h3M4 17.5h2m3 0h1m2 0h1m1 0h1m5 0h1m2 0h1m1 0h1m1 0h1M4 18.5h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m2 0h1m1 0h1m1 0h3m1 0h2M4 19.5h1m3 0h2m1 0h1m1 0h3m2 0h1m1 0h1m1 0h3m3 0h1M4 20.5h1m1 0h2m2 0h1m3 0h2m4 0h5m1 0h1M12 21.5h3m1 0h5m3 0h2M4 22.5h7m2 0h2m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3M4 23.5h1m5 0h1m1 0h1m3 0h2m1 0h2m3 0h2m1 0h2M4 24.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m1 0h1m1 0h1M4 25.5h1m1 0h3m1 0h1m1 0h1m8 0h2m1 0h5M4 26.5h1m1 0h3m1 0h1m1 0h5m2 0h1m5 0h2m1 0h1M4 27.5h1m5 0h1m4 0h1m2 0h3m2 0h3m2 0h1M4 28.5h7m1 0h1m1 0h2m5 0h8"/>
                   </svg>
                 </div>
                 <p class="mt-4 font-black text-sm text-[#141414]">Escanéalo desde tu móvil 📱</p>
@@ -1016,8 +914,8 @@ const steps = [
       <div class="mt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-neutral-500 gap-2">
         <p>© 2026 Melia · Todos los derechos reservados.</p>
         <div class="flex items-center gap-4">
-          <a href="#" class="hover:text-neutral-300 transition-colors">Privacidad</a>
-          <a href="#" class="hover:text-neutral-300 transition-colors">Términos</a>
+          <a href="/privacidad" class="hover:text-neutral-300 transition-colors">Privacidad</a>
+          <a href="/terminos" class="hover:text-neutral-300 transition-colors">Términos</a>
           <span>Español (ES)</span>
         </div>
       </div>
@@ -1149,6 +1047,11 @@ const steps = [
       });
 
       document.getElementById('btn-to-creator')?.addEventListener('click', () => {
+        switchView('creator');
+        document.getElementById('input-plan-title')?.focus();
+      });
+
+      document.getElementById('hero-invite-group-btn')?.addEventListener('click', () => {
         switchView('creator');
         document.getElementById('input-plan-title')?.focus();
       });
